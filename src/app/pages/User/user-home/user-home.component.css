@@ -1,0 +1,81 @@
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: montserrat;
+}
+
+nav{
+  background: #2b2c2d;
+  height: 80px;
+  width: 100%;
+}
+
+nav ul{
+  float: right;
+  margin-right: 20px;
+}
+
+label.logo{
+  color:rgba(166, 7, 7, 0.882);
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 100px;
+  font-weight:bold;
+}
+
+nav ul li{
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+
+nav ul li a{
+  color:white;
+  font-size:17px;
+  padding:7px 13px;
+  border-radius: 3px;
+  text-transform:uppercase
+}
+
+a.active,a:hover{
+  background: #868a8d;
+  transition: .5s;
+}
+
+/* .register-link.active,
+.register-link:hover {
+  background: #868a8d;
+  transition:  0.5s;
+  width: auto;
+  height: auto
+} */
+
+.register-link{
+  color:white;
+  font-size:17px;
+  padding:7px 13px;
+  border-radius: 3px;
+  text-transform:uppercase;
+  cursor: pointer;
+}
+
+nav ul li:last-child a span.bmi {
+  position: relative; 
+  z-index: 10; 
+  color: rgba(166, 7, 7, 0.882);
+  font-size: 30px;
+  line-height: 80px; 
+  padding: 0 120px;
+  font-weight: bold;
+}
+
+nav ul li:last-child a:hover span.bmi {
+  padding: 0 40px; /* Further reduced padding for hover state */
+  transition: padding 0.5s ease-in-out; /* Ensure smooth transition */
+}

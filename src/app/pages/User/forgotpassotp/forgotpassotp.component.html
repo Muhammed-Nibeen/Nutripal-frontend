@@ -1,0 +1,19 @@
+<div class="min-h-screen flex">
+  <div class="border-half">
+    <img src='./assets/images/Boost your immune system-bro.png' alt="image" class="object-cover w-full h-full">
+  </div>
+
+  <div class="w-full lg:w-1/2 p-8 flex justify-center mt-48">
+    <form [formGroup]="forgotpassotpForm" (ngSubmit)="submit()">
+      <p-card header="Otp verification" [style]="{width: '360px' }" >
+        <div class="field">
+          <label for="otp">Enter the Otp</label>
+          <input type="string" pInputText formControlName="otp" class="w-full" name="otp" placeholder="Type your Otp" />
+          <small *ngIf="otp.invalid && (otp.dirty || otp.touched)" class="block p-error">
+            <div *ngIf="otp.errors?.['required']">Otp is required.</div>
+          </small>
+        </div>
+        <p-button  label="Submit" styleClass="w-full" type="submit"></p-button>
+      </p-card>
+    </form>
+  </div>

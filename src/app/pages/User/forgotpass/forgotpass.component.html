@@ -1,0 +1,21 @@
+<div class="min-h-screen flex">
+  <div class="border-half">
+    <img src='./assets/images/Boost your immune system-bro.png' alt="image" class="object-cover w-full h-full">
+  </div> 
+
+  <div class="w-full lg:w-1/2 p-8 flex justify-center mt-48">  
+    <form [formGroup]="forgotpassForm" (ngSubmit)="forgotPass()">
+      <p-card header="Forgot Password" [style]="{width: '360px' }" >
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Type your email" />
+          <small *ngIf="email.invalid && (email.dirty || email.touched)" class="block p-error">
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['email']">Email should be valid</div>
+          </small>
+        </div>
+        <p-button label="Proceed" styleClass="w-full" [disabled]="forgotpassForm.invalid" type="submit"></p-button>
+      </p-card>
+    </form>
+  </div>
+

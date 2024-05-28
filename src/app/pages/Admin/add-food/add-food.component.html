@@ -1,0 +1,145 @@
+<div class="min-h-screen flex">
+  <div class="fixed top-0 left-0 mt- h-full bg-blue-800 w-64 py-4 px-2 text-white">
+    <!-- Admin Profile -->
+    <div class="flex items-center mb-8 px-4">
+      <!-- Admin Image -->
+      <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+        <img src='./assets/images/view-3d-businessman.jpg' alt="Admin Profile Image" />
+      </div>
+      <!-- Admin Name with Indicator -->
+      <div>
+        <p class="text-lg font-semibold">Admin</p>
+        <div class="flex items-center mt-1">
+          <div class="h-3 w-3 bg-green-500 rounded-full mr-2 mb-3 animate-ping"></div>
+          <p>Online</p>
+        </div>
+      </div>
+    </div>
+
+    
+   
+
+    <!-- Navigation Links -->
+    <ul class="text-lg mb-8">
+      <li class="mb-4">
+        <a routerLink="/admindash" class="block py-2 px-4 text-gray-300 hover:text-white">Users</a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="/viewnutritionist" class="block py-2 px-4 text-gray-300 hover:text-white">View Nutritionist</a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="" class="block py-2 px-4 text-gray-300 hover:text-white">Add food items</a>
+      </li>
+      <li class="mb-4">
+        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white">View Nutritionist</a>
+      </li>
+      <li class="mb-4">
+        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white">Orders</a>
+      </li>
+      <li class="mb-4">
+        <a (click)="logout()" class="block py-2 px-4 text-gray-300 hover:text-white">Logout</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-start mb-20 ">
+  
+  <div class="pt-8 pb-4 uppercase tracking-wide text-indigo-500 font-semibold text-xl">Add Food</div>
+
+  <form [formGroup]="addfoodForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="flex flex-row">
+        <div class="flex flex-col w-1/2 p-2">
+            <div>
+                <label for="foodName" class="block mb-2 text-base text-black font-semibold">Food
+                    name</label>
+                <input type="string" id="foodName" formControlName="foodName"
+                    class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                    placeholder="Eg: Chia seed pudding" required />
+                    <small *ngIf="foodName.invalid && (foodName.dirty || foodName.touched)" class="block p-error">
+                      <div *ngIf="foodName.errors?.['required']">Name is required.</div>
+                      <div *ngIf="foodName.errors?.['pattern']">Entered name should be valid</div>
+                    </small>
+            </div>
+            <div>
+              <label for="kcal" class="block mb-2 text-base text-black font-semibold">Calories
+                  </label>
+              <input type="number" id="kcal" formControlName="kcal"
+                  class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                  placeholder="kcal" required />
+                  <small *ngIf="kcal.invalid && (kcal.dirty || kcal.touched)" class="block p-error">
+                    <div *ngIf="kcal.errors?.['required']">Mandatory.</div>
+                    <div *ngIf="kcal.errors?.['pattern']">Entered value should be valid</div>
+                  </small>
+          </div>
+          <div>
+            <label for="Protein" class="block mb-2 text-base text-black font-semibold">Protein
+                </label>
+            <input type="number" id="protein" formControlName="protein"
+                class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                placeholder="protein" required />
+                <small *ngIf="protein.invalid && (protein.dirty || protein.touched)" class="block p-error">
+                  <div *ngIf="protein.errors?.['required']">Mandatory.</div>
+                  <div *ngIf="protein.errors?.['pattern']">Entered value should be valid</div>
+                </small>
+          </div>
+          <div>
+            <label for="carbs" class="block mb-2 text-base text-black font-semibold">Carbs
+                </label>
+            <input type="number" id="Kcal" formControlName="carbs"
+                class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                placeholder="carbs" required />
+                <small *ngIf="carbs.invalid && (carbs.dirty || carbs.touched)" class="block p-error">
+                  <div *ngIf="carbs.errors?.['required']">Mandatory.</div>
+                  <div *ngIf="carbs.errors?.['pattern']">Entered value should be valid</div>
+                </small>
+          </div>
+          <div>
+            <label for="Fats" class="block mb-2 text-base text-black font-semibold">Fats
+                </label>
+            <input type="number" id="fat" formControlName="fats"
+                class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                placeholder="fats" required />
+                <small *ngIf="fats.invalid && (fats.dirty || fats.touched)" class="block p-error">
+                  <div *ngIf="fats.errors?.['required']">Mandatory.</div>
+                  <div *ngIf="fats.errors?.['pattern']">Entered value should be valid</div>
+                </small>
+          </div>
+          <div>
+            <label for="category" class="block mb-2 text-base text-black font-semibold">Choose a Category</label>
+            <select name="category"   id="category" formControlName="category" class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600">
+          
+              <option value="breakfast" selected>Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+            </select>
+          </div>    
+          <div>
+            <label for="portion" class="block mb-2 text-base text-black font-semibold">Portion size</label>
+            <select name="portion"  id="portion" formControlName="portion" class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600">
+              <option value="light" selected>Light</option>
+              <option value="moderate">Moderate</option>
+              <option value="heavy">Heavy</option>
+            </select>
+          </div>
+            <div>
+              <label for="addImage" class="block mb-2 text-base text-black font-semibold">Add
+                  image</label>
+              <input type="file" id="addImage"  (change)="changeImage($event)"
+                  class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                  placeholder="Eg: Chia seed pudding" required />
+                 <div class="">
+                  <img *ngIf="previewImage" [src]="previewImage" alt="Selected Image" class="w-20 h-20 object-cover rounded-md ml-2">
+                 </div>
+          </div>
+    </div>
+  </div>
+  <div class="flex justify-end">
+    <div class="w-20 mt-6 mr-8">
+      <p-button label="Add Food" styleClass="w-full" [disabled]="addfoodForm.invalid" type="submit"></p-button>
+    </div>
+</div>
+  </form>
+  </div>
+
+</div>

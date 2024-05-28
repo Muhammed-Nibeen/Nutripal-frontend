@@ -1,0 +1,119 @@
+<div class="min-h-screen flex">
+  <div class="fixed top-0 left-0 mt- h-full bg-blue-800 w-64 py-4 px-2 text-white">
+    <!-- Admin Profile -->
+    <div class="flex items-center mb-8 px-4">
+      <!-- Admin Image -->
+      <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+        <img src='./assets/images/view-3d-businessman.jpg' alt="Admin Profile Image" />
+      </div>
+      <!-- Admin Name with Indicator -->
+      <div>
+        <p class="text-lg font-semibold">Admin</p>
+        <div class="flex items-center mt-1">
+          <div class="h-3 w-3 bg-green-500 rounded-full mr-2 mb-3 animate-ping"></div>
+          <p>Online</p>
+        </div>
+      </div>
+    </div>
+
+    
+   
+
+    <!-- Navigation Links -->
+    <ul class="text-lg mb-8">
+      <li class="mb-4">
+        <a routerLink="/admindash" class="block py-2 px-4 text-gray-300 hover:text-white">Users</a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="/viewnutritionist" class="block py-2 px-4 text-gray-300 hover:text-white">View Nutritionist</a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="/addfood" class="block py-2 px-4 text-gray-300 hover:text-white">Add food items</a>
+      </li>
+      <li class="mb-4">
+        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white">View Nutritionist</a>
+      </li>
+      <li class="mb-4">
+        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white">Orders</a>
+      </li>
+      <li class="mb-4">
+        <a (click)="logout()" class="block py-2 px-4 text-gray-300 hover:text-white">Logout</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-center mb-20">
+    <h2 class="text10-xl font-bold mb-4">User List</h2>
+    
+    <!-- Search bar -->
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" [(ngModel)] ="filterObj.Email" placeholder="Search By Email">
+          <button class="btn btn-sm btn-success" (click)="searchUser()" >Search</button>
+        </div>
+    </div>
+    </div> 
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full mb-20">
+        <thead>
+          <tr>
+            <th
+              class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
+              No</th>
+            <th
+              class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
+              Username</th>
+            <th
+              class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
+              Email ID</th>
+            <th
+              class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
+              Is Blocked</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <!-- Sample User Data -->
+          <tr *ngFor="let user of Users;let i = index ">
+            <td class="px-6 py-4 whitespace-no-wrap">{{ ((currentPage - 1) * itemsPerPage) + i+1 }}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">{{user.fullName}}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">{{user.email}}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">
+              <span *ngIf="!user.isblocked"
+                class="bg-green-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded">ACTIVE</span>
+              <span *ngIf="user.isblocked"
+                class="bg-red-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded">BLOCKED</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap">
+              <button *ngIf="user.isblocked" type="button"
+                class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none"
+                (click)="toggleBlockStatus(user)">Unblock</button>
+              <button (click)="toggleBlockStatus(user)" *ngIf="!user.isblocked" type="button"
+                class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-red-500 rounded-lg border-none hover:bg-red-600 focus:ring-4 focus:outline-none"
+                >Block</button>
+            </td>
+          </tr>
+          <!-- Add more user rows here -->
+        </tbody>
+      </table>
+    </div>
+
+      <!-- pagination -->
+
+  <div class="pagination-controls ">
+    <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="prevPage()">
+      Previous
+    </button>
+    <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="nextPage()">
+      Next
+    </button>
+  </div>
+
+  </div>
+
+  
+</div>
+

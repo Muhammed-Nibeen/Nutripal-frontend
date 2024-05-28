@@ -1,0 +1,55 @@
+<nav>
+  <label class="logo">Nutripal</label>
+  <ul>
+  <li routerLink="#" routerLinkActive="active" class="register-link">Profile</li>
+  <li><a routerLink="#">Consult</a></li>
+  <li><a routerLink="#">About Us</a></li>
+  <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
+    Logout
+  </button>
+  </ul>
+</nav>
+
+<div class="form-container pl-10">
+  <form [formGroup]="bmiForm" (ngSubmit)="bmiDetails()">
+    <p-card header="Enter the details " [style]="{width: '360px' }" >
+      <div class="field">
+        <label for="age">Age</label>
+        <input type="number" pInputNumber formControlName="age" class="w-full" name="age" placeholder="Type your age" />
+        <small *ngIf="age.invalid && (age.dirty || age.touched)" class="block p-error">
+          <div *ngIf="age.errors?.['required']">age is required.</div>
+          <div *ngIf="age.errors?.['pattern']">Entered Age should be valid</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="weight">Weight</label>
+        <input type="number" pInputText formControlName="weight" class="w-full" name="weight" placeholder="Type your weight in Kgs" />
+        <small
+        *ngIf="weight.invalid && (weight.dirty || weight.touched)"
+        class="block p-error">
+        <div *ngIf="weight.errors?.['pattern']">Entered weight should be valid</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="height">Height</label>
+        <input type="number" pInputText formControlName="height" class="w-full" name="height" placeholder="Type your height in meter" />
+        <small
+        *ngIf="height.invalid && (height.dirty || height.touched)"
+        class="block p-error">
+        <div *ngIf="height.errors?.['pattern']">Entered height should be valid</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="height">Desired weight</label>
+        <input type="number" pInputText formControlName="desweight" class="w-full" name="desweight" placeholder="Type your desired weight" />
+        <small
+        *ngIf="desweight.invalid && (desweight.dirty || desweight.touched)"
+        class="block p-error">
+        <div *ngIf="desweight.errors?.['pattern']">Entered weight should be valid</div>
+        </small>
+      </div>
+
+      <p-button label="Calculate" styleClass="w-full" [disabled]="bmiForm.invalid" type="submit"></p-button>
+  </p-card>
+  </form>
+</div>

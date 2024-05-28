@@ -1,0 +1,43 @@
+
+<nav>
+    <label class="logo">Nutripal</label>
+    <ul>
+    <li routerLink="#" routerLinkActive="active" class="register-link">Profile</li>
+    <li><a routerLink="#">Consult</a></li>
+    <li><a routerLink="#">About Us</a></li>
+    <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
+      Logout
+    </button>
+
+    </ul>
+  </nav>
+
+  <div class="details">
+    <h2>Your current bmi count is {{bmiValue}}</h2> 
+    <h3>In order to change your body weight</h3>
+    <h3>Change your bmi from {{bmiValue}} to {{bmiResult}} </h3>
+    <h2>Foods we recommend</h2>
+  </div>
+
+  <div class="buttons">
+    <button id="breakfastBtn" class="icon-button" (click)="toggleBreakfast()"><lucide-icon name="utensils"></lucide-icon>Breakfast</button>
+    <button id="lunchBtn" class="icon-button" (click)="toggleLunch()"><lucide-icon name="beef"></lucide-icon>Lunch</button>
+    <button id="dinnerBtn" class="icon-button" (click)="toggleDinner()"><lucide-icon name="croissant"></lucide-icon>Dinner</button>
+  </div>
+
+  <div class="foodDisplay">
+    <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+      <p>
+          Lorem ipsum dolor sit amet...
+      </p>
+      <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1">
+              <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
+              <p-button label="Save" class="w-full" styleClass="w-full" />
+          </div>
+      </ng-template>
+  </p-card>
+  </div>

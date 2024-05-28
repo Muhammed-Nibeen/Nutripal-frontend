@@ -1,0 +1,39 @@
+<div class="min-h-screen flex">
+  <div class="fixed top-0 left-0 mt- h-full bg-blue-800 w-64 py-4 px-2 text-white">
+    <!-- Admin Profile -->
+    <div class="flex items-center mb-8 px-4">
+      <!-- Admin Image -->
+      <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+        <img src='./assets/images/funny-3d-illustration-cartoon-teenage-girl.jpg' alt="Admin Profile Image" />
+      </div>
+      <!-- Admin Name with Indicator -->
+      <div>
+        <p class="text-lg font-semibold">Nutritionist</p>
+        <div class="flex items-center mt-1">
+          <div class="h-3 w-3 bg-green-500 rounded-full mr-2 mb-3 animate-ping"></div>
+          <p>Online</p>
+        </div>
+      </div>
+    </div>
+
+    <ul class="text-lg mb-8">
+      <li class="mb-4">
+        <a routerLink="#" class="block py-2 px-4 text-gray-300 hover:text-white">Show Appoinments</a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
+      </li>
+      <li class="mb-4">
+        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
+      </li>
+      <li class="mb-4">
+        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
+      </li>
+      <li class="mb-4">
+        <a (click)="logout()" class="block py-2 px-4 text-gray-300 hover:text-white">Logout</a>
+      </li>
+    </ul>
+  </div>

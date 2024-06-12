@@ -1,39 +1,44 @@
-<div class="min-h-screen flex">
-  <div class="fixed top-0 left-0 mt- h-full bg-blue-800 w-64 py-4 px-2 text-white">
-    <!-- Admin Profile -->
-    <div class="flex items-center mb-8 px-4">
-      <!-- Admin Image -->
-      <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-        <img src='./assets/images/funny-3d-illustration-cartoon-teenage-girl.jpg' alt="Admin Profile Image" />
-      </div>
-      <!-- Admin Name with Indicator -->
-      <div>
-        <p class="text-lg font-semibold">Nutritionist</p>
-        <div class="flex items-center mt-1">
-          <div class="h-3 w-3 bg-green-500 rounded-full mr-2 mb-3 animate-ping"></div>
-          <p>Online</p>
-        </div>
+<app-nutridash></app-nutridash>
+
+
+
+  <!-- Main Content -->
+
+  
+  <div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-start mb-20 ">
+    <div class="pt-8 pb-4 uppercase tracking-wide text-indigo-500 font-semibold text-xl">Schedule an appointment</div>
+    <form [formGroup]="appointmentForm" (ngSubmit)="Onsubmit()">
+      <div class="flex flex-row">
+          <div class="flex flex-col w-1/2 p-2">
+              <div>
+                  <label for="date" class="block mb-2 text-base text-black font-semibold">Date</label>
+                  <input type="date" id="date" formControlName="date"
+                      class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                      required />
+                      <small *ngIf="date.invalid && (date.dirty || date.touched)" class="block p-error">
+                        <div *ngIf="date.errors?.['required']">Date is required.</div>
+                        <div *ngIf="date.errors?.['pattern']">Entered date should be valid</div>
+                      </small>
+              </div>
+              <div>
+                <label for="time" class="block mb-2 text-base text-black font-semibold">Time
+                    </label>
+                <input type="time" id="time" formControlName="time" autocomplete="off" name="time"
+                    class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                    placeholder="time" required />
+                    <small *ngIf="time.invalid && (time.dirty || time.touched)" class="block p-error">
+                      <div *ngIf="time.errors?.['required']">Mandatory.</div>
+                      <div *ngIf="time.errors?.['timeRange']">Time must be between 16:00 and 22:00.</div>
+                    </small>
+            </div>
       </div>
     </div>
-
-    <ul class="text-lg mb-8">
-      <li class="mb-4">
-        <a routerLink="#" class="block py-2 px-4 text-gray-300 hover:text-white">Show Appoinments</a>
-      </li>
-      <li class="mb-4">
-        <a routerLink="" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
-      </li>
-      <li class="mb-4">
-        <a routerLink="" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
-      </li>
-      <li class="mb-4">
-        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
-      </li>
-      <li class="mb-4">
-        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white"></a>
-      </li>
-      <li class="mb-4">
-        <a (click)="logout()" class="block py-2 px-4 text-gray-300 hover:text-white">Logout</a>
-      </li>
-    </ul>
+    <div class="flex justify-end">
+      <div class="w-20 mt-6 mr-8">
+        <p-button label="Schedule" styleClass="w-full"  type="submit" [disabled]="appointmentForm.invalid"></p-button>
+      </div>
   </div>
+    </form>
+    </div>
+
+

@@ -124,3 +124,16 @@ nav ul li:last-child a:hover span.bmi {
   justify-content: center; 
   padding: 10px; 
 }
+
+.food-display-container {
+  display: flex;
+  justify-content: center; 
+  flex-wrap: wrap; 
+  padding: 15px; 
+}
+
+
+.foodDisplay {
+  margin-right: 20px; 
+  margin-bottom: 20px; 
+}

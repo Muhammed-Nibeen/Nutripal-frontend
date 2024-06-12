@@ -20,24 +20,26 @@
   </div>
 
   <div class="buttons">
-    <button id="breakfastBtn" class="icon-button" (click)="toggleBreakfast()"><lucide-icon name="utensils"></lucide-icon>Breakfast</button>
+    <button id="breakfastBtn" class="icon-button" (click)="toggleBreakfast()" ><lucide-icon name="utensils"></lucide-icon>Breakfast</button>
     <button id="lunchBtn" class="icon-button" (click)="toggleLunch()"><lucide-icon name="beef"></lucide-icon>Lunch</button>
     <button id="dinnerBtn" class="icon-button" (click)="toggleDinner()"><lucide-icon name="croissant"></lucide-icon>Dinner</button>
   </div>
 
-  <div class="foodDisplay">
-    <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+<div class="food-display-container">
+  <div class="foodDisplay" *ngFor="let food of foodArray">
+    <p-card header="{{food.foodName}}" header="Calories {{food.kcal}} Protein {{food.protein}} Fats {{food.fats}}" [style]="{ width: '360px' }">
       <ng-template pTemplate="header">
-          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+          <img alt="Card" src="http://localhost:3000/foodImages/{{food?.imageUrl}}" />
       </ng-template>
       <p>
           Lorem ipsum dolor sit amet...
       </p>
       <ng-template pTemplate="footer">
           <div class="flex gap-3 mt-1">
-              <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
-              <p-button label="Save" class="w-full" styleClass="w-full" />
+              <!-- <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
+              <p-button label="Save" class="w-full" styleClass="w-full" /> -->
           </div>
       </ng-template>
   </p-card>
   </div>
+</div>

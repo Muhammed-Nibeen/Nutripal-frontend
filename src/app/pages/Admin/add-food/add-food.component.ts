@@ -63,6 +63,7 @@ export class AddFoodComponent {
 
   onSubmit() {
     if (this.addfoodForm) {
+      this.addfoodForm.reset()
       console.log(this.addfoodForm.value)
       const formData: FormData = new FormData();
       const formValue: any = this.addfoodForm.value; 

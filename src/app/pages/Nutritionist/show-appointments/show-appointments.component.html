@@ -1,0 +1,47 @@
+<app-nutridash></app-nutridash>
+
+<div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-center mb-20">
+  <h2 class="text-2xl font-bold mb-4">Scheduled Slots</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full mb-20">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Time</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <!-- Sample User Data -->
+        <tr *ngFor="let appointment of Appointments;let i = index">
+          <td class="px-6 py-4 whitespace-no-wrap">{{i+1}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.date | date:'yyyy-MM-dd'}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.time}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.status}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap" *ngIf="appointment.status === 'booked'">
+            <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none" (click)="showInfo(appointment._id)" >Show Info</button>
+          </td>
+        </tr>
+        <!-- Add more user rows here -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card flex justify-content-center" >
+  <p-dialog *ngIf="userDetails"
+header="Header" 
+[(visible)]="visible" 
+[modal]="true" 
+[breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+[style]="{ width: '50vw' }" 
+[draggable]="false" 
+[resizable]="false">
+    <p>
+      The User name is
+      UserName: {{userDetails.email}}
+      The user name is: {{userDetails.fullName}}
+    </p>
+</p-dialog>
+</div>

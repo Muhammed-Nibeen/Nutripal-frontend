@@ -64,6 +64,14 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/nutri/login`,requestBody)
   }
 
+  refreshToken(): Observable<any>{
+    const refreshToken = localStorage.getItem('refreshToken')
+    const requestBody = {refreshToken:refreshToken}
+    return this.http.post(`${this.baseUrl}/user/refreshtoken`, requestBody)
+  }
 
+  getUser(userid: string):Observable<any>{
+    return this.http.get(`${this.baseUrl}/user/getuser/${userid}`)
+  }
 
 }

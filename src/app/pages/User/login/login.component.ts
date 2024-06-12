@@ -40,6 +40,8 @@ export class LoginComponent {
             if (typeof localStorage !== 'undefined') {
               sessionStorage.setItem('user_token', response.token);
               localStorage.setItem('user_token', response.token);
+              localStorage.setItem('user_refreshToken', response.refreshToken);
+
               const data = localStorage.getItem('user_token')
               console.log("localStorage storage",data)
               localStorage.setItem('user', JSON.stringify(response.user));
@@ -52,6 +54,7 @@ export class LoginComponent {
           }
         },
         (error: any) => {
+          console.log(error)
           this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error });
         }
       );

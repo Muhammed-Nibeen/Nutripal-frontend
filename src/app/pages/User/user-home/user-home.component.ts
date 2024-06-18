@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-// import { PaymentService } from '../../../services/payment.service';
+
+
 
 @Component({
   selector: 'app-user-home',
@@ -15,16 +16,6 @@ export class UserHomeComponent {
     this.router.navigate(['userLogin'])
   }
 
-  // bookSlot(){
-  //   this.paymentService.paymentPay().subscribe({
-  //     next:(response:any)=>{
-  //       if (response && response.url) {
-  //         window.location.href = response.url; // Redirect to PayPal
-  //       } else {
-  //         console.error('Error creating PayPal payment');
-  //       }
-  //     }
-  //   })
-  // }
+
 
 }

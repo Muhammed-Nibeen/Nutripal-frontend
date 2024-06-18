@@ -39,14 +39,16 @@ export class LoginComponent {
           if (response.message) {
             if (typeof localStorage !== 'undefined') {
               sessionStorage.setItem('user_token', response.token);
-              localStorage.setItem('user_token', response.token);
-              localStorage.setItem('user_refreshToken', response.refreshToken);
-
-              const data = localStorage.getItem('user_token')
-              console.log("localStorage storage",data)
-              localStorage.setItem('user', JSON.stringify(response.user));
-
-              this.router.navigate(['userHome']);
+              if(typeof window!=='undefined'){
+                localStorage.setItem('user_token', response.token);
+                localStorage.setItem('user_refreshToken', response.refreshToken);
+  
+                const data = localStorage.getItem('user_token')
+                console.log("localStorage storage",data)
+                localStorage.setItem('user', JSON.stringify(response.user));
+  
+                this.router.navigate(['userHome']);
+              }
             } else {
               console.error('localStorage is not available');
               

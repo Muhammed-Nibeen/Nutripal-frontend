@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit,ChangeDetectorRef  } from '@angular/core';
+import {  FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { MessageService } from 'primeng/api';
+import { catchError, throwError } from 'rxjs';
+
 
 import { Nutritionist, User, userAppointment } from '../../../interfaces/auth';
+import { PaymentService } from '../../../services/payment.service';
+
 import { UserService } from '../../../services/user.service';
+
+declare var Razorpay: any
+
 
 @Component({
   selector: 'app-consult',
@@ -15,31 +22,37 @@ import { UserService } from '../../../services/user.service';
 export class ConsultComponent implements OnInit{
 
   
+  visible: boolean = false;
   Appointment:userAppointment[]=[]
   nutri_id!:Nutritionist
   userData!:User
   jwttoken!:string|null
   appbtn:boolean = false
+  paymentId: string | null = null
+  price:number = 300
+  appointmentId!:string
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
     private messageService:MessageService,
-    private router:Router){}
+    private router:Router,
+    private cdr:ChangeDetectorRef,
+    private paymentService:PaymentService
+   ){}
 
+  consultOptForm = this.fb.group({
+    option:['',[Validators.required]]
+  })
 
   logout(){
     this.userService.logout()
   }
   
   ngOnInit(): void{
-    this.userService.getNutris().subscribe({
-      next:(response:any)=>{
-        this.Appointment = response.combinedData
-      },
-      error:(error: any)=>{
-      }
-    })
     this.getToken()
+
+    this.getNutris()
+
   }
 
   getToken(){
@@ -52,19 +65,83 @@ export class ConsultComponent implements OnInit{
     }
   }
 
+  getNutris(){
+    this.userService.getNutris().subscribe({
+      next: (response: any) => {
+        this.Appointment = response.combinedData;
+        console.log("Combined data: ",this.Appointment)
+        this.cdr.detectChanges();
+      },
+      error: (error: any) => {
+        console.error('Subscription error:', error);
+      }
+    });
+  }
+
+
+
   bookSlot(id:string){
     console.log("This is the appointment id",id)
+    this.visible = true;
     const userId = this.userData
-    this.userService.bookAppointment(id as string,userId).subscribe({
-      next:(response:any)=>{
-        this.messageService.add({severity:'success',summary:'Success',detail: response.message})
-      
+    this.appointmentId = id;
+    // this.userService.bookAppointment(id as string,userId).subscribe({
+    //   next:(response:any)=>{
+    //     this.messageService.add({severity:'success',summary:'Success',detail: response.message})
+        
+    //   },
+    //   error:(error:any)=>{
+    //     this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
+    //   }
+    // })
+  }
+
+  onProceedToPay(){
+    const selectedOption = this.consultOptForm.get('option')?.value
+    console.log(selectedOption)
+    this.visible = false;
+
+    const razorPayOptions = {
+      currency: 'INR',
+      amount: this.price * 100,
+      name: 'Nutripal',
+      key: 'rzp_test_jHotBnTKoHrYXJ',
+      theme: {
+        color: '#3b28fe'
       },
-      error:(error:any)=>{
+      modal: {
+        ondismiss: () => { }
+      },
+      handler: ((response: any) => {
+        if (response) {
+          if (response.razorpay_payment_id) {
+            this.handlePaymentSucess(response.razorpay_payment_id)
+          }
+        }
+      })
+    }
+
+    Razorpay.open(razorPayOptions); 
+
+  
+  }
+
+    handlePaymentSucess(paymentId: string){
+      
+      console.log("htis is payment",paymentId)
+    const userId = this.userData
+    const appointmentid = this.appointmentId
+    
+    this.paymentService.paymentSuccess(paymentId, userId,this.price,appointmentid).subscribe({
+      next:(response: any)=>{
+        this.messageService.add({severity:'success',summary:'Success',detail: response.message})
+      },
+      error:(error: any)=>{
         this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
       }
     })
   }
-
+ 
+ 
  
 }

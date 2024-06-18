@@ -43,7 +43,7 @@ export interface Appointment{
 }
 
 export interface userAppointment{
-  _doc: {
+  appointment: {
     _id:string;
     date: string;
     nutri_id: string;

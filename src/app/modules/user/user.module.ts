@@ -17,7 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card'; 
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
-
 import { DialogModule } from 'primeng/dialog';
 
 @NgModule({

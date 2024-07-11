@@ -31,8 +31,9 @@ export interface Food{
   protein: number;
   carbs: number;
   fats: number;
-  category: string;
+  category: string; 
   imageUrl: string
+  description: string
 }
 
 export interface Appointment{
@@ -40,6 +41,8 @@ export interface Appointment{
   date: string
   time: string
   status: string
+  user_id: string
+  nutri_id: string
 }
 
 export interface userAppointment{
@@ -58,4 +61,25 @@ export interface userAppointment{
     role: string;
     _id: string;
   }
+}
+
+export interface ChatMessage{
+  senderId: string;
+  receiverId: string;
+  message: string;
+  _id: string;
+  timestamp: Date;
+}
+
+export interface DailyIntake{
+  program: string;
+  calories: string;
+  protein: string;
+  fats: string,
+  carbs: string
+}
+
+export interface TrackProgress{
+  currentDate: string;
+  currentWeight: string; 
 }

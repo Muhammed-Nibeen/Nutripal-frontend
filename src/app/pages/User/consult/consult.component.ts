@@ -31,6 +31,7 @@ export class ConsultComponent implements OnInit{
   paymentId: string | null = null
   price:number = 300
   appointmentId!:string
+  bookingStarted: boolean = false;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
@@ -82,6 +83,7 @@ export class ConsultComponent implements OnInit{
 
   bookSlot(id:string){
     console.log("This is the appointment id",id)
+    this.bookingStarted = true;
     this.visible = true;
     const userId = this.userData
     this.appointmentId = id;
@@ -128,7 +130,7 @@ export class ConsultComponent implements OnInit{
 
     handlePaymentSucess(paymentId: string){
       
-      console.log("htis is payment",paymentId)
+    console.log("htis is payment",paymentId)
     const userId = this.userData
     const appointmentid = this.appointmentId
     

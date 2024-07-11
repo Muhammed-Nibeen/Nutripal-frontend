@@ -3,10 +3,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/User/home/home.component';
-
-
-
-
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 
@@ -23,12 +19,16 @@ import { NutritionistModule } from './modules/nutritionist/nutritionist.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card'; 
 import { ButtonModule } from 'primeng/button';
- 
+ //websocket
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+//Websocket configuaration
+const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent, 
+    HomeComponent,
   ],
   imports: [
     AdminModule,
@@ -45,6 +45,8 @@ import { ButtonModule } from 'primeng/button';
     BrowserAnimationsModule,
     FormsModule,
     DialogModule,
+    SocketIoModule.forRoot(config),
+    
   ],
   providers: [
     provideClientHydration(),

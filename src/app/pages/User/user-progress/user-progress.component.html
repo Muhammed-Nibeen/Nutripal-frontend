@@ -1,0 +1,77 @@
+  <nav>
+    <label class="logo">Nutripal</label>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+    <ul>
+    <li><a routerLink="/profile" routerLinkActive="active" class="register-link">Profile</a></li>
+    <li><a routerLink="/consult">Consult</a></li>
+    <li><a routerLink="/userprogress">Progress</a></li>
+    <li><a routerLink="/aboutus" routerLinkActive="active" class="register-link">About Us</a></li>
+    <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
+      Logout
+    </button>
+   <li><a routerLink="/bmicalculator" class="nav-link"><span class="bmi" >Calculate Bmi</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="main-section">
+    <h1 class="hprogress">Progress</h1>
+    <h2 class="hprogress">Day <span class="dayCount">{{days}}</span></h2>
+
+    <div class="baseGoal">
+      <div class="intake">
+        <h3>Daily Intake</h3>
+        <div class="intake-item">
+          <span class="label">Calories:</span>
+          <span class="value">{{dailyIntake.calories}} kcal</span>
+        </div>
+        <div class="intake-item">
+          <span class="label">Protein: </span>
+          <span class="value">{{dailyIntake.protein}} g <i class="fas fa-drumstick-bite"></i></span>
+          
+        </div>
+        <div class="intake-item">
+          <span class="label">Fat:</span>
+          <span class="value">{{dailyIntake.fats}} g <i class="fas fa-seedling"></i></span>
+        </div>
+        <div class="intake-item">
+          <span class="label">Carbs:</span>
+          <span class="value">{{dailyIntake.carbs}} g <i class="fas fa-bread-slice"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="progressTracker">
+      <form [formGroup]="progressForm" (ngSubmit)="onSubmit()" class="progress-form">
+        <h3>Track Your Progress</h3>
+        <div class="form-group">
+          <label for="currentWeight">Current Weight:</label>
+          <input type="number" id="currentWeight" formControlName="currentWeight" name="currentWeight" placeholder="Enter your current weight" required>
+          <small *ngIf="currentWeight.invalid && (currentWeight.dirty || currentWeight.touched)" class="block p-error">
+            <div *ngIf="currentWeight.errors?.['required']">Weight is required.</div>
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="currentDate">Current Date:</label>
+          <input type="date" id="currentDate" formControlName="currentDate"  name="currentDate" required>
+          <small *ngIf="currentDate.invalid && (currentDate.dirty || currentDate.touched)" class="block p-error">
+            <div *ngIf="currentDate.errors?.['required']">Date is required.</div>
+          </small>
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+
+    <div *ngIf="showProgressSection" class="showProgress">
+      <div class="progress-info">
+        {{weightChangeMessage}}
+      </div>
+    <div class="progress-bar">
+          <div class="mb-1 text-lg font-medium dark:text-white">Extra Large</div>
+    <div class="w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
+      <div class="h-6 bg-blue-600 rounded-full dark:bg-blue-500" [style.width.%]="progressPercentage">{{progressPercentage}}%</div>
+    </div>
+    </div>
+    </div>
+  </div>
+  

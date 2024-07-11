@@ -7,13 +7,19 @@
 }
 
 body{
-  font-family: montserrat;
+  font-family: 'Montserrat', sans-serif;
 }
 
 nav{
-  background: #2b2c2d;
-  height: 80px;
-  width: 100%;
+  background: #b2b4b5;
+  height: 75px;
+  width: calc(100% - 1px); /* Reduced width to leave space on both sides */
+  max-width: 1450px; /* Maximum width for larger screens */
+  margin: 0 auto; /* Centering the navbar */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between logo and links */
+  padding: 0 10px;
 }
 
 nav ul{
@@ -22,47 +28,32 @@ nav ul{
 }
 
 label.logo{
-  color:rgba(166, 7, 7, 0.882);
-  font-size: 35px;
-  line-height: 80px;
+  color: #b82f60;
+  font-size: 30px;
+  line-height: 75px;
   padding: 0 100px;
   font-weight:bold;
 }
 
 nav ul li{
   display: inline-block;
-  line-height: 80px;
+  line-height: 75px;
   margin: 0 5px;
 }
 
 nav ul li a{
   color:white;
-  font-size:17px;
-  padding:7px 13px;
-  border-radius: 3px;
-  text-transform:uppercase
-}
-
-
-a.active,a:hover{
-  background: #868a8d;
-  transition: .5s;
-}
-
-.register-link.active,
-.register-link:hover {
-  background: #868a8d;
-  transition:  0.5s;
-  width: auto;
-  height: auto
-  
-}
-
-.register-link{
-  color:white;
-  font-size:17px;
+  font-size:15px;
   padding:7px 13px;
   border-radius: 3px;
   text-transform:uppercase;
+  font-weight:bold;
+  transition: color 0.5s;
   cursor: pointer;
+}
+
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #b82f60; 
 }

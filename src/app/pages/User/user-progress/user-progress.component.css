@@ -1,0 +1,371 @@
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
+nav{
+  background: #b2b4b5;
+  height: 75px;
+  width: calc(100% - 1px); /* Reduced width to leave space on both sides */
+  max-width: 1450px; /* Maximum width for larger screens */
+  margin: 0 auto; /* Centering the navbar */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between logo and links */
+  padding: 0 10px;
+}
+
+nav ul{
+  float: right;
+  margin-right: 20px;
+}
+
+label.logo{
+  color:#b82f60;
+  font-size: 30px;
+  line-height: 75px;
+  padding: 0 100px;
+  font-weight:bold;
+}
+
+nav ul li{
+  display: inline-block;
+  line-height: 75px;
+  margin: 0 5px;
+}
+
+nav ul li a{
+  color:white;
+  font-size:15px;
+  padding:7px 13px;
+  border-radius: 3px;
+  font-weight:bold;
+  transition: color 0.5s;
+  cursor: pointer;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #b82f60; 
+}
+.nav-link {
+  color: white;
+  font-size: 15px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* .register-link.active,
+.register-link:hover {
+  background: #868a8d;
+  transition:  0.5s;
+  width: auto;
+  height: auto
+} */
+
+nav ul li:last-child a span.bmi {
+  color: white;
+  font-size: 17px;
+  line-height: 75px; 
+  padding: 7px 13px;
+  font-weight: bold;
+}
+
+nav ul li:last-child a:hover span.bmi {
+  background: #b82f60;
+  transition: 0.5s;
+}
+
+/* Styling for the logout button */
+.logout-button {
+  background-color: white;
+  margin-top: 4px;
+  border: none;
+  color: #b82f60;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 7px 13px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.logout-button:hover {
+  background-color: #b82f60;
+  color: white;
+  transition: 0.5s;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 75px;
+    left: -100%;
+    background: #b2b4b5;
+    transition: all 0.5s;
+  }
+
+  nav ul li {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  nav ul li a {
+    font-size: 15px;
+  }
+
+  #menu-toggle:checked ~ ul {
+    left: 0;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  label.logo {
+    padding: 0 15px;
+  }
+
+  .logout-button {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+}
+
+/* End of navbar */
+
+.main-section{
+  width: calc(100% - 1px); /* Reduced width to leave space on both sides */
+  max-width: 1450px; /* Maximum width for larger screens */
+  margin: 0 auto; /* Centering the navbar */
+  align-items: center;
+}
+
+.hprogress{
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #9a9c9d;
+}
+
+/* basegoal section */
+
+.baseGoal {
+  background-color: #f8f9fa; /* Light background color */
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center the content */
+}
+
+.dayCount{
+  color:#b82f60;
+  font-weight: bold;
+}
+
+.intake {
+  max-width: 600px; /* Limit the width of the content */
+  margin: 0 auto; /* Center the content */
+}
+
+.intake h3 {
+  font-size: 34px;
+  margin-bottom: 30px;
+  color: #333; /* Dark text color */
+}
+
+.intake-item {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out label and value */
+  margin: 10px 0; /* Spacing between items */
+}
+
+.intake-item .label {
+  font-size: 18px;
+  color: #555; /* Medium text color */
+}
+
+.intake-item .value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333; /* Dark text color */
+}
+
+@media (max-width: 768px) {
+  .intake h3 {
+    font-size: 20px;
+  }
+
+  .intake-item .label,
+  .intake-item .value {
+    font-size: 16px;
+  }
+}
+
+/* Form to track progress */
+
+.progressTracker h3 {
+  font-size: 34px;
+  margin-bottom: 30px;
+  color: #333; /* Dark text color */
+}
+
+.progressTracker {
+  background-color: #f8f9fa; /* Light background color */
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center the content */
+}
+
+.progress-form {
+  max-width: 600px; /* Limit the width of the form */
+  margin: 0 auto; /* Center the form */
+  padding: 20px;
+  background-color: #fff; /* White background for the form */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.form-group {
+  margin-bottom: 20px; /* Space between form groups */
+}
+
+.form-group label {
+  display: block; /* Make labels block elements */
+  font-size: 18px;
+  color: #555; /* Medium text color */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.form-group input {
+  width: 70%; /* Full width inputs */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.submit-btn {
+  background-color: #b82f60; /* Button background color */
+  color: #fff; /* Button text color */
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.submit-btn:hover {
+  background-color: #a02755; /* Darken background color on hover */
+}
+
+@media (max-width: 768px) {
+  .progress-form {
+    padding: 15px;
+  }
+
+  .form-group label,
+  .form-group input,
+  .submit-btn {
+    font-size: 16px;
+  }
+}
+
+/* This is the progress bar */
+
+/* Existing CSS */
+
+.showProgress {
+  max-width: 600px; /* Reduce the width of the progress section */
+  margin: 20px auto; /* Center the section with some margin */
+  background-color: #f8f9fa; /* Light background color */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center the content */
+  margin-bottom: 40px;
+}
+
+.progress-info {
+  font-size: 25px;
+  font-weight: bold;
+  color: #333; /* Dark text color */
+  margin-bottom: 15px;
+}
+
+.weight-reduced {
+  color: #b82f60; /* Highlight the weight reduced */
+  font-weight: bold;
+}
+
+.time-period {
+  color: #b82f60; /* Highlight the time period */
+  font-weight: bold;
+}
+
+.progress-bar-container {
+  width: 100%; /* Full width for the container */
+  background-color: #e0e0e0; /* Light gray background */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Clip the content inside */
+}
+
+.progress-bar {
+  width: 100%; /* Full width for the bar */
+  height: 30px; /* Set a fixed height for the bar */
+  margin-bottom: 40px;
+}
+
+.progress {
+  height: 100%; /* Full height for the progress */
+  background-color: #b82f60; /* Progress bar color */
+  border-radius: 5px; /* Rounded corners for the progress */
+  text-align: center; /* Center the text inside the progress */
+  color: white; /* White text color */
+  line-height: 30px; /* Align text vertically */
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .progress-bar {
+    height: 20px; /* Adjust height for smaller screens */
+  }
+
+  .progress {
+    line-height: 20px; /* Adjust vertical alignment */
+  }
+
+  .progress-text {
+    font-size: 16px; /* Adjust text size for smaller screens */
+  }
+}

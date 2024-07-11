@@ -1,44 +1,37 @@
 <app-nutridash></app-nutridash>
 
-
-
-  <!-- Main Content -->
-
-  
-  <div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-start mb-20 ">
-    <div class="pt-8 pb-4 uppercase tracking-wide text-indigo-500 font-semibold text-xl">Schedule an appointment</div>
-    <form [formGroup]="appointmentForm" (ngSubmit)="Onsubmit()">
-      <div class="flex flex-row">
-          <div class="flex flex-col w-1/2 p-2">
-              <div>
-                  <label for="date" class="block mb-2 text-base text-black font-semibold">Date</label>
-                  <input type="date" id="date" formControlName="date"
-                      class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
-                      required />
-                      <small *ngIf="date.invalid && (date.dirty || date.touched)" class="block p-error">
-                        <div *ngIf="date.errors?.['required']">Date is required.</div>
-                        <div *ngIf="date.errors?.['pattern']">Entered date should be valid</div>
-                      </small>
-              </div>
-              <div>
-                <label for="time" class="block mb-2 text-base text-black font-semibold">Time
-                    </label>
-                <input type="time" id="time" formControlName="time" autocomplete="off" name="time"
-                    class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
-                    placeholder="time" required />
-                    <small *ngIf="time.invalid && (time.dirty || time.touched)" class="block p-error">
-                      <div *ngIf="time.errors?.['required']">Mandatory.</div>
-                      <div *ngIf="time.errors?.['timeRange']">Time must be between 16:00 and 22:00.</div>
-                    </small>
-            </div>
+<!-- Main Content -->
+<div class="main-content ml-64">
+  <div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-center mb-20">
+    <div class="pt-8 pb-4 uppercase tracking-wide text-indigo-500 font-semibold text-xl text-center">Schedule an appointment</div>
+    <form [formGroup]="appointmentForm" (ngSubmit)="Onsubmit()" class="w-full flex flex-col items-center">
+      <div class="fields flex flex-col w-full items-center p-2">
+        <div class="w-full max-w-md mb-4">
+          <label for="date" class="block mb-2 text-base text-black font-semibold text-center">Date</label>
+          <input type="date" id="date" formControlName="date"
+                 class="custom-input form-control text-indigo-600 placeholder-indigo-600 text-sm rounded-lg w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                 required />
+          <small *ngIf="date.invalid && (date.dirty || date.touched)" class="block p-error text-center">
+            <div *ngIf="date.errors?.['required']">Date is required.</div>
+            <div *ngIf="date.errors?.['pattern']">Entered date should be valid</div>
+          </small>
+        </div>
+        <div class="w-full max-w-md mb-4">
+          <label for="time" class="block mb-2 text-base text-black font-semibold text-center">Time</label>
+          <input type="time" id="time" formControlName="time" autocomplete="off" name="time"
+                 class="custom-input form-control text-indigo-600 placeholder-indigo-600 text-sm rounded-lg w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                 placeholder="time" required />
+          <small *ngIf="time.invalid && (time.dirty || time.touched)" class="block p-error text-center">
+            <div *ngIf="time.errors?.['required']">Mandatory.</div>
+            <div *ngIf="time.errors?.['timeRange']">Time must be between 16:00 and 22:00.</div>
+          </small>
+        </div>
       </div>
-    </div>
-    <div class="flex justify-end">
-      <div class="w-20 mt-6 mr-8">
-        <p-button label="Schedule" styleClass="w-full"  type="submit" [disabled]="appointmentForm.invalid"></p-button>
+      <div class="flex justify-center w-full mt-6">
+        <div class="w-40">
+          <p-button label="Schedule" styleClass="w-full" type="submit" [disabled]="appointmentForm.invalid"></p-button>
+        </div>
       </div>
-  </div>
     </form>
-    </div>
-
-
+  </div>
+</div>

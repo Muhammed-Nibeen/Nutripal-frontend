@@ -1,0 +1,89 @@
+<div class="wrapper">
+  <nav>
+    <label class="logo">Nutripal</label>
+    <ul>
+      <li routerLink="#" routerLinkActive="active" class="register-link">Profile</li>
+      <li><a routerLink="/consult">Consult</a></li>
+      <li><a routerLink="#">About Us</a></li>
+      <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
+        Logout
+      </button>
+      <li><a routerLink="/bmicalculator"><span class="bmi">Calculate Bmi</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <div class="profile">
+      <div class="profile-container">
+        <div class="flex-grow flex items-center justify-center flex-col">
+          <div class="w-full max-w-4xl p-8 bg-white rounded-lg shadow-md relative">
+            <div class="flex flex-col items-center">
+              <div class="profile-photo-section">
+                <div class="profile-photo-wrapper">
+                  <img src="./assets/images/profile.jpg" alt="Profile Photo" class="profile-photo" />
+                </div>
+              </div>
+              <h2 class="text-4xl font-semibold mb-8">{{userProfile.fullName}}</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label class="block text-lg font-medium text-gray-700">Full Name</label>
+                <input type="text" [(ngModel)]="userProfile.fullName" class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg" />
+              </div>
+              <div>
+                <label class="block text-lg font-medium text-gray-700">Email</label>
+                <input type="email" [(ngModel)]="userProfile.email" class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg" />
+              </div>
+              <div>
+                <label class="block text-lg font-medium text-gray-700">Age</label>
+                <input type="number" [(ngModel)]="userProfile.age" class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg" />
+                <br><button class="profile button" (click)="saveProfile()">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="appointments mt-8">
+      <div class="appointments-container">
+        <h2 class="text-4xl font-semibold mb-8 text-center">Upcoming Appointments</h2>
+        <div *ngIf="appointments.length > 0">
+          <div class="overflow-x-auto">
+            <table class="min-w-full mb-20">
+              <thead>
+                <tr>
+                  <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
+                  <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Nutritionist</th>
+                  <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Email</th>
+                  <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+                  <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Time</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr *ngFor="let appointment of appointments; let i = index" class="appointment-list">
+                  <td class="px-6 py-4 whitespace-no-wrap">{{i + 1}}</td>
+                  <td class="px-6 py-4 whitespace-no-wrap">{{appointment.nutritionist.fullName }}</td>
+                  <td class="px-6 py-4 whitespace-no-wrap">{{appointment.nutritionist.email }}</td>
+                  <td class="px-6 py-4 whitespace-no-wrap">{{appointment.appointment.date | date:'yyyy-MM-dd'}}</td>
+                  <td class="px-6 py-4 whitespace-no-wrap">{{appointment.appointment.time}}</td>
+                  <td class="px-6 py-4 whitespace-no-wrap">
+                    <button (click)="chat(appointment.appointment.nutri_id)" class="chatBtn">
+                      <svg height="1.6em" fill="white" xml:space="preserve" viewBox="0 0 1000 1000" y="0px" x="0px" version="1.1">
+                        <path d="M881.1,720.5H434.7L173.3,941V720.5h-54.4C58.8,720.5,10,671.1,10,610.2v-441C10,108.4,58.8,59,118.9,59h762.2C941.2,59,990,108.4,990,169.3v441C990,671.1,941.2,720.5,881.1,720.5L881.1,720.5z M935.6,169.3c0-30.4-24.4-55.2-54.5-55.2H118.9c-30.1,0-54.5,24.7-54.5,55.2v441c0,30.4,24.4,55.1,54.5,55.1h54.4h54.4v110.3l163.3-110.2H500h381.1c30.1,0,54.5-24.7,54.5-55.1V169.3L935.6,169.3z M717.8,444.8c-30.1,0-54.4-24.7-54.4-55.1c0-30.4,24.3-55.2,54.4-55.2c30.1,0,54.5,24.7,54.5,55.2C772.2,420.2,747.8,444.8,717.8,444.8L717.8,444.8z M500,444.8c-30.1,0-54.4-24.7-54.4-55.1c0-30.4,24.3-55.2,54.4-55.2c30.1,0,54.4,24.7,54.4,55.2C554.4,420.2,530.1,444.8,500,444.8L500,444.8z M282.2,444.8c-30.1,0-54.5-24.7-54.5-55.1c0-30.4,24.4-55.2,54.5-55.2c30.1,0,54.4,24.7,54.4,55.2C336.7,420.2,312.3,444.8,282.2,444.8L282.2,444.8z"></path>
+                      </svg>
+                      <span class="tooltip">Chat</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="appointments.length === 0" class="no-appointments">
+          No appointments booked.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

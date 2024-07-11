@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DialogModule } from 'primeng/dialog';
 import { AdminloginComponent } from '../../pages/Admin/adminlogin/adminlogin.component';
+import { DailyIntakeComponent } from '../../pages/Admin/daily-intake/daily-intake.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AdminloginComponent } from '../../pages/Admin/adminlogin/adminlogin.com
     AdminDashboardComponent,
     ViewNutritionistComponent,
     AddFoodComponent,
-    AdminloginComponent
+    AdminloginComponent,
+    DailyIntakeComponent
   ],
   imports: [
     CommonModule,

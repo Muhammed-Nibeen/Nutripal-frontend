@@ -8,6 +8,12 @@ export const userAuthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   // const token = localStorage.getItem('user_token');
+
+  if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    router.navigate(['userLogin']);
+    return false;
+  }
+
   const token = localStorage.getItem(
     'user_token'
   )
@@ -35,7 +41,9 @@ export const userAuthGuard: CanActivateFn = (route, state) => {
 
 export const authGuardForLoggedUser: CanActivateFn = (route, state) => {
   const router = inject(Router);
-
+  if(typeof window === 'undefined'){
+    return true;
+  }
   const token = localStorage.getItem('user_token');
   if (!token) {
     return true
@@ -58,6 +66,9 @@ export const authGuardForLoggedUser: CanActivateFn = (route, state) => {
 
 export const userblockGuard: CanActivateFn = async(route,state)=>{
   const router = inject(Router)
+  if(typeof window === 'undefined'){
+    return true;
+  }
   const authService = inject(AuthService)
   const token = localStorage.getItem('user_token')
   if(!token){

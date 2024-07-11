@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
   text-decoration: none;
@@ -6,85 +6,144 @@
   box-sizing: border-box;
 }
 
-body{
-  font-family: montserrat;
+body {
+  font-family: 'Montserrat', sans-serif;
 }
 
-nav{
-  background: #2b2c2d;
-  height: 80px;
-  width: 100%;
+nav {
+  background: #b2b4b5;
+  height: 75px;
+  width: calc(100% - 1px); /* Reduced width to leave space on both sides */
+  max-width: 1450px; /* Maximum width for larger screens */
+  margin: 0 auto; /* Centering the navbar */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between logo and links */
+  padding: 0 10px;
 }
 
-nav ul{
+nav ul {
   float: right;
   margin-right: 20px;
 }
 
-label.logo{
-  color:rgba(166, 7, 7, 0.882);
-  font-size: 35px;
-  line-height: 80px;
+label.logo {
+  color:#b82f60;
+  font-size: 30px;
+  line-height: 75px;
   padding: 0 100px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
-nav ul li{
+nav ul li {
   display: inline-block;
-  line-height: 80px;
+  line-height: 75px;
   margin: 0 5px;
 }
 
-nav ul li a{
-  color:white;
-  font-size:17px;
-  padding:7px 13px;
+nav ul li a {
+  color: white;
+  font-size: 15px;
+  padding: 7px 13px;
   border-radius: 3px;
-  text-transform:uppercase
+  font-weight:bold;
+  transition: color 0.5s;
+  cursor: pointer;
 }
 
-a.active,a:hover{
-  background: #868a8d;
-  transition: .5s;
+nav ul li a:hover,
+nav ul li a.active {
+  color: #b82f60; 
 }
-
-/* .register-link.active,
-.register-link:hover {
-  background: #868a8d;
-  transition:  0.5s;
-  width: auto;
-  height: auto
-} */
-
-.register-link{
-  color:white;
-  font-size:17px;
-  padding:7px 13px;
+.nav-link {
+  color: white;
+  font-size: 15px;
+  padding: 7px 13px;
   border-radius: 3px;
-  text-transform:uppercase;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
 nav ul li:last-child a span.bmi {
-  position: relative; 
-  z-index: 10; 
-  color: rgba(166, 7, 7, 0.882);
-  font-size: 30px;
-  line-height: 80px; 
-  padding: 0 120px;
+  color: white;
+  font-size: 17px;
+  line-height: 75px; 
+  padding: 7px 13px;
   font-weight: bold;
 }
 
 nav ul li:last-child a:hover span.bmi {
-  padding: 0 40px; /* Further reduced padding for hover state */
-  transition: padding 0.5s ease-in-out; /* Ensure smooth transition */
+  background: #b82f60;
+  transition: 0.5s;
 }
 
-.form-container{
+.logout-button {
+  background-color: white;
+  margin-top: 4px;
+  border: none;
+  color: #b82f60;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 7px 13px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.logout-button:hover {
+  background-color: #b82f60;
+  color: white;
+  transition: 0.5s;
+}
+
+.background-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
-  width: 100%; 
-  padding-top: 20px;
+  height: 100vh; /* Full height minus nav height */
+  width: calc(100% - 1px);
+  max-width: 1450px;
+  margin: 0 auto; /* Centering the background container */
+  background: url('/assets/images/back.jpg') no-repeat center center/cover;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  /* border-radius: 8px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* width: 360px; */
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  font-weight: bold;
+}
+
+.field input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.8);;
+  border-radius: 4px;
+}
+
+.field small {
+  color: red;
+  margin-top: 4px;
+  display: block;
+}
+
+.p-error {
+  font-size: 12px;
+}
+
+.heading{
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2b2c2d; /* Dark color for contrast */
 }

@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
   text-decoration: none;
@@ -6,44 +6,44 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: montserrat;
 }
 
-nav{
+nav {
   background: #2b2c2d;
   height: 80px;
   width: 100%;
 }
 
-nav ul{
+nav ul {
   float: right;
   margin-right: 20px;
 }
 
-label.logo{
-  color:rgba(166, 7, 7, 0.882);
+label.logo {
+  color: rgba(166, 7, 7, 0.882);
   font-size: 35px;
   line-height: 80px;
   padding: 0 100px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
-nav ul li{
+nav ul li {
   display: inline-block;
   line-height: 80px;
   margin: 0 5px;
 }
 
-nav ul li a{
-  color:white;
-  font-size:17px;
-  padding:7px 13px;
+nav ul li a {
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
   border-radius: 3px;
-  text-transform:uppercase
+  text-transform: uppercase;
 }
 
-a.active,a:hover{
+a.active, a:hover {
   background: #868a8d;
   transition: .5s;
 }
@@ -51,31 +51,98 @@ a.active,a:hover{
 .register-link.active,
 .register-link:hover {
   background: #868a8d;
-  transition:  0.5s;
+  transition: 0.5s;
   width: auto;
-  height: auto
-} 
+  height: auto;
+}
 
- .register-link{
-  color:white;
-  font-size:17px;
-  padding:7px 13px;
+.register-link {
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
   border-radius: 3px;
-  text-transform:uppercase;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
 nav ul li:last-child a span.bmi {
-  position: relative; 
-  z-index: 10; 
+  position: relative;
+  z-index: 10;
   color: rgba(166, 7, 7, 0.882);
   font-size: 30px;
-  line-height: 80px; 
+  line-height: 80px;
   padding: 0 120px;
   font-weight: bold;
 }
 
 nav ul li:last-child a:hover span.bmi {
-  padding: 0 40px; 
-  transition: padding 0.5s ease-in-out; 
-} 
+  padding: 0 40px;
+  transition: padding 0.5s ease-in-out;
+}
+
+.main-section {
+  
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.container{
+  border: 5px solid rgb(106, 106, 106);
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+  background-color: #f4f4f4;
+}
+
+table thead th {
+  padding: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+table tbody tr {
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table tbody td {
+  padding: 40px;
+  text-align: left;
+}
+
+button {
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.appointment-row {
+  padding-top: 40px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.appointment-row:hover {
+  background-color: #6c6a6a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

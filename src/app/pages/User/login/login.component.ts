@@ -42,7 +42,7 @@ export class LoginComponent {
               if(typeof window!=='undefined'){
                 localStorage.setItem('user_token', response.token);
                 localStorage.setItem('user_refreshToken', response.refreshToken);
-  
+                localStorage.setItem('user_id',response.user._id)
                 const data = localStorage.getItem('user_token')
                 console.log("localStorage storage",data)
                 localStorage.setItem('user', JSON.stringify(response.user));

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { Food, User } from '../../../interfaces/auth';
@@ -12,7 +12,10 @@ import { UserService } from '../../../services/user.service';
 export class ShowfoodComponent implements OnInit{
 
   constructor(private router:Router,
-    private userservice:UserService){}
+    private userservice:UserService,
+    private renderer: Renderer2,
+    private el: ElementRef
+    ){}
 
   userData!:User
   jwttoken!:string|null
@@ -20,8 +23,27 @@ export class ShowfoodComponent implements OnInit{
   bmiResult!: number
   foodArray!: Food[]
   
+
   ngOnInit(): void {
-    if(typeof document!== 'undefined'){
+    if (typeof window !== 'undefined') {
+      // Only run this code in the browser
+      this.jwttoken = localStorage.getItem('user_token');
+      if (this.jwttoken) {
+        const decode = jwtDecode(this.jwttoken);
+        this.userData = decode as User;
+      }
+
+      this.userservice.showBmi(this.userData as User).subscribe({
+        next: (response: any) => {
+          this.bmiValue = response.bmiValues;
+          this.bmiResult = response.result;
+        }
+      });
+
+      this.toggleBreakfast();
+      this.toggleLunch();
+      this.toggleDinner();
+
       const buttons = document.querySelectorAll('.buttons button') as NodeListOf<HTMLButtonElement>;
       buttons.forEach(button => {
         button.addEventListener('click', () => {
@@ -30,25 +52,6 @@ export class ShowfoodComponent implements OnInit{
         });
       });
     }
-
-    
-    this.jwttoken = localStorage.getItem('user_token')
-    if(this.jwttoken){
-      const decode = jwtDecode(this.jwttoken)
-      this.userData = decode as User
-    }
-
-    this.userservice.showBmi(this.userData as User).subscribe({
-      next:(response:any)=>{
-        this.bmiValue = response.bmiValues
-        this.bmiResult = response.result
-      }
-    })
-  
-    this.toggleBreakfast();
-    this.toggleLunch();
-    this.toggleDinner();
-    
   }
 
   logout(){
@@ -62,6 +65,11 @@ export class ShowfoodComponent implements OnInit{
       this.userservice.displayFood(this.bmiResult).subscribe({
         next: (response: any) => {
         this.foodArray = response.food
+        this.foodArray.forEach(food => {
+          if (!food.description) {
+            food.description = "Very nice and tasty food";
+          }
+        });
         console.log(response.food)
         },
         error: (error: any) => {
@@ -76,6 +84,11 @@ export class ShowfoodComponent implements OnInit{
       this.userservice.displayLunch(this.bmiResult).subscribe({
         next: (response: any) => {
         this.foodArray = response.food
+        this.foodArray.forEach(food => {
+          if (!food.description) {
+            food.description = "Very nice and tasty Lunch";
+          }
+        });
         console.log(response.food)
         },
         error: (error: any) => {
@@ -90,6 +103,11 @@ export class ShowfoodComponent implements OnInit{
       this.userservice.displayDinner(this.bmiResult).subscribe({
         next: (response: any) => {
         this.foodArray = response.food
+        this.foodArray.forEach(food => {
+          if (!food.description) {
+            food.description = "A really good breakfast option";
+          }
+        });
         console.log(response.food)
         },
         error: (error: any) => {
@@ -99,6 +117,12 @@ export class ShowfoodComponent implements OnInit{
     }
   }
 
+  startDiet(){
+
+    this.userservice.startDiet(this.userData).subscribe({
+      
+    })
+  }
 
 }
 

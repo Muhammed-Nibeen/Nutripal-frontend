@@ -28,4 +28,8 @@ export class NutritionistService {
     const body = {id}
     return this.http.post(`${this.baseUrl}/nutri/showuserapp`,body)
   }
+
+  getCount(user_id: string,nutri_id: string):Observable<any>{
+    return this.http.post(`${this.baseUrl}/nutri/getcount`,{user_id,nutri_id})
+  }
 }

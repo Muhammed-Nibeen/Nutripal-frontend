@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Food, User } from '../interfaces/auth';
+import { DailyIntake, Food, User } from '../interfaces/auth';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -33,8 +33,11 @@ export class AdminService {
   }  
 
   addFood(formdata:FormData):Observable<any>{
- 
     return this.http.post(`${this.baseUrl}/admin/addfood`, formdata)
+  }
+  
+  dailyIntake(dailyIntake:DailyIntake):Observable<any>{
+    return this.http.post(`${this.baseUrl}/admin/dailyintake`,dailyIntake)
   }
 
 }

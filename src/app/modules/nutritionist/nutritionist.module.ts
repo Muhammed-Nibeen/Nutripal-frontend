@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { NutridashComponent } from '../../shared/components/nutridash/Nutritionist/nutridash.component';
 import { NutriDashboardComponent } from '../../pages/Nutritionist/nutri-dashboard/nutri-dashboard.component';
+import { ChatComponent } from '../../pages/Nutritionist/chat/chat.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NutriDashboardComponent } from '../../pages/Nutritionist/nutri-dashboar
     NutriLoginComponent,
     NutridashComponent,
     NutriDashboardComponent,
-    ShowAppointmentsComponent
+    ShowAppointmentsComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,

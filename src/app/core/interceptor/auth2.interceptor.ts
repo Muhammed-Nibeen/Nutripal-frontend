@@ -1,41 +1,10 @@
-// import { Injectable } from '@angular/core';
-// import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-// import { BehaviorSubject, catchError, Observable } from 'rxjs';
-
-
-// @Injectable()
-// export class AuthInterceptor implements HttpInterceptor {
-//   private isRefreshing = false;
-//   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-//   constructor() {}
-
-//   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
-//     const userData = localStorage.getItem('user_token');
-//     console.log("This is userdata", userData);
-   
-//     if (userData) {
-//       const clonedReq = req.clone({
-//         setHeaders: {
-//           Authorization: `Bearer ${userData}`
-//         }
-//       });
-
-//       return next.handle(clonedReq);
-//     } else {
-//       return next.handle(req);
-//     }
-//   }
-// }
-
-
-
-
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject, iif } from 'rxjs';
 import { catchError, switchMap, filter, take, finalize } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Injectable()
@@ -44,12 +13,17 @@ export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,@Inject(PLATFORM_ID)private platformId: Object) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    const userData = localStorage.getItem('user_token');
-    console.log("This is userdata", userData);
+    let userData: string | null = null;
+
+    // Check if we're in the browser environment
+    if (isPlatformBrowser(this.platformId)) {
+      userData = localStorage.getItem('user_token');
+      console.log("This is userdata", userData);
+    }
     if(userData){
       req =this.addToken(req,userData)
     }

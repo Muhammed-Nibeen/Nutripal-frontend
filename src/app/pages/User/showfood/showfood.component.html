@@ -32,7 +32,7 @@
           <img alt="Card" src="http://localhost:3000/foodImages/{{food?.imageUrl}}" />
       </ng-template>
       <p>
-          Lorem ipsum dolor sit amet...
+          {{food.description}}
       </p>
       <ng-template pTemplate="footer">
           <div class="flex gap-3 mt-1">
@@ -42,4 +42,8 @@
       </ng-template>
   </p-card>
   </div>
+</div>
+
+<div class="startBtn">
+  <button id="buttonStart" (click)="startDiet()">Start Diet</button>
 </div>

@@ -1,0 +1,255 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: montserrat;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav {
+  background: #2b2c2d;
+  height: 80px;
+  width: 100%;
+}
+
+nav ul {
+  float: right;
+  margin-right: 20px;
+}
+
+label.logo {
+  color: rgba(166, 7, 7, 0.882);
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 100px;
+  font-weight: bold;
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+
+nav ul li a {
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+a.active,
+a:hover {
+  background: #868a8d;
+  transition: 0.5s;
+}
+
+.register-link {
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+nav ul li:last-child a span.bmi {
+  position: relative;
+  z-index: 10;
+  color: rgba(166, 7, 7, 0.882);
+  font-size: 30px;
+  line-height: 80px;
+  padding: 0 120px;
+  font-weight: bold;
+}
+
+nav ul li:last-child a:hover span.bmi {
+  padding: 0 40px;
+  transition: padding 0.5s ease-in-out;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 20px; /* Add gap between profile and appointments */
+}
+
+.profile, .appointments {
+  flex: 1;
+}
+
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile .flex-grow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Ensure the appointments are vertically aligned */
+}
+
+.profile .w-full {
+  max-width: 600px; /* Adjust the width as needed */
+}
+
+.profile-photo-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-photo-wrapper img {
+  display: block;
+  margin: 0 auto;
+}
+
+.profile-photo-section h2 {
+  text-align: center;
+  margin-top: 0px;
+}
+
+.grid .block {
+  margin-bottom: 8px; /* Adjust as needed */
+}
+
+.appointments {
+  width: 100%;
+  margin-top: 0; /* Adjust the margin-top */
+  display: flex;
+  justify-content: center;
+}
+
+.appointments-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%; /* Ensures the container takes full width */
+  border: 5px solid rgb(106, 106, 106); /* Add border to appointments container */
+  padding: 20px; /* Add padding inside the border */
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.min-w-full {
+  min-width: 100%;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.appointment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.appointment-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.no-appointments {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: #888;
+}
+
+.chatBtn {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background-color: #FFE53B;
+  background-image: linear-gradient(147deg, #FFE53B, #FF2525, #FFE53B);
+  cursor: pointer;
+  padding-top: 3px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.164);
+  position: relative;
+  background-size: 300%;
+  background-position: left;
+  transition-duration: 1s;
+}
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  opacity: 0;
+  background-color: rgb(255, 180, 82);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: .5s;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+}
+
+.chatBtn:hover .tooltip {
+  opacity: 1;
+  transition-duration: .5s;
+}
+
+.chatBtn:hover {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+
+
+
+.profile button {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Padding */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Display inline */
+  font-size: 16px; /* Font size */
+  margin: 4px 2px; /* Margin */
+  cursor: pointer; /* Pointer cursor */
+  border-radius: 4px; /* Rounded corners */
+  margin-left: 160px;
+}
+
+/* Hover effect */
+.profile button:hover {
+  background-color: #45a049; /* Darker green */
+}

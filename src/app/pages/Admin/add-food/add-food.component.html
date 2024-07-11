@@ -31,10 +31,7 @@
         <a routerLink="/addfood" class="block py-2 px-4 text-gray-300 hover:text-white">Add food items</a>
       </li>
       <li class="mb-4">
-        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white">View Nutritionist</a>
-      </li>
-      <li class="mb-4">
-        <a href="#" class="block py-2 px-4 text-gray-300 hover:text-white">Orders</a>
+        <a href="/dailyintake" class="block py-2 px-4 text-gray-300 hover:text-white">Daily Intake</a>
       </li>
       <li class="mb-4">
         <a (click)="logout()" class="block py-2 px-4 text-gray-300 hover:text-white">Logout</a>
@@ -122,15 +119,25 @@
               <option value="heavy">Heavy</option>
             </select>
           </div>
-            <div>
-              <label for="addImage" class="block mb-2 text-base text-black font-semibold">Add
-                  image</label>
-              <input type="file" id="addImage"  (change)="changeImage($event)"
-                  class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
-                  placeholder="Eg: Chia seed pudding" required />
-                 <div class="">
-                  <img *ngIf="previewImage" [src]="previewImage" alt="Selected Image" class="w-20 h-20 object-cover rounded-md ml-2">
-                 </div>
+          <div>
+            <label for="description" class="block mb-2 text-base text-black font-semibold">Description
+                </label>
+            <input type="string" id="description" formControlName="description"
+                class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                placeholder="Eg: Food Description" required />
+                <small *ngIf="description.invalid && (description.dirty || description.touched)" class="block p-error">
+                  <div *ngIf="description.errors?.['required']">Description is required.</div>
+                </small>
+        </div>
+          <div>
+            <label for="addImage" class="block mb-2 text-base text-black font-semibold">Add
+                image</label>
+            <input type="file" id="addImage"  (change)="changeImage($event)"
+                class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                placeholder="Eg: Chia seed pudding" required />
+                <div class="">
+                <img *ngIf="previewImage" [src]="previewImage" alt="Selected Image" class="w-20 h-20 object-cover rounded-md ml-2">
+                </div>
           </div>
     </div>
   </div>

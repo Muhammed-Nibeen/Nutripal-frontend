@@ -40,8 +40,10 @@ export class AddFoodComponent {
     carbs: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     fats: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     category:['',[Validators.required]],
-    portion:['',[Validators.required]]
+    portion:['',[Validators.required]],
+    description:['',Validators.required]
   })
+
 
   get foodName() {
     return this.addfoodForm.controls['foodName'];
@@ -58,13 +60,20 @@ export class AddFoodComponent {
   get fats() {
     return this.addfoodForm.controls['fats'];
   }
-
-
+  get category() {
+    return this.addfoodForm.controls['category'];
+  }
+  get portion() {
+    return this.addfoodForm.controls['portion'];
+  }
+  get description() {
+    return this.addfoodForm.controls['description'];
+  }
+  
 
   onSubmit() {
     if (this.addfoodForm) {
-      this.addfoodForm.reset()
-      console.log(this.addfoodForm.value)
+      console.log("This is the values in front end",this.addfoodForm.value)
       const formData: FormData = new FormData();
       const formValue: any = this.addfoodForm.value; 
 
@@ -82,6 +91,7 @@ export class AddFoodComponent {
       this.adminservice.addFood(formData as any).subscribe({
         next: (response: any) => {
           if(response.message){
+            this.addfoodForm.reset()
             this.messageService.add({severity:'success',summary:'Success',detail: response.message})
           }
         },

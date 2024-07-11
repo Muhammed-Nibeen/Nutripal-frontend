@@ -13,6 +13,7 @@ export class UserHomeComponent {
     ){}
   logout(){
     localStorage.removeItem('user_token');
+    localStorage.removeItem('user_id')
     this.router.navigate(['userLogin'])
   }
 

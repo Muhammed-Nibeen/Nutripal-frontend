@@ -38,8 +38,12 @@ export class NutriLoginComponent {
             if (typeof localStorage !== 'undefined') {
               sessionStorage.setItem('nutri_token', response.token);
               localStorage.setItem('nutri_token', response.token);
+              localStorage.setItem('nutri_id',response.user._id)
+              
+              
               const data = localStorage.getItem('nutri_token')
               console.log("localStorage storage",data)
+
               localStorage.setItem('user', JSON.stringify(response.user));
 
               this.router.navigate(['nutrihome']);

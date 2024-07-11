@@ -18,6 +18,12 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
+import { ChatComponent } from '../../pages/User/chat/chat.component';
+import { AboutUsComponent } from '../../pages/User/about-us/about-us.component';
+import { ProfileComponent } from '../../pages/User/profile/profile.component';
+import { UserProgressComponent } from '../../pages/User/user-progress/user-progress.component';
+
+
 
 @NgModule({
   declarations: [
@@ -32,6 +38,10 @@ import { DialogModule } from 'primeng/dialog';
     BmiCalculatorComponent,
     ShowfoodComponent,
     ConsultComponent,
+    ChatComponent,
+    AboutUsComponent,
+    ProfileComponent,
+    UserProgressComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +51,8 @@ import { DialogModule } from 'primeng/dialog';
     ButtonModule,
     CardModule,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    
   ]
 })
 export class UserModule { }

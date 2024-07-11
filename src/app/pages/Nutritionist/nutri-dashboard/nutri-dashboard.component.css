@@ -1,4 +1,62 @@
 .custom-input {
   height: 80px!important;
-  width: 200px!important; /* Adjusted width */
+  width: 100%!important;
+  width: 300px!important; /* Adjusted width */
+}
+.main-section {
+  border-radius: 8px; /* Adding border radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
+  background-color: #f4efef; /* Adding background color */
+  padding: 16px; /* Adding padding */
+}
+
+.main-section .uppercase {
+  color: #3e4f6e; /* Changing heading color */
+}
+
+.main-section form {
+  width: 100%;
+}
+
+.main-section label {
+  color: #2D3748; /* Changing label color */
+  text-align: center; /* Centering label text */
+}
+
+.main-section input.custom-input {
+  margin-bottom: 16px; /* Adding margin below inputs */
+}
+
+.main-section .p-button {
+  background-color: #3182CE; /* Changing button background color */
+  border: none;
+}
+
+.main-section .p-button:hover {
+  background-color: #3877bb; /* Changing button hover background color */
+  cursor: pointer;
+}
+
+.main-section .p-error {
+  color: #E53E3E; /* Changing error message color */
+}
+
+.main-section small {
+  font-size: 0.875rem; /* Adjusting font size of small text */
+  text-align: center;
+}
+
+.main-content {
+  margin-left: 16rem; /* Matching the width of the sidebar */
+  padding: 16px; /* Optional: additional padding */
+}
+
+.fields{
+  text-align: center;
+  display: flex;
+  border: 4px solid #4A5568; /* Adding border */
+  border-radius: 8px; /* Adding border radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
+  background-color: #f4efef; /* Adding background color */
+  padding: 16px; /* Adding padding */
 }

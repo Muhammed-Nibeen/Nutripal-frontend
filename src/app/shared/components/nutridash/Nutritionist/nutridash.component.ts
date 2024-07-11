@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class NutridashComponent {
   logout(){
     localStorage.removeItem('nutri_token');
+    localStorage.removeItem('nutri_id');
     this.router.navigate(['nutriLogin'])
   }
   constructor(private router:Router){}

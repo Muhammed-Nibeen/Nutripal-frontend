@@ -22,6 +22,10 @@ import { ButtonModule } from 'primeng/button';
  //websocket
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+import { ShareButton } from 'ngx-sharebuttons/button';
+import { ShareButtonDirective } from 'ngx-sharebuttons';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 //Websocket configuaration
 const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
 
@@ -46,7 +50,9 @@ const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
     FormsModule,
     DialogModule,
     SocketIoModule.forRoot(config),
-    
+    ShareButton,
+    ShareButtonDirective,
+    FaIconComponent
   ],
   providers: [
     provideClientHydration(),

@@ -41,6 +41,38 @@
       </div>
     </div>
 
+
+    <button shareButton="x">
+      <fa-icon [icon]="xIcon" size="lg"></fa-icon>
+    </button>
+
+    <!-- <button shareButton="instagram">
+      <fa-icon [icon]="instagramIcon" size="lg"></fa-icon>
+      Share on Instagram
+    </button>
+     -->
+
+    <button 
+    shareButton="facebook"
+    #facebookBtn="shareButton"
+    url="https://ngx-sharebuttons.netlify.app/#/share-button-directive"
+    [style.background-color]="facebookBtn.color">
+    <i class="fa-brands fa-facebook"></i>
+      Share on Facebook
+    </button>
+
+    <br>
+
+    <button
+    shareButton="whatsapp"
+  
+    url="http://localhost:4200/userprogress"
+    >
+    <i class="fa-brands fa-whatsapp"></i>
+    Share on WhatsApp
+    </button>
+    
+
     <div class="progressTracker">
       <form [formGroup]="progressForm" (ngSubmit)="onSubmit()" class="progress-form">
         <h3>Track Your Progress</h3>
@@ -62,6 +94,8 @@
       </form>
     </div>
 
+
+
     <div *ngIf="showProgressSection" class="showProgress">
       <div class="progress-info">
         {{weightChangeMessage}}
@@ -70,8 +104,9 @@
           <div class="mb-1 text-lg font-medium dark:text-white">Extra Large</div>
     <div class="w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
       <div class="h-6 bg-blue-600 rounded-full dark:bg-blue-500" [style.width.%]="progressPercentage">{{progressPercentage}}%</div>
+    </div> 
     </div>
-    </div>
+
     </div>
   </div>
   

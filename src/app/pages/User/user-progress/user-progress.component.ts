@@ -6,7 +6,8 @@ import { jwtDecode } from 'jwt-decode';
 import { MessageService } from 'primeng/api';
 import { DailyIntake, TrackProgress, User } from '../../../interfaces/auth';
 import { UserService } from '../../../services/user.service';
-
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
+// import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-user-progress',
@@ -14,6 +15,9 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './user-progress.component.css'
 })
 export class UserProgressComponent implements OnInit{
+
+  xIcon = faXTwitter
+
   constructor(private router:Router,
   private userservice:UserService,  
   private messageService:MessageService,
@@ -121,6 +125,21 @@ export class UserProgressComponent implements OnInit{
     progressPercentage = Math.max(0, Math.min(100, progressPercentage));
 
     return progressPercentage;
+  }
+
+  shareOnX() {
+    // Logic for sharing on X platform
+    console.log('Sharing on X platform');
+  }
+
+  shareOnInstagram() {
+    // Logic for sharing on Instagram
+    console.log('Sharing on Instagram');
+  }
+
+  shareOnFacebook() {
+    // Logic for sharing on Facebook
+    console.log('Sharing on Facebook');
   }
 
 }

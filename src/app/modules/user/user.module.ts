@@ -22,7 +22,10 @@ import { ChatComponent } from '../../pages/User/chat/chat.component';
 import { AboutUsComponent } from '../../pages/User/about-us/about-us.component';
 import { ProfileComponent } from '../../pages/User/profile/profile.component';
 import { UserProgressComponent } from '../../pages/User/user-progress/user-progress.component';
-
+import { ShareButton } from 'ngx-sharebuttons/button';
+import { ShareButtonDirective } from 'ngx-sharebuttons';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -52,7 +55,11 @@ import { UserProgressComponent } from '../../pages/User/user-progress/user-progr
     CardModule,
     ReactiveFormsModule,
     DialogModule,
-    
-  ]
+    ShareButton,
+    ShareButtonDirective,
+    FaIconComponent,
+
+  ],
+  
 })
 export class UserModule { }

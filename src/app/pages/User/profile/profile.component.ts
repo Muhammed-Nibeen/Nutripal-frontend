@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { jwtDecode } from 'jwt-decode';
 import { MessageService } from 'primeng/api';
-import { Appointment, User, userAppointment } from '../../../interfaces/auth';
+import { Appointment, User, userAppointment, UserProfile } from '../../../interfaces/auth';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -15,7 +15,17 @@ export class ProfileComponent implements OnInit{
 
   jwttoken!:string|null
   userData!:User
-  userProfile:any = {}
+  userProfile:UserProfile = {
+    _id: '',
+    fullName: '',
+    email: '',
+    age: 0,
+    phoneNumber: 0,
+    sex: '',
+    password: '',
+    isblocked: false
+  }
+  
   age:number = 36
   appointments: userAppointment[] = [];
 
@@ -78,6 +88,10 @@ export class ProfileComponent implements OnInit{
 
   chat(nutri_id: string){
     this.router.navigateByUrl(`/chat/${nutri_id}`)
+  }
+
+  videoCall(nutri_id: string){
+    this.router.navigateByUrl(`/uservideochat/${nutri_id}`)
   }
 
   saveProfile(){

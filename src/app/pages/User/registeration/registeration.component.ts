@@ -18,6 +18,9 @@ export class RegisterationComponent {
   registerForm = this.fb.group({
     fullName: ['',[Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['',[Validators.required,Validators.email]],
+    age: ['', [Validators.required, Validators.min(0)]],
+    sex: ['', Validators.required],
+    phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
     password: ['',Validators.required],
     confirmPassword: ['',Validators.required]
   },{
@@ -45,13 +48,23 @@ export class RegisterationComponent {
     return  this.registerForm.controls['confirmPassword'];
   }
 
-  
+  get age() {
+    return this.registerForm.controls['age'];
+  }
+
+  get sex() {
+    return this.registerForm.controls['sex'];
+  }
+
+  get phoneNumber() {
+    return this.registerForm.controls['phoneNumber'];
+  }
 
   submitDetails(){
     const postData = {...this.registerForm.value}
     delete postData.confirmPassword;
     localStorage.setItem('userData', JSON.stringify(postData));
-    this.authService.registerUser(postData as User).subscribe(
+    this.authService.registerUser(postData as unknown as User).subscribe(
       (response: any) => {
         console.log(response)
           this.messageService.add({ severity: 'success', summary: 'Success', detail: response.message });

@@ -1,0 +1,68 @@
+<nav>
+  <label class="logo">Nutripal</label>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">&#9776;</label>
+  <ul>
+  <li><a routerLink="/profile" routerLinkActive="active" class="register-link">Profile</a></li>
+  <li><a routerLink="/consult">Consult</a></li>
+  <li><a routerLink="/booking">Bookings</a></li>
+  <li><a routerLink="/userprogress">Progress</a></li>
+  <li><a routerLink="/aboutus" routerLinkActive="active" class="register-link">About Us</a></li>
+  <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
+    Logout
+  </button>
+ <li><a routerLink="/bmicalculator" class="nav-link"><span class="bmi" >Calculate Bmi</span></a></li>
+  </ul>
+</nav>
+
+<div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-center mb-20">
+  <h2 class="text-4xl font-bold mb-10">Bookings</h2>
+  <div class="container overflow-x-auto">
+    <table class="min-w-full mb-20">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Appointment Id</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Amount</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Time</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Payment Id</th>
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Prescription</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <!-- Sample User Data -->
+        <tr *ngFor="let appointment of Appointment; let i = index" class="appointment-row">
+          <td class="px-6 py-4 whitespace-no-wrap">{{i + 1}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.nutritionistName}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.amount}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.appointmentDate | date: 'MMMM d, yyyy'}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.appointmentTime}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.displayPaymentId}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap">
+            <ng-container *ngIf="appointment.hasPrescription; else noPrescription">
+              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none" (click)="downloadPrescription(appointment.appointment_id)">
+                Prescription
+              </button>
+            </ng-container>
+            <ng-template #noPrescription>
+              <span class="text-sm text-gray-500">No Prescription</span>
+            </ng-template>
+          </td>
+          
+        </tr>
+        <!-- Add more user rows here -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="pagination-controls">
+  <button type="button" class="pagination-button" (click)="prevPage()">
+    Previous
+  </button>
+  <span class="pagination-info">Page {{ currentPage }} of {{ totalPages }}</span>
+  <button type="button" class="pagination-button" (click)="nextPage()">
+    Next
+  </button>
+</div>

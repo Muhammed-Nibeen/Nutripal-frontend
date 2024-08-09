@@ -16,6 +16,7 @@ export class NutriDashboardComponent implements OnInit{
 
   jwttoken!: string|null
   nutriData!: Nutritionist
+  slots: string[]=[]
 
   logout(){
     localStorage.removeItem('nutri_token');
@@ -25,6 +26,63 @@ export class NutriDashboardComponent implements OnInit{
   
   ngOnInit(): void {
     this.getToken()
+    
+  }
+
+  deleteSlot(index: number) {
+    this.slots.splice(index, 1);
+  }
+
+  generateSlots() {
+    const startTime = this.appointmentForm.controls['startTime'].value;
+    const endTime = this.appointmentForm.controls['endTime'].value;
+  
+    if (startTime && endTime) {
+      const start = this.parseTime(startTime);
+      const end = this.parseTime(endTime);
+  
+      if (start && end && start < end) {
+        this.slots = this.createSlots(start, end);
+      } else {
+        this.slots = [];
+      }
+    }
+  }
+
+  parseTime(time: string): Date | null {
+    const [hours, minutes] = time.split(':').map(Number);
+    if (!isNaN(hours) && !isNaN(minutes)) {
+      const date = new Date();
+      date.setHours(hours, minutes, 0, 0);
+      return date;
+    }
+    return null;
+  }
+  
+  createSlots(start: Date, end: Date): string[] {
+    const slots: string[] = [];
+    const slotDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
+  
+    let currentTime = new Date(start);
+  
+    while (currentTime < end) {
+      const nextTime = new Date(currentTime.getTime() + slotDuration);
+      if (nextTime > end) break;
+  
+      const startSlot = this.formatTime(currentTime);
+      const endSlot = this.formatTime(nextTime);
+  
+      slots.push(`${startSlot} - ${endSlot}`);
+      currentTime = nextTime;
+    }
+  
+    return slots;
+  }
+
+  formatTime(date: Date): string {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 
   getToken() {
@@ -45,35 +103,35 @@ export class NutriDashboardComponent implements OnInit{
 
     appointmentForm = this.fb.group({
       date: ['', Validators.required],
-      time: ['', [Validators.required,this.timeRangeValidator]]
+      startTime: ['', Validators.required],
+      endTime:['',Validators.required]
     });
   
-    timeRangeValidator(control: AbstractControl): { [key: string]: any } | null {
-      const time = control.value;
-      if (time) {
-        const [hours, minutes] = time.split(':').map(Number);
-        if (hours < 16 || hours > 22 || (hours === 22 && minutes > 0)) {
-          return { 'timeRange': true };
-        }
-      }
-      return null;
-    }
+
     
     get date(){
       return this.appointmentForm.controls['date']
     }
     
-    get time(){
-      return this.appointmentForm.controls['time']
+    get startTime(){
+      return this.appointmentForm.controls['startTime']
+    }
+
+    get endTime(){
+      return this.appointmentForm.controls['endTime']
     }
 
     Onsubmit(){
+      console.log('This is the slots',this.slots);
+      
       const data = this.appointmentForm.value
+      console.log(data);
+      
       const nutri_id = this.nutriData
-      this.appointmentForm.reset()
-      this.nutritionistservice.scheduleAppointment(data as Appointment,nutri_id as any).subscribe({
+      this.nutritionistservice.scheduleAppointment(data as Appointment,nutri_id as Nutritionist,this.slots as string[]).subscribe({
         next:(response:any)=>{
           this.messageService.add({severity: 'success', summary: 'Success', detail: response.message})
+          this.appointmentForm.reset()
         },
         error:(error:any)=>{
           this.messageService.add({severity: 'error', summary: 'Error', detail:  error.error.error})

@@ -1,16 +1,19 @@
-
 <nav>
-    <label class="logo">Nutripal</label>
-    <ul>
-    <li routerLink="#" routerLinkActive="active" class="register-link">Profile</li>
-    <li><a routerLink="#">Consult</a></li>
-    <li><a routerLink="#">About Us</a></li>
-    <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
-      Logout
-    </button>
-
-    </ul>
-  </nav>
+  <label class="logo">Nutripal</label>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">&#9776;</label>
+  <ul>
+  <li><a routerLink="/profile" routerLinkActive="active" class="register-link">Profile</a></li>
+  <li><a routerLink="/consult">Consult</a></li>
+  <li><a routerLink="/booking">Bookings</a></li>
+  <li><a routerLink="/userprogress">Progress</a></li>
+  <li><a routerLink="/aboutus" routerLinkActive="active" class="register-link">About Us</a></li>
+  <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
+    Logout
+  </button>
+ <li><a routerLink="/bmicalculator" class="nav-link"><span class="bmi" >Calculate Bmi</span></a></li>
+  </ul>
+</nav>
 
   <div class="details">
     <h2>Your current bmi count is {{bmiValue}}</h2> 

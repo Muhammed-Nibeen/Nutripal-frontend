@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatMessage } from '../../../interfaces/auth';
+import { ChatMessage, NutritionistResponse } from '../../../interfaces/auth';
 import { ChatService } from '../../../services/chat.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { NutritionistService } from '../../../services/nutritionist.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-chat-a',
@@ -14,11 +16,14 @@ export class ChatComponent implements OnInit {
   userId!: string
   currentRoomId!: string
   newMessage: string = ''
+  nutriName: NutritionistResponse = { fullName: '' };
+
   constructor(private chatService: ChatService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private nutriService: NutritionistService,
+    private messageService:MessageService) { }
   
   ngOnInit(): void {
-
     this.route.params.subscribe((params: Params) => { 
       this.nutriId = params['id'] || '';
       this.loadMessage();
@@ -33,8 +38,22 @@ export class ChatComponent implements OnInit {
     } else {
       console.log('localStorage is not available.');
     }
-  
+    
+    this.getName(this.nutriId)
  
+  }
+
+  getName(nutriId: string){
+    this.nutriService.getNameNutri(nutriId).subscribe({
+      next:(response:NutritionistResponse) =>{
+        this.nutriName = response
+        console.log('Response from getNameNutri:', response); 
+        console.log('This is the name:', this.nutriName);
+      },
+      error: (error) => {
+        this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
+      }
+    })
   }
 
   sendMessage() {

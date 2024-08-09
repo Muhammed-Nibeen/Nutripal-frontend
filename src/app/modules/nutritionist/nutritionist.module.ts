@@ -16,6 +16,9 @@ import { DialogModule } from 'primeng/dialog';
 import { NutridashComponent } from '../../shared/components/nutridash/Nutritionist/nutridash.component';
 import { NutriDashboardComponent } from '../../pages/Nutritionist/nutri-dashboard/nutri-dashboard.component';
 import { ChatComponent } from '../../pages/Nutritionist/chat/chat.component';
+import { VideoCallComponent } from '../../pages/Nutritionist/video-call/video-call.component';
+import { BookedSlotsComponent } from '../../pages/Nutritionist/booked-slots/booked-slots.component';
+import { VideocallEndComponent } from '../../pages/User/videocall-end/videocall-end.component';
 
 
 @NgModule({
@@ -27,7 +30,9 @@ import { ChatComponent } from '../../pages/Nutritionist/chat/chat.component';
     NutridashComponent,
     NutriDashboardComponent,
     ShowAppointmentsComponent,
-    ChatComponent
+    ChatComponent,
+    VideoCallComponent,
+    BookedSlotsComponent,
   ],
   imports: [
     CommonModule,

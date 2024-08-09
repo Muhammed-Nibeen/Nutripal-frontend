@@ -5,6 +5,7 @@
     <ul>
     <li><a routerLink="/profile" routerLinkActive="active" class="register-link">Profile</a></li>
     <li><a routerLink="/consult">Consult</a></li>
+    <li><a routerLink="/booking">Bookings</a></li>
     <li><a routerLink="/userprogress">Progress</a></li>
     <li><a routerLink="/aboutus" routerLinkActive="active" class="register-link">About Us</a></li>
     <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
@@ -42,35 +43,9 @@
     </div>
 
 
-    <button shareButton="x">
-      <fa-icon [icon]="xIcon" size="lg"></fa-icon>
-    </button>
 
-    <!-- <button shareButton="instagram">
-      <fa-icon [icon]="instagramIcon" size="lg"></fa-icon>
-      Share on Instagram
-    </button>
-     -->
 
-    <button 
-    shareButton="facebook"
-    #facebookBtn="shareButton"
-    url="https://ngx-sharebuttons.netlify.app/#/share-button-directive"
-    [style.background-color]="facebookBtn.color">
-    <i class="fa-brands fa-facebook"></i>
-      Share on Facebook
-    </button>
 
-    <br>
-
-    <button
-    shareButton="whatsapp"
-  
-    url="http://localhost:4200/userprogress"
-    >
-    <i class="fa-brands fa-whatsapp"></i>
-    Share on WhatsApp
-    </button>
     
 
     <div class="progressTracker">
@@ -106,6 +81,22 @@
       <div class="h-6 bg-blue-600 rounded-full dark:bg-blue-500" [style.width.%]="progressPercentage">{{progressPercentage}}%</div>
     </div> 
     </div>
+
+    <button shareButton="x">
+      <fa-icon [icon]="xIcon" size="lg"></fa-icon>
+      Share On X
+    </button>
+
+
+
+    <button 
+    shareButton="facebook"
+    #facebookBtn="shareButton"
+    url="https://ngx-sharebuttons.netlify.app/#/share-button-directive"
+    [style.background-color]="facebookBtn.color">
+    <i class="fa-brands fa-facebook"></i>
+      Share on Facebook
+    </button>
 
     </div>
   </div>

@@ -22,6 +22,36 @@
           <div *ngIf="email.errors?.['email']">Email should be valid</div>
         </small>
       </div>
+
+      <div class="field">
+        <label for="email">Age</label>
+        <input type="number" pInputText formControlName="age" class="w-full" name="email" placeholder=" Age field is required" />
+        <small *ngIf="age.invalid && (age.dirty || age.touched)" class="block p-error">
+          <div *ngIf="age.errors?.['required']">age is required.</div>
+          <div *ngIf="age.errors?.['age']">age should be valid</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="sex">Sex</label>
+        <select pInputText formControlName="sex" class="w-full" name="sex">
+          <option value="">Select your sex</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <small *ngIf="sex.invalid && (sex.dirty || sex.touched)" class="block p-error">
+          <div *ngIf="sex.errors?.['required']">Sex is required.</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" pInputText formControlName="phoneNumber" class="w-full" name="phoneNumber" placeholder="Type your phoneNumber" />
+        <small *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="block p-error">
+          <div *ngIf="phoneNumber.errors?.['required']">PhoneNumber is required.</div>
+          <div *ngIf="phoneNumber.errors?.['phoneNumber']">PhoneNumber should be valid</div>
+        </small>
+      </div>
+
       <div class="field">
         <label for="password">Password</label>
         <input type="password" pInputText formControlName="password" class="w-full" name="password" placeholder="Type your password" />

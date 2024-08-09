@@ -15,16 +15,17 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { AdminloginComponent } from '../../pages/Admin/adminlogin/adminlogin.component';
 import { DailyIntakeComponent } from '../../pages/Admin/daily-intake/daily-intake.component';
+import { FoodViewComponent } from '../../pages/Admin/food-view/food-view.component';
 
 
 @NgModule({
   declarations: [
-    
     AdminDashboardComponent,
     ViewNutritionistComponent,
     AddFoodComponent,
     AdminloginComponent,
-    DailyIntakeComponent
+    DailyIntakeComponent,
+    FoodViewComponent
   ],
   imports: [
     CommonModule,

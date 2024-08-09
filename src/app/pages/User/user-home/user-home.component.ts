@@ -14,6 +14,7 @@ export class UserHomeComponent {
   logout(){
     localStorage.removeItem('user_token');
     localStorage.removeItem('user_id')
+    localStorage.removeItem('user_refreshToken')
     this.router.navigate(['userLogin'])
   }
 

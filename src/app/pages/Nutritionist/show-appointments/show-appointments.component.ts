@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService,MessageService } from 'primeng/api';
 import { Appointment, Nutritionist, User } from '../../../interfaces/auth';
 import { NutritionistService } from '../../../services/nutritionist.service';
 
@@ -20,11 +20,37 @@ export class ShowAppointmentsComponent implements OnInit {
   userDetails!:User
   visible: boolean = false;
   unreadmessageCount: { [key: string]: number } = {};
+  selectedAppointment: Appointment = {
+    _id: '',
+    user_id: '',
+    nutri_id: '',
+    date: '',
+    time: '',
+    end_time: '',
+    status: '',
+    // add other properties if needed
+  };
+  editVisible: boolean = false;
+  medication: string = '';
+  dosage: string = '';
+  frequency: string = '';
+  prescriptionDetails: string = '';
+  isModalOpen:boolean = false;
+  Pvisible: boolean = false;
+  appointmentId: string = ''
+  userId: string = ''
+  nutriId: string = ''
+  currentPage = 1;
+  itemsPerPage = 2;
+  totalPages = 0;
+
 
   constructor(private nutritionistservice:NutritionistService,
     private messageService:MessageService,
     private cdr: ChangeDetectorRef,
-    private router:Router){}
+    private router:Router,
+    private confirmationService: ConfirmationService,
+    ){}
 
   
 
@@ -38,46 +64,45 @@ export class ShowAppointmentsComponent implements OnInit {
         this.nutriData = decode as Nutritionist
       }
     }
-     
     this.getAppointment()
-
   }
-   getCount() {
-    console.log("Function call 1");
-    this.Appointments.map(async (appointment) => {
-       this.unreadMessages(appointment.user_id,appointment.nutri_id);
-      console.log("Function call 2", appointment.user_id);
-    });
-  }
+  //  getCount() { 
+  //   this.Appointments.map(async (appointment) => {
+  //      this.unreadMessages(appointment.user_id,appointment.nutri_id);
+  //     console.log("Function call 2", appointment.user_id);
+  //   });
+  // }
   
 
   getAppointment(){
-   this.nutritionistservice.getAppointment(this.nutriData).subscribe({
+   this.nutritionistservice.getAppointment(this.nutriData,this.currentPage,this.itemsPerPage).subscribe({
        next: (response: any) => {
          this.Appointments = response.appoinments;
-         console.log('app', this.Appointments);
-         this.getCount()
+         this.totalPages = Math.ceil(response.totalcount / this.itemsPerPage)
+         console.log('Appointments fetched:', this.Appointments);
+        //  this.getCount()
 
        },
        error: (error: any) => {
-         this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
+        console.error('Error fetching appointments:', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error });
        }
      })
   }
 
-  // getToken(){
-  //   if(typeof window!== 'undefined'){
-  //     this.jwttoken = localStorage.getItem('nutri_token')
-  //     if(this.jwttoken){
-  //       const decode = jwtDecode(this.jwttoken)
-  //       this.nutriData = decode as Nutritionist
-  //     }
-  //   }
-  // }
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.getAppointment();
+    }
+  }
 
-  // getAppointments(){
-    
-  // }
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getAppointment();
+    }
+  }
 
   showInfo(id: string){
     this.nutritionistservice.showUserApp(id as string).subscribe({
@@ -111,5 +136,97 @@ export class ShowAppointmentsComponent implements OnInit {
       }
     })
   }
+
+  videoCall(user_id:string){
+    this.router.navigateByUrl(`/videocall/${user_id}`)
+  }
+
+  editAppointment(appointment:Appointment){
+    console.log('This is the appointemnt',appointment);
+    const formattedDate = new Date(appointment.date).toISOString().split('T')[0];
+    this.selectedAppointment = {...appointment,date: formattedDate}
+    this.visible = true;
+  }
+
+  saveAppointment(){
+    this.visible = false;
+    const updatedAppointment: Appointment = {
+      ...this.selectedAppointment,
+      date: new Date(this.selectedAppointment.date).toISOString(), // Convert date back to ISO string
+    };
+
+    this.nutritionistservice.updateAppointment(updatedAppointment).subscribe({
+      next:(response:any)=>{
+        // this.Appointments = response.Appointment
+        this.getAppointment()
+        this.messageService.add({severity: 'success', summary: 'Success', detail: response.message})
+      },
+      error:(error)=>{
+        this.messageService.add({severity: 'error', summary: 'Error', detail:  error.error.error})
+      }
+    })
+
+  }
+
+  deleteAppointment(appointmentId:string){
+    console.log('This is a show',appointmentId);
+    
+    this.nutritionistservice.deleteAppointment(appointmentId,this.nutriData).subscribe({
+      next:(response:any)=>{
+        // this.Appointments = response.appointment
+        this.getAppointment()
+        this.messageService.add({severity: 'success', summary: 'Success', detail: response.message})
+      },
+      error:(error)=>{
+        this.messageService.add({severity: 'error', summary: 'Error', detail:  error.error.error})
+      }
+    })
+  }
+
+  showDialog(id: string,userid: string,nutriid: string) {
+    
+    this.userId = userid
+    this.nutriId = nutriid
+    this.appointmentId = id
+    this.Pvisible = true;
+  }
+
+
+  closePrescriptionModal() {
+    this.Pvisible = false;
+  }
+
+  resetForm() {
+    this.appointmentId = ''
+    this.userId = ''
+    this.nutriId = ''
+    this.medication = '';
+    this.dosage = '';
+    this.frequency = '';
+    this.prescriptionDetails = '';
+  }
+
+
+  savePrescription() {
+    const prescriptionData = {
+      appointmentId: this.appointmentId,
+      userId: this.userId,
+      nutriIdS: this.nutriId,
+      medication: this.medication,
+      dosage: this.dosage,
+      frequency: this.frequency,
+      details: this.prescriptionDetails
+    };
+    this.nutritionistservice.savePrescription(prescriptionData).subscribe({
+      next:(res) =>{
+        this.messageService.add({severity: 'success', summary: 'Success', detail: res.message})
+        this.resetForm();
+        this.closePrescriptionModal()
+      }
+    })
+    
+    
+  }
+
 
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Appointment, TrackProgress, User } from '../interfaces/auth';
 import {Bmi} from '../interfaces/auth'
 import { Router } from '@angular/router';
+import { ShowBmiRes } from '../interfaces/auth2';
 
 
 @Injectable({
@@ -21,8 +22,8 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/user/bmicalculation`,requestBody)
   }
 
-  showBmi(userData:User):Observable<any>{
-    return this.http.post(`${this.baseUrl}/user/showbmi`,userData)
+  showBmi(userData:User):Observable<ShowBmiRes>{
+    return this.http.post<ShowBmiRes>(`${this.baseUrl}/user/showbmi`,userData)
   }
 
   displayFood(bmiResult:number):Observable<any>{
@@ -42,8 +43,8 @@ export class UserService {
     this.router.navigate(['userLogin'])
   }
 
-  getNutris():Observable<any>{
-    return this.http.get(`${this.baseUrl}/user/getnutris`)
+  getNutris(page:number,limit:number):Observable<any>{
+    return this.http.post(`${this.baseUrl}/user/getnutris`,{page,limit})
   }
 
   bookAppointment(id: string,userId:User):Observable<any>{
@@ -53,6 +54,10 @@ export class UserService {
 
   getProfile(userData:User):Observable<any>{
     return this.http.post(`${this.baseUrl}/user/getprofile`,{userData})
+  }
+
+  getNutriProfile(nutriId: string):Observable<any>{
+    return this.http.post(`${this.baseUrl}/user/getnutriprofile`,{nutriId})
   }
 
   getbookedNutris(userData:User):Observable<any>{
@@ -75,6 +80,18 @@ export class UserService {
   trackProgress(trackprogress:TrackProgress,userData: User):Observable<any>{
     console.log('THis is the service file',trackprogress)
     return this.http.post(`${this.baseUrl}/user/trackprogress`,{trackprogress,userData})
+  }
+
+  getBookings(userData: User,page:number,limit:number): Observable<any>{
+    return this.http.post(`${this.baseUrl}/user/getbookings`,{userData,page,limit})
+  }
+
+  downloadPdf(appointmentId: string): Observable<Blob>{
+    return this.http.post(`${this.baseUrl}/user/generatepdf`,{appointmentId}, { responseType: 'blob' })
+  }
+
+  getAvailableSlots(nutritionistId: string){
+    return this.http.post(`${this.baseUrl}/user/getavailableslots`,{nutritionistId})
   }
 
 }

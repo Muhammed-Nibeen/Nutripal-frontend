@@ -5,11 +5,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/User/home/home.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MessageService } from 'primeng/api';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MessageService,ConfirmationService } from 'primeng/api';
+import { HttpClientModule, HTTP_INTERCEPTORS ,provideHttpClient, withFetch } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptor/auth2.interceptor';
 import { DialogModule } from 'primeng/dialog';
 import { DatePipe } from '@angular/common';
@@ -26,6 +26,10 @@ import { ShareButton } from 'ngx-sharebuttons/button';
 import { ShareButtonDirective } from 'ngx-sharebuttons';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { ErrorInterceptor } from './core/interceptor/errorhandling.ts';
+
+
+
 //Websocket configuaration
 const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
 
@@ -52,13 +56,17 @@ const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
     SocketIoModule.forRoot(config),
     ShareButton,
     ShareButtonDirective,
-    FaIconComponent
+    FaIconComponent,
+    ConfirmDialogModule
   ],
   providers: [
     provideClientHydration(),
     MessageService,
+    provideHttpClient(withFetch()),
+    ConfirmationService,
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

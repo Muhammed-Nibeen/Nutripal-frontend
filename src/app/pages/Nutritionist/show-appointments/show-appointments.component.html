@@ -2,23 +2,32 @@
 
 <div class="main">
   <div class="main-section w-full lg:w-3/4 xl:w-2/3 p-8 flex flex-col items-center justify-center mb-20">
-    <h2 class="text-2xl font-bold mb-4 text-indigo-500">Scheduled Slots</h2>
+    <h2 class="text-2xl font-bold mb-4 text-indigo-500">Booked Slots</h2>
     <div class="main-content overflow-x-auto">
       <table class="min-w-full mb-20">
         <thead>
           <tr>
-            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
-            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
-            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Time</th>
-            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+            <th class="px-3 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
+            <th class="px-3 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+            <th class="px-3 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Start Time</th>
+            <th class="px-3 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">End Time</th>
+            <th class="px-3 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">User Info</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Chat</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Video Call</th>
+            <th class="px-3 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Prescription</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr *ngFor="let appointment of Appointments; let i = index">
-            <td class="px-6 py-4 whitespace-no-wrap">{{ i + 1 }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap">{{ appointment.date | date: 'yyyy-MM-dd' }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap">{{ appointment.time }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap">{{ appointment.status }}</td>
+            <td class="px-3 py-4 whitespace-no-wrap">{{ ((currentPage - 1) * itemsPerPage) + i+1 }}</td>
+            <td class="px-3 py-4 whitespace-no-wrap">{{ appointment.date | date: 'yyyy-MM-dd' }}</td>
+            <td class="px-3 py-4 whitespace-no-wrap">{{ appointment.time }}</td>
+            <td class="px-3 py-4 whitespace-no-wrap">{{ appointment.end_time }}</td>
+            <td class="px-3 py-4 whitespace-no-wrap">
+              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-blue-500 rounded-lg border-none hover:bg-blue-600 focus:ring-4 focus:outline-none" (click)="editAppointment(appointment)">Edit</button>
+              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-red-500 rounded-lg border-none hover:bg-red-600 focus:ring-4 focus:outline-none" (click)="deleteAppointment(appointment._id)">Delete</button>
+            </td>
             <td class="px-6 py-4 whitespace-no-wrap" *ngIf="appointment.status === 'booked'">
               <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none" (click)="showInfo(appointment._id)">Show Info</button>
             </td>
@@ -31,12 +40,22 @@
                 <span class="tooltip">Chat</span>
               </button>
             </td>
+            <td class="px-6 py-4 whitespace-no-wrap" *ngIf="appointment.status === 'booked'">
+              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none" (click)="videoCall(appointment.user_id)">Video Call</button>
+            </td>
+            <td>
+              <button id="prescriptionButton" *ngIf="appointment.status === 'booked'" 
+                      (click)="showDialog(appointment._id, appointment.user_id, appointment.nutri_id)"
+                      class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none">Prescription</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+<!-- User details modal -->
 
 <div class="card flex justify-content-center">
   <p-dialog *ngIf="userDetails" header="Details" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
@@ -49,8 +68,96 @@
       <label for="email" class="font-semibold w-6rem">Email</label>
       <label for="username" class="font-semibold w-6rem">{{ userDetails.fullName }}</label>
     </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="email" class="font-semibold w-6rem">Age</label>
+      <label for="username" class="font-semibold w-6rem">{{ userDetails.age }}</label>
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="email" class="font-semibold w-6rem">Sex</label>
+      <label for="username" class="font-semibold w-6rem">{{ userDetails.sex }}</label>
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="email" class="font-semibold w-6rem">Phone Number</label>
+      <label for="username" class="font-semibold w-6rem">{{ userDetails.phoneNumber }}</label>
+    </div>
     <div class="flex justify-content-end gap-2">
       <p-button label="Cancel" severity="secondary" (click)="visible = false" />
     </div>
   </p-dialog>
 </div>
+
+
+<!-- Edit modal -->
+
+<div class="card flex justify-content-center">
+  
+  <p-dialog 
+      header="Update" 
+      [(visible)]="visible" 
+      [modal]="true" 
+      [style]="{ width: '25rem' }">
+          <!-- <ng-template pTemplate="header">
+              <div class="inline-flex align-items-center justify-content-center gap-2">
+         
+              </div>
+          </ng-template> -->
+          <span class="p-text-secondary block mb-5">Update your information.</span>
+          <div class="flex align-items-center gap-3 mb-3">
+            <label for="date">Date</label>
+            <input pInputText type="date" [(ngModel)]="selectedAppointment.date" id="date" />
+          </div>
+          <div class="flex align-items-center gap-3 mb-5">
+            <label for="startTime"> Time</label>
+            <input pInputText type="time" [(ngModel)]="selectedAppointment.time" id="startTime" />
+          </div>
+          <ng-template pTemplate="footer">
+              <p-button 
+                  label="Save" 
+                  [outlined]="true" 
+                  severity="secondary" 
+                  (onClick)="saveAppointment()" 
+                />
+          </ng-template>
+  </p-dialog>
+</div>
+
+
+  <!-- Prescription Modal -->
+  <div class="card flex justify-content-center">
+    <p-dialog header="Prescription" [modal]="true" [(visible)]="Pvisible" [style]="{ width: '25rem' }">
+    <div class="modal-content">
+      <span class="close" (click)="closePrescriptionModal()">&times;</span>
+      <h2>Add Prescription Details</h2>
+      <form (ngSubmit)="savePrescription()">
+        <div class="form-group">
+          <label for="medication">Medication:</label>
+          <input type="text" id="medication" [(ngModel)]="medication" name="medication" required>
+        </div>
+        <div class="form-group">
+          <label for="dosage">Dosage:</label>
+          <input type="text" id="dosage" [(ngModel)]="dosage" name="dosage" required>
+        </div>
+        <div class="form-group">
+          <label for="frequency">Frequency:</label>
+          <input type="text" id="frequency" [(ngModel)]="frequency" name="frequency" required>
+        </div>
+        <div class="form-group">
+          <label for="prescriptionDetails">Details:</label>
+          <textarea id="prescriptionDetails" [(ngModel)]="prescriptionDetails" name="prescriptionDetails" required></textarea>
+        </div>
+        <button type="submit" class="save-button">Save</button>
+      </form>
+    </div>
+  </p-dialog>
+  </div>
+
+  <div class="pagination-controls ">
+    <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="prevPage()">
+      Previous
+    </button>
+    <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="nextPage()">
+      Next
+    </button>
+  </div>
+

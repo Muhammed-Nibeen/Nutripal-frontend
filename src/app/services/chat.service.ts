@@ -56,4 +56,44 @@ export class ChatService {
     return this.http.post(`${this.baseUrl}/user/getmessages`,requestBody)
   }
 
+  // Webrtr Signaling methods
+
+  sendOffer(offer: RTCSessionDescriptionInit, roomId: string): void {
+    this._socket.emit('offer', offer, roomId);
+    console.log("The offered room id is", roomId);
+  };
+
+  sendAnswer(answer: RTCSessionDescriptionInit, roomId: string): void {
+    this._socket.emit('answer', answer, roomId);
+    console.log("The answered room id is", roomId);
+  };
+
+  sendCandidate(candidate: RTCIceCandidate, roomId: string): void {
+    this._socket.emit('candidate', candidate, roomId);
+    console.log("The candidate room id is", roomId);
+  };
+
+  receiveOffer(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('offer', (offer) => {
+        observer.next(offer);
+      });
+    });
+  };
+
+  receiveAnswer(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('answer', (answer) => {
+        observer.next(answer);
+      });
+    });
+  };
+
+  receiveCandidate(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('candidate', (candidate) => {
+        observer.next(candidate);
+      });
+    });
+  };
 }

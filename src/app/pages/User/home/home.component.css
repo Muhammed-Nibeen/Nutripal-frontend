@@ -57,3 +57,319 @@ nav ul li a:hover,
 nav ul li a.active {
   color: #b82f60; 
 }
+
+
+.main-section{
+  width: calc(100% - 1px); /* Reduced width to leave space on both sides */
+  width: 100%;
+  position: relative;
+  height: 100vh; /* Centering the navbar */
+  /* align-items: center; */
+}
+
+.heading-container {
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  padding: 20px;
+  color: white;
+}
+
+.main-header {
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.heading {
+  font-size: 30px;
+  line-height: 44px;
+  font-weight: bold;
+  margin: 0; /* Remove margin if needed */
+  max-width: 100%;
+}
+
+h1{
+  margin-top:15px;
+  font-size:30px;
+  line-height: 44px;
+  font-weight: bold; /* Make the letters thick */
+  color: white; /* Set the text color to white */
+}
+
+.text-color-bg {
+  display: block; /* Each span on a new line */
+  background-color: #b82f60; /* Red background color */
+  padding: 10px; /* Add some padding inside the rectangle */
+  border-radius: 3px; /* Optional: Add border radius for rounded corners */
+  margin-bottom: 20px; /* Space between the lines */
+  width: fit-content; /* Adjust width to fit content */
+  margin: border-box; 
+  box-sizing: border-box; 
+  white-space: nowrap;
+}
+
+
+.home_hero-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.home_hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Styles for the weight loss section */
+.weight-loss-container {
+  position: absolute; /* Use absolute positioning */
+  top: 400px; /* Adjust the top position to place below the main heading */
+  left: 50px; /* Adjust the left position */
+  padding: 20px;
+  color: white;
+}
+
+.weight-loss-heading {
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 20px;
+}
+
+.weight-loss-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between the boxes */
+}
+
+.weight-box {
+  background-color: #b82f60;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  flex: 0 0 45%;;
+  min-width: 100px;
+}
+
+.weight-box-large {
+  flex: 0 0 92%; /* Double the width of the standard weight boxes */
+  min-width: 220px;
+}
+
+.weight-box:hover {
+  background-color: #e8508e;
+  transition: background-color 0.3s;
+}
+
+/* Styles for the info section */
+.info-section {
+  text-align: center; /* Center the content */
+  padding: 40px 20px; /* Add padding around the section */
+  max-width: 800px; /* Set a max-width for the section */
+  margin: 0 auto; /* Center the section horizontally */
+  color: #333; /* Set text color to a dark grey */
+}
+
+.info-heading {
+  font-size: 24px; /* Set font size for the heading */
+  color: grey; /* Set the text color to grey */
+  margin-bottom: 20px; /* Space between heading and content */
+  font-weight: 500; /* Make the heading semi-bold */
+}
+
+.info-content {
+  font-size: 16px; /* Set font size for the content */
+  color: #555; /* Set text color to a medium grey */
+  line-height: 1.6; /* Increase line height for readability */
+  margin-bottom: 20px; /* Space between paragraphs */
+}
+
+/* Styles for the nutritionist profile section */
+.nutritionist-profile {
+  display: flex;
+  justify-content: space-between; /* Align profiles to the left and right sides */
+  padding: 20px; /* Space around the profile section */
+  max-width: 1200px; /* Maximum width for larger screens */
+  margin: 0 auto; /* Center the profile section */
+}
+
+.profile {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin: 0 20px; /* Space between profiles */
+}
+
+.profile img {
+  width: 80px; /* Minimized profile photo size */
+  height: 80px; /* Keep aspect ratio */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+  margin-right: 15px; /* Space between the image and text */
+}
+
+.details {
+  max-width: 300px; /* Limit the width of the details container */
+}
+
+.name {
+  font-size: 20px; /* Font size for the name */
+  color: #333; /* Dark gray color for the text */
+  margin: 0 0 5px; /* Margin below the name */
+}
+
+.details p {
+  font-size: 16px; /* Font size for the paragraphs */
+  color: #666; /* Gray color for the text */
+  margin: 0; /* Remove default margins */
+}
+
+@media (max-width: 768px) {
+  .nutritionist-profile {
+    flex-direction: column; /* Stack profiles vertically on smaller screens */
+    align-items: center; /* Center profiles horizontally */
+  }
+
+  .profile {
+    margin: 10px 0; /* Space between profiles when stacked */
+  }
+}
+
+/* Styles for the last section */
+.last-section {
+  display: flex;
+  justify-content: space-between; /* Align items to the left and right side */
+  align-items: flex-start; /* Align items to the top of the section */
+  padding: 2rem; /* Space around the section */
+
+
+}
+
+.info {
+  flex: 1; /* Take up the remaining space */
+  margin-right: 1.5rem; /* Space between info and video */
+}
+
+.info h1 {
+  font-size: 2.5rem; /* Increase header font size */
+  font-weight: normal; /* Regular weight for the header */
+  margin-bottom: 1rem;
+  color: #333; /* Dark gray color for the text */
+}
+
+.info p {
+  font-size: 1.25rem; /* Increase paragraph font size */
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.info .sub-head {
+  font-weight: bold; /* Bold for the sub-head */
+  color: #ff5733; /* Highlight color for the sub-head */
+}
+
+.info .head-end {
+  font-size: 1rem; /* Smallest font size for the info end */
+  color: #555; /* Gray color for a subtle look */
+}
+
+
+.video-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.video-container video {
+  width: 80%; /* Increase the width of the video */
+  max-width: 700px; /* Set a max-width for the video */
+  height: auto; /* Maintain aspect ratio */
+  border: 2px solid #ccc; /* Optional border for video */
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column; /* Stack content vertically on smaller screens */
+    align-items: center; /* Center align content horizontally */
+  }
+
+  .info {
+    margin-right: 0; /* Remove right margin on small screens */
+    margin-bottom: 20px; /* Space between info and video */
+  }
+
+  .video-container {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+
+  .image-Container {
+    display: block; /* Show the image container on small screens if needed */
+    margin-top: 20px; /* Space above the image */
+  }
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #e0e0e0; /* Grey background color */
+  padding: 20px; /* Padding around the content */
+  color: #333; /* Dark grey text color */
+  position: relative; /* Ensure the footer is positioned relative to its container */
+  width: 100%; /* Full width of the page */
+  bottom: 0; /* Position the footer at the bottom */
+  text-align: center; /* Center-align the text */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Space out the footer sections */
+  flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+  max-width: 1200px; /* Maximum width for larger screens */
+  margin: 0 auto; /* Center the footer content */
+}
+
+.footer-section {
+  flex: 1; /* Allow sections to grow and shrink */
+  padding: 10px; /* Padding around each section */
+  min-width: 150px; /* Minimum width for each section */
+}
+
+.footer-section h2 {
+  font-size: 18px; /* Font size for the section headings */
+  margin-bottom: 10px; /* Space below the headings */
+  color: #333; /* Dark grey color for the section headings */
+}
+
+.footer-section p {
+  font-size: 14px; /* Font size for the paragraphs */
+  color: #666; /* Light grey color for the text */
+}
+
+.footer-section ul {
+  padding: 0; /* Remove padding */
+  list-style: none; /* Remove bullets */
+}
+
+.footer-section ul li {
+  margin-bottom: 10px; /* Space between list items */
+}
+
+.footer-section a {
+  color: #b82f60; /* Color for the links */
+  text-decoration: none; /* Remove underline */
+}
+
+.footer-section a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+
+.footer-bottom {
+  background-color: #e0e0e0; /* Slightly darker grey background for the bottom section */
+  padding: 10px; /* Padding around the bottom section */
+  font-size: 14px; /* Font size for the bottom section text */
+  color: #333; /* Dark grey color for the text */
+}

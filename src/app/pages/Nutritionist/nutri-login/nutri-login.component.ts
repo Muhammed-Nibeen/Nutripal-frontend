@@ -33,7 +33,7 @@ export class NutriLoginComponent {
       const { email, password } = this.nutriloginForm.value;
       this.authService.nutriLogin(email as string, password as string).subscribe(
         (response: any) => {
-          console.log(response);
+          console.log('This is res',response);
           if (response.message) {
             if (typeof localStorage !== 'undefined') {
               sessionStorage.setItem('nutri_token', response.token);

@@ -1,0 +1,26 @@
+<div class="container overflow-x-auto">
+  <table class="min-w-full mb-20">
+    <thead>
+      <tr>
+        <th *ngFor="let column of tableColumns" class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
+          {{ column.header }}
+        </th>
+        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr *ngFor="let row of tableData; let i = index" class="appointment-row">
+        <td *ngFor="let column of tableColumns" class="px-6 py-4 whitespace-no-wrap">
+          {{ resolveField(row, column.field) }}
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap">
+          <div class="button-group">
+            <button *ngFor="let action of actions" [ngClass]="action.class" type="button" (click)="action.action(row)">
+              {{ action.label }}
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

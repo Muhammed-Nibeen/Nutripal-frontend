@@ -14,6 +14,8 @@ export class NutriRegisterComponent {
   nutriregisterForm = this.fb.group({
     fullName: ['',[Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['',[Validators.required,Validators.email]],
+    specialization: ['',Validators.required],
+    experience: ['',Validators.required],
     password: ['',Validators.required],
     confirmPassword: ['',Validators.required]
   },{
@@ -32,7 +34,15 @@ export class NutriRegisterComponent {
     get email(){
       return  this.nutriregisterForm.controls['email'];
     }
-  
+    
+    get specialization(){
+      return this.nutriregisterForm.controls['specialization']
+    }
+
+    get experience(){
+      return this.nutriregisterForm.controls['experience']
+    }
+
     get password(){
       return  this.nutriregisterForm.controls['password'];
     }

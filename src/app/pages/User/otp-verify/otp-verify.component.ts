@@ -49,7 +49,6 @@ export class OtpVerifyComponent {
       error=>{
         this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
       }
-    
 
     )
   }

@@ -23,6 +23,22 @@
         </small>
       </div>
       <div class="field">
+        <label for="specialization">Specialization</label>
+        <input type="text" pInputText formControlName="specialization" class="w-full" name="specialization" placeholder="Type your specialization" />
+        <small *ngIf="specialization.invalid && (specialization.dirty || specialization.touched)" class="block p-error">
+          <div *ngIf="specialization.errors?.['required']">specialization is required.</div>
+          <div *ngIf="specialization.errors?.['specialization']">specialization should be valid</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="experience">Years of experience</label>
+        <input type="text" pInputText formControlName="experience" class="w-full" name="experience" placeholder="Type your experience" />
+        <small *ngIf="experience.invalid && (experience.dirty || experience.touched)" class="block p-error">
+          <div *ngIf="experience.errors?.['required']">experience is required.</div>
+          <div *ngIf="experience.errors?.['experience']">experience should be valid</div>
+        </small>
+      </div>
+      <div class="field">
         <label for="password">Password</label>
         <input type="password" pInputText formControlName="password" class="w-full" name="password" placeholder="Type your password" />
         <small

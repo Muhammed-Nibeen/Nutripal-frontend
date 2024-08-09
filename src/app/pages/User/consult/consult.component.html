@@ -1,59 +1,82 @@
 <nav>
   <label class="logo">Nutripal</label>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">&#9776;</label>
   <ul>
-    <li><a routerLink="/profile" routerLinkActive="active" class="register-link">Profile</a></li>
-    <li><a routerLink="/consult">Consult</a></li>
-    <li><a routerLink="#">About Us</a></li>
-    <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
-      Logout
-    </button>
-    <li><a routerLink="/bmicalculator"><span class="bmi">Calculate Bmi</span></a></li>
+  <li><a routerLink="/profile" routerLinkActive="active" class="register-link">Profile</a></li>
+  <li><a routerLink="/consult" routerLinkActive="active" class="register-link">Consult</a></li>
+  <li><a routerLink="/booking">Bookings</a></li>
+  <li><a routerLink="/userprogress">Progress</a></li>
+  <li><a routerLink="/aboutus" routerLinkActive="active" class="register-link">About Us</a></li>
+  <button class="bg-white-600 mt-4 hover:bg-red-700 border-none text-white text-lg font-bold py-2 px-4 rounded hover:cursor-pointer focus:outline-none focus:shadow-outline" (click)="logout()">
+    Logout
+  </button>
+ <li><a routerLink="/bmicalculator" class="nav-link"><span class="bmi" >Calculate Bmi</span></a></li>
   </ul>
 </nav>
 
 <div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-center mb-20">
   <h2 class="text-4xl font-bold mb-10">Book an appointment</h2>
-  <div class="container overflow-x-auto">
-    <table class="min-w-full mb-20">
-      <thead>
-        <tr>
-          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
-          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Nutritionist</th>
-          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Email</th>
-          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
-          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Time</th>
-          <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Book</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        <!-- Sample User Data -->
-        <tr *ngFor="let appointment of Appointment; let i = index" class="appointment-row">
-          <td class="px-6 py-4 whitespace-no-wrap">{{i + 1}}</td>
-          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.nutritionist.fullName }}</td>
-          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.nutritionist.email }}</td>
-          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.appointment.date | date:'yyyy-MM-dd'}}</td>
-          <td class="px-6 py-4 whitespace-no-wrap">{{appointment.appointment.time}}</td>
-          <td class="px-6 py-4 whitespace-no-wrap">
-              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none" (click)="bookSlot(appointment.appointment._id)" [disabled]="bookingStarted">Book Slot</button>
-          </td>
-        </tr>
-        <!-- Add more user rows here -->
-      </tbody>
-    </table>
+  <div class="search-filter-container flex w-full justify-between items-center">
+    <div class="search">
+      <input 
+        type="text" 
+        placeholder="Search by nutritionist name" 
+        (keyup.enter)="onSearch($event)" 
+        [(ngModel)]="searchQuery">
+    </div>
+    <div class="filter-container">
+      <select [(ngModel)]="selectedSpecialization" (change)="filterBySpecialization()" class="filter-dropdown">
+        <option value="">All Specializations</option>
+        <option value="Gut health">Gut Health</option>
+        <option value="Carnivorous diet">Carnivorous Diet</option>
+        <option value="Keto Diet">Keto Diet</option>
+      </select>
+    </div>
   </div>
+  
+  <app-reusable-table
+    [tableData]="Appointment"
+    [tableColumns]="tableColumns"
+    [actions]="tableActions"
+  ></app-reusable-table>
 </div>
 
+
+
+
 <div class="card flex justify-content-center">
-  <p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-      <span class="p-text-secondary block mb-5">Choose an option</span>
-      <form [formGroup]="consultOptForm">
-      <select name="option"  id="option" formControlName="option" class="custom-input form-control  text-indigo-600 placeholder-indigo-600 text-sm rounded-lg  w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600">
-        <option value="chat" selected>Chat</option>
-        <option value="videoCall">Video Call</option>
-      </select>
-      </form>
-      <div class="flex justify-content-end gap-2">
-          <p-button label="Proceed to pay" (click)="onProceedToPay()"/>
+  <p-dialog header="Choose an action" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
+    <div *ngIf="availableSlots.length > 0; else noSlots">
+      <h3 class="text-lg font-bold mt-4">Available Slots</h3>
+      <div class="slots-container grid grid-cols-4 gap-4">
+        <div 
+          class="slot-item p-3 mb-2 border-2 border-solid border-indigo-200 rounded-lg cursor-pointer" 
+          *ngFor="let slot of availableSlots"
+          (click)="selectSlot(slot)"
+          [ngClass]="{'selected': slot._id === selectedSlot?._id}">
+          <p>{{ slot.date | date: 'yyyy-MM-dd ' }}</p>
+          <p>{{ slot.time }}</p>
+          <p>Rate: ₹300</p>
+        </div>
       </div>
+    </div>
+    <ng-template #noSlots>
+      <p class="text-center text-lg text-red-600 mt-4">No slots available</p>
+    </ng-template>
+    <div class="flex justify-content-end gap-2 mt-4" *ngIf="selectedSlot">
+      <p-button label="Proceed to pay" (click)="onProceedToPay(selectedSlot._id)"/>
+    </div>
   </p-dialog>
+</div>
+
+
+<div class="pagination-controls">
+  <button type="button" class="pagination-button" (click)="prevPage()">
+    Previous
+  </button>
+  <span class="pagination-info">Page {{ currentPage }} of {{ totalPages }}</span>
+  <button type="button" class="pagination-button" (click)="nextPage()">
+    Next
+  </button>
 </div>

@@ -1,0 +1,81 @@
+<div class="min-h-screen flex">
+  <div class="fixed top-0 left-0 mt- h-full bg-blue-800 w-64 py-4 px-2 text-white">
+    <!-- Admin Profile -->
+    <div class="flex items-center mb-8 px-4">
+      <!-- Admin Image -->
+      <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+        <img src='./assets/images/view-3d-businessman.jpg' alt="Admin Profile Image" />
+      </div>
+      <!-- Admin Name with Indicator -->
+      <div>
+        <p class="text-lg font-semibold">Admin</p>
+        <div class="flex items-center mt-1">
+          <div class="h-3 w-3 bg-green-500 rounded-full mr-2 mb-3 animate-ping"></div>
+          <p>Online</p>
+        </div>
+      </div>
+    </div>
+
+    
+   
+
+    <!-- Navigation Links -->
+    <ul class="text-lg mb-8">
+      <li class="mb-4">
+        <a routerLink="/admindash" class="block py-2 px-4 text-gray-300 hover:text-white">Users</a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="/viewnutritionist" class="block py-2 px-4 text-gray-300 hover:text-white">View Nutritionist</a>
+      </li>
+      <li class="mb-4">
+        <a routerLink="/addfood" class="block py-2 px-4 text-gray-300 hover:text-white">Add food items</a>
+      </li>
+      <li class="mb-4">
+        <a href="/viewfood" class="block py-2 px-4 text-gray-300 hover:text-white">View Food</a>
+      </li>
+      <li class="mb-4">
+        <a href="/dailyintake" class="block py-2 px-4 text-gray-300 hover:text-white">Daily Intake</a>
+      </li>
+      <li class="mb-4">
+        <a (click)="logout()" class="block py-2 px-4 text-gray-300 hover:text-white">Logout</a>
+      </li>
+    </ul>
+  </div>
+
+<!-- Main Content -->
+<div class="flex-1 flex flex-col items-center justify-start mt-4">
+  <div class="flex justify-center mt-4">
+    <div class="flex space-x-4">
+      <button id="breakfastBtn" class="icon-button" (click)="toggleBreakfast()">Breakfast</button>
+      <button id="lunchBtn" class="icon-button" (click)="toggleLunch()">Lunch</button>
+      <button id="dinnerBtn" class="icon-button" (click)="toggleDinner()">Dinner</button>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap justify-center mt-8 px-4">
+    <form *ngFor="let food of foodArray"  (submit)="submitForm(food)" class="mx-2">
+      <div class="mb-4">
+        <label for="foodName" class="block text-sm font-medium text-gray-700">Food Name</label>
+        <input type="text" id="foodName" [(ngModel)]="food.foodName" name="name" class="form-input mt-1 block w-full" required>
+      </div>
+      <div class="mb-4">
+        <label for="calories" class="block text-sm font-medium text-gray-700">Calories</label>
+        <input type="number" id="calories" [(ngModel)]="food.kcal" name="calories" class="form-input mt-1 block w-full" required>
+      </div>
+      <div class="mb-4">
+        <label for="proteins" class="block text-sm font-medium text-gray-700">Proteins</label>
+        <input type="number" id="proteins" [(ngModel)]="food.protein" name="proteins" class="form-input mt-1 block w-full" required>
+      </div>
+      <div class="mb-4">
+        <label for="carbs" class="block text-sm font-medium text-gray-700">Carbs</label>
+        <input type="number" id="carbs" [(ngModel)]="food.carbs" name="carbs" class="form-input mt-1 block w-full" required>
+      </div>
+      <div class="mb-4">
+        <label for="fats" class="block text-sm font-medium text-gray-700">Fats</label>
+        <input type="number" id="fats" [(ngModel)]="food.fats" name="fats" class="form-input mt-1 block w-full" required>
+      </div>
+      <button type="submit" class="icon-button px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Change</button>
+    </form>
+  </div>
+</div>
+</div>

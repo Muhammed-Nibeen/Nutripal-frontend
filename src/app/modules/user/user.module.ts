@@ -26,6 +26,11 @@ import { ShareButton } from 'ngx-sharebuttons/button';
 import { ShareButtonDirective } from 'ngx-sharebuttons';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { VideochatComponent } from '../../pages/User/videochat/videochat.component';
+import { BookingComponent } from '../../pages/User/booking/booking.component';
+import { ReusableTableComponent } from '../../shared/components/reusable-table/reusable-table.component';
+import { VideocallEndComponent } from '../../pages/User/videocall-end/videocall-end.component';
+import { NutriProfileComponent } from '../../pages/User/nutri-profile/nutri-profile.component';
 
 
 @NgModule({
@@ -44,7 +49,12 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
     ChatComponent,
     AboutUsComponent,
     ProfileComponent,
-    UserProgressComponent
+    UserProgressComponent,
+    VideochatComponent,
+    BookingComponent,
+    ReusableTableComponent,
+    VideocallEndComponent,
+    NutriProfileComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +68,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
     ShareButton,
     ShareButtonDirective,
     FaIconComponent,
-
+    
   ],
   
 })

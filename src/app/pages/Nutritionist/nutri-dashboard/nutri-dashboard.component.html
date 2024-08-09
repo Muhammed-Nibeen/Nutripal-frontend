@@ -17,15 +17,33 @@
           </small>
         </div>
         <div class="w-full max-w-md mb-4">
-          <label for="time" class="block mb-2 text-base text-black font-semibold text-center">Time</label>
-          <input type="time" id="time" formControlName="time" autocomplete="off" name="time"
+          <label for="startTime" class="block mb-2 text-base text-black font-semibold text-center">Start Time</label>
+          <input type="time" id="startTime" formControlName="startTime" autocomplete="off" name="startTime"
                  class="custom-input form-control text-indigo-600 placeholder-indigo-600 text-sm rounded-lg w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
-                 placeholder="time" required />
-          <small *ngIf="time.invalid && (time.dirty || time.touched)" class="block p-error text-center">
-            <div *ngIf="time.errors?.['required']">Mandatory.</div>
-            <div *ngIf="time.errors?.['timeRange']">Time must be between 16:00 and 22:00.</div>
+                 placeholder="Start Time" required />
+          <small *ngIf="startTime.invalid && (startTime.dirty || startTime.touched)" class="block p-error text-center">
+            <div *ngIf="startTime.errors?.['required']">Mandatory.</div>
           </small>
         </div>
+        <div class="w-full max-w-md mb-4">
+          <label for="endTime" class="block mb-2 text-base text-black font-semibold text-center">End Time</label>
+          <input type="time" id="endTime" formControlName="endTime" autocomplete="off" name="endTime"
+                class="custom-input form-control text-indigo-600 placeholder-indigo-600 text-sm rounded-lg w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
+                placeholder="End Time" required />
+          <small *ngIf="endTime.invalid && (endTime.dirty || endTime.touched)" class="block p-error text-center">
+            <div *ngIf="endTime.errors?.['required']">Mandatory.</div>
+          </small>
+        </div>
+        <button type="button" class="generate-slots-btn" (click)="generateSlots()">Generate Slots</button>
+      </div>
+      <div *ngIf="slots.length > 0" class="w-full max-w-md mb-4">
+        <br>
+        <label class="block mb-4 text-base text-black font-semibold text-center">Confirm Slots</label>
+        <ul class="slot-list">
+          <li *ngFor="let slot of slots;let i = index" class="slot-item">{{ slot }}
+            <button type="button" class="delete-slot-btn" (click)="deleteSlot(i)">x</button>
+          </li>
+        </ul>
       </div>
       <div class="flex justify-center w-full mt-6">
         <div class="w-40">

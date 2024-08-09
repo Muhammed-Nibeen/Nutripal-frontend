@@ -6,7 +6,7 @@ import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 
 
-import { Nutritionist, User, userAppointment } from '../../../interfaces/auth';
+import { Nutritionist, ShowNutritionist, User, userAppointment } from '../../../interfaces/auth';
 import { PaymentService } from '../../../services/payment.service';
 
 import { UserService } from '../../../services/user.service';
@@ -20,10 +20,11 @@ declare var Razorpay: any
   styleUrl: './consult.component.css'
 })
 export class ConsultComponent implements OnInit{
-
   
   visible: boolean = false;
-  Appointment:userAppointment[]=[]
+  originalAppointments: ShowNutritionist[] = [];
+  Appointment:ShowNutritionist[]=[]
+  filteredAppointments: ShowNutritionist[] = [];
   nutri_id!:Nutritionist
   userData!:User
   jwttoken!:string|null
@@ -32,18 +33,50 @@ export class ConsultComponent implements OnInit{
   price:number = 300
   appointmentId!:string
   bookingStarted: boolean = false;
+  loading: boolean = false;
+  availableSlots: any[] = [];
+  selectedSlot: any = null;
+  searchQuery: string = '';
+  selectedSpecialization: string = '';
+  currentPage = 1;
+  itemsPerPage = 2;
+  totalPages = 0;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
     private messageService:MessageService,
     private router:Router,
     private cdr:ChangeDetectorRef,
-    private paymentService:PaymentService
+    private paymentService:PaymentService,
+    private changeDetectorRef: ChangeDetectorRef
    ){}
 
   consultOptForm = this.fb.group({
     option:['',[Validators.required]]
   })
+
+  tableColumns = [
+    { field: 'no', header: 'No' },
+    { field: 'fullName', header: 'Nutritionist' },
+    { field: 'email', header: 'Email' },
+    { field: 'specialization', header: 'Specialization' },
+    { field: 'experience', header: 'Experience' }
+  ];
+  
+
+  tableActions = [
+    {
+      label: 'Show Slots',
+      action: (row:   { _id: string }) => this.bookSlot(row._id),
+      class: 'show-slots-btn'
+    },
+    {
+      label: 'Show Profile',
+      action: (row:   { _id: string }) => this.showProfile(row._id),
+      class: 'show-profile-btn'
+    }
+  ];
+  
 
   logout(){
     this.userService.logout()
@@ -51,10 +84,9 @@ export class ConsultComponent implements OnInit{
   
   ngOnInit(): void{
     this.getToken()
-
     this.getNutris()
-
   }
+
 
   getToken(){
     if (typeof window!== 'undefined'){
@@ -67,11 +99,16 @@ export class ConsultComponent implements OnInit{
   }
 
   getNutris(){
-    this.userService.getNutris().subscribe({
+    this.userService.getNutris(this.currentPage,this.itemsPerPage).subscribe({
       next: (response: any) => {
-        this.Appointment = response.combinedData;
+        console.log(response.nutritionist);
+        this.Appointment = response.nutritionist.map((item: any, index: number) => ({
+          no: index + 1,
+          ...item 
+        }));
+        this.totalPages = Math.ceil(response.totalcount / this.itemsPerPage)
         console.log("Combined data: ",this.Appointment)
-        this.cdr.detectChanges();
+        this.originalAppointments = [...this.Appointment]; // Copy original data
       },
       error: (error: any) => {
         console.error('Subscription error:', error);
@@ -79,26 +116,78 @@ export class ConsultComponent implements OnInit{
     });
   }
 
-
-
-  bookSlot(id:string){
-    console.log("This is the appointment id",id)
-    this.bookingStarted = true;
-    this.visible = true;
-    const userId = this.userData
-    this.appointmentId = id;
-    // this.userService.bookAppointment(id as string,userId).subscribe({
-    //   next:(response:any)=>{
-    //     this.messageService.add({severity:'success',summary:'Success',detail: response.message})
-        
-    //   },
-    //   error:(error:any)=>{
-    //     this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
-    //   }
-    // })
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.getNutris();
+    }
   }
 
-  onProceedToPay(){
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getNutris();
+    }
+  }
+
+  onSearch(event: Event) {
+    console.log('onSearch triggered'); // Check if the method is being called
+    const keyboardEvent = event as KeyboardEvent;
+    if (keyboardEvent.key === 'Enter') {
+      console.log('Enter key pressed'); // Confirm Enter key detection
+      const searchTerm = this.searchQuery.trim();
+      console.log(`Searching for: ${searchTerm}`); // Log the search term
+      if (searchTerm) {
+        this.filteredAppointments = this.Appointment.filter((appointment) =>
+          appointment.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        console.log('Filtered appointments:', this.filteredAppointments); // Log filtered appointments
+        this.Appointment = [...this.filteredAppointments]; // Update the Appointment array
+      } else {
+        this.getNutris(); // Reset to all nutritionists if no search term
+      }
+    }
+  }
+  
+  filterBySpecialization(): void {
+    if (this.selectedSpecialization) {
+      this.Appointment = this.originalAppointments.filter(appointment =>
+        appointment.specialization.trim().toLowerCase() === this.selectedSpecialization.trim().toLowerCase()
+      );
+    } else {
+      this.Appointment = [...this.originalAppointments]; // Reset to original data
+    }
+  }
+  
+  
+
+  showProfile(nutritionistId: string){
+    this.router.navigateByUrl(`/nutriprofile/${nutritionistId}`)
+  }
+
+  bookSlot(nutritionistId:string){
+    console.log("This is the appointment id",nutritionistId)
+    this.visible = true;
+    const userId = this.userData
+    this.userService.getAvailableSlots(nutritionistId).subscribe({
+      next:(response:any)=>{
+          console.log('this is slots',response.slots,this.availableSlots);          
+          this.availableSlots = response.slots;
+          this.messageService.add({severity:'success',summary:'Success',detail: response.message})
+      },
+      error:(error:any)=>{
+        // this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
+      }
+    })
+  }
+
+  selectSlot(slot: any) {
+    this.selectedSlot = slot;
+  }
+
+  onProceedToPay(slotId:string){
+    console.log('Proceeding to pay for slot:', slotId);
+    this.appointmentId = slotId
     const selectedOption = this.consultOptForm.get('option')?.value
     console.log(selectedOption)
     this.visible = false;
@@ -134,9 +223,16 @@ export class ConsultComponent implements OnInit{
     const userId = this.userData
     const appointmentid = this.appointmentId
     
+    this.loading = true;
+
     this.paymentService.paymentSuccess(paymentId, userId,this.price,appointmentid).subscribe({
-      next:(response: any)=>{
+      next: (response: any) => {
         this.messageService.add({severity:'success',summary:'Success',detail: response.message})
+        console.log('Response from backend', response); // Debug log for response
+        this.Appointment = response.nutritionist.map((item: any, index: number) => ({
+          no: index + 1,
+          ...item
+        }));
       },
       error:(error: any)=>{
         this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})

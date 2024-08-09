@@ -1,0 +1,13 @@
+<div id="video-call-container">
+  <div id="remote-video-container">
+    <video id="remoteVideo" autoplay playsinline></video>
+    <div id="local-video-container">
+      <video id="localVideo" autoplay playsinline muted></video>
+    </div>
+  </div>
+  <div id="controls">
+    <button (click)="startCall()">Start Call</button>
+    <button (click)="endCall()">End Call</button>
+    <button (click)="toggleCamera()">Toggle Camera</button>
+  </div>
+</div>

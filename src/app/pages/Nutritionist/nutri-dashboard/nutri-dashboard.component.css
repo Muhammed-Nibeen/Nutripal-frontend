@@ -60,3 +60,50 @@
   background-color: #f4efef; /* Adding background color */
   padding: 16px; /* Adding padding */
 }
+
+/* Styles for the generate btn */
+
+.generate-slots-btn {
+  background-color: #4A5568;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.generate-slots-btn:hover {
+  background-color: #4338ca;
+}
+
+.slot-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.slot-item {
+  position: relative;
+  background-color: #e0e7ff;
+  color: #1e3a8a;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  text-align: center;
+}
+
+.delete-slot-btn {
+  background-color: transparent;
+  border: none;
+  color: #1e3a8a;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.delete-slot-btn:hover {
+  color: #d50000;
+}

@@ -20,7 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card'; 
 import { ButtonModule } from 'primeng/button';
  //websocket
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { ShareButton } from 'ngx-sharebuttons/button';
 import { ShareButtonDirective } from 'ngx-sharebuttons';
@@ -31,7 +31,7 @@ import { ErrorInterceptor } from './core/interceptor/errorhandling.ts';
 
 
 //Websocket configuaration
-const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
+// const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ const config:SocketIoConfig = {url:'http://localhost:8080',options:{} }
     BrowserAnimationsModule,
     FormsModule,
     DialogModule,
-    SocketIoModule.forRoot(config),
+    // SocketIoModule.forRoot(config),
     ShareButton,
     ShareButtonDirective,
     FaIconComponent,

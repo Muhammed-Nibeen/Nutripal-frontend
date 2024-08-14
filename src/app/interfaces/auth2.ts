@@ -1,4 +1,4 @@
-import { Food, User } from "./auth"
+import { Food, Nutritionist, User } from "./auth"
 
 export interface Admin{
   email: string
@@ -45,6 +45,11 @@ export interface RefreshTokenRes{
 export interface GetUserRes{
   message: string;
   user: User
+}
+
+export interface GetNutriRes{
+  message: string;
+  nutritionist: Nutritionist
 }
 
 export interface AdminGetUser{

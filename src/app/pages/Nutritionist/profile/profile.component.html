@@ -1,0 +1,35 @@
+<app-nutridash></app-nutridash>
+
+<div class="profile-section bg-white shadow-lg rounded-lg p-6 max-w-sm mx-auto">
+  <!-- Profile Photo -->
+  <div class="profile-photo-wrapper flex justify-center mb-6">
+      <img src='./assets/images/funny-3d-illustration-cartoon-teenage-girl.jpg' alt="Nutritionist Profile" class="profile-photo w-24 h-24 rounded-full border-4 border-blue-500 object-cover"/>
+  </div>
+
+  <!-- Profile Details -->
+  <div class="profile-details">
+      <p class="text-xl font-bold text-center mb-4">Nutritionist</p>
+
+      <div class="mb-4">
+          <label for="fullName" class="text-gray-600 font-semibold">Full Name:</label>
+          <input [(ngModel)]="nutritionistProfile.fullName" (ngModelChange)="enableSave()" type="text" id="fullName" class="w-full mt-1 p-2 border rounded" placeholder="Enter Full Name">
+      </div>
+      <div class="mb-4">
+          <label for="email" class="text-gray-600 font-semibold">Email:</label>
+          <input [(ngModel)]="nutritionistProfile.email" (ngModelChange)="enableSave()" type="email" id="email" class="w-full mt-1 p-2 border rounded" placeholder="Enter Email">
+      </div>
+      <div class="mb-4">
+          <label for="experience" class="text-gray-600 font-semibold">Experience:</label>
+          <input [(ngModel)]="nutritionistProfile.experience" (ngModelChange)="enableSave()" type="text" id="experience" class="w-full mt-1 p-2 border rounded" placeholder="Enter Experience">
+      </div>
+      <div class="mb-4">
+          <label for="specialization" class="text-gray-600 font-semibold">Specialization:</label>
+          <input [(ngModel)]="nutritionistProfile.specialization" (ngModelChange)="enableSave()" type="text" id="specialization" class="w-full mt-1 p-2 border rounded" placeholder="Enter Specialization">
+      </div>
+
+      <!-- Save Button -->
+      <button (click)="saveProfile()" [disabled]="!isSaveEnabled" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed">
+          Save Changes
+      </button>
+  </div>
+</div>

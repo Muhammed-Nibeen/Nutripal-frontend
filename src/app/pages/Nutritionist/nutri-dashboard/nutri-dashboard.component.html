@@ -3,7 +3,7 @@
 <!-- Main Content -->
 <div class="main-content ml-64">
   <div class="main-section w-full lg:w-1/2 p-8 flex flex-col items-center justify-center mb-20">
-    <div class="pt-8 pb-4 uppercase tracking-wide text-indigo-500 font-semibold text-xl text-center">Schedule an appointment</div>
+    <div class="header mb-4 uppercase tracking-wide text-indigo-500 font-semibold text-xl text-center">Schedule an appointment</div>
     <form [formGroup]="appointmentForm" (ngSubmit)="Onsubmit()" class="w-full flex flex-col items-center">
       <div class="fields flex flex-col w-full items-center p-2">
         <div class="w-full max-w-md mb-4">
@@ -34,7 +34,7 @@
             <div *ngIf="endTime.errors?.['required']">Mandatory.</div>
           </small>
         </div>
-        <button type="button" class="generate-slots-btn" (click)="generateSlots()">Generate Slots</button>
+        <p-button type="button" class="generate-slots-btn" (click)="generateSlots()" [disabled]="appointmentForm.invalid">Generate Slots</p-button>
       </div>
       <div *ngIf="slots.length > 0" class="w-full max-w-md mb-4">
         <br>

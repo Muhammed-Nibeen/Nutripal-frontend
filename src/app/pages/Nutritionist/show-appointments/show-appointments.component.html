@@ -4,7 +4,7 @@
   <div class="main-section w-full lg:w-3/4 xl:w-2/3 p-8 flex flex-col items-center justify-center mb-20">
     <h2 class="text-2xl font-bold mb-4 text-indigo-500">Booked Slots</h2>
     <div class="main-content overflow-x-auto">
-      <table class="min-w-full mb-20">
+      <table class="min-w-full mb-10 mt-10">
         <thead>
           <tr>
             <th class="px-3 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
@@ -125,31 +125,34 @@
   <!-- Prescription Modal -->
   <div class="card flex justify-content-center">
     <p-dialog header="Prescription" [modal]="true" [(visible)]="Pvisible" [style]="{ width: '25rem' }">
-    <div class="modal-content">
-      <span class="close" (click)="closePrescriptionModal()">&times;</span>
-      <h2>Add Prescription Details</h2>
-      <form (ngSubmit)="savePrescription()">
-        <div class="form-group">
-          <label for="medication">Medication:</label>
-          <input type="text" id="medication" [(ngModel)]="medication" name="medication" required>
-        </div>
-        <div class="form-group">
-          <label for="dosage">Dosage:</label>
-          <input type="text" id="dosage" [(ngModel)]="dosage" name="dosage" required>
-        </div>
-        <div class="form-group">
-          <label for="frequency">Frequency:</label>
-          <input type="text" id="frequency" [(ngModel)]="frequency" name="frequency" required>
-        </div>
-        <div class="form-group">
-          <label for="prescriptionDetails">Details:</label>
-          <textarea id="prescriptionDetails" [(ngModel)]="prescriptionDetails" name="prescriptionDetails" required></textarea>
-        </div>
-        <button type="submit" class="save-button">Save</button>
-      </form>
-    </div>
-  </p-dialog>
+      <div class="modal-content">
+        <span class="close" (click)="closePrescriptionModal()">&times;</span>
+        <h2>Add Prescription Details</h2>
+        <form (ngSubmit)="savePrescription()">
+          <div class="form-group" *ngFor="let medication of medications; let i = index">
+            <label for="medication-{{i}}">Medication:</label>
+            <input type="text" id="medication-{{i}}" [(ngModel)]="medication.name" name="medication-{{i}}" required>
+  
+            <label for="dosage-{{i}}">Dosage:</label>
+            <input type="text" id="dosage-{{i}}" [(ngModel)]="medication.dosage" name="dosage-{{i}}" required>
+  
+            <label for="frequency-{{i}}">Frequency:</label>
+            <input type="text" id="frequency-{{i}}" [(ngModel)]="medication.frequency" name="frequency-{{i}}" required>
+  
+            <button type="button" class="remove-button" (click)="removeMedication(i)" *ngIf="medications.length > 1">Remove</button>
+          </div>
+          <button type="button" class="add-button" (click)="addMedication()">+ Add Medication</button>
+  
+          <div class="form-group">
+            <label for="prescriptionDetails">Details:</label>
+            <textarea id="prescriptionDetails" [(ngModel)]="prescriptionDetails" name="prescriptionDetails" required></textarea>
+          </div>
+          <button type="submit" class="save-button">Save</button>
+        </form>
+      </div>
+    </p-dialog>
   </div>
+  
 
   <div class="pagination-controls ">
     <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="prevPage()">
@@ -160,4 +163,3 @@
       Next
     </button>
   </div>
-

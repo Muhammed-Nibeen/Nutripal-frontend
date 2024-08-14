@@ -16,7 +16,7 @@ export class BookedSlotsComponent implements OnInit{
   nutriData!: Nutritionist
   Appointments:Appointment[]=[]
   currentPage = 1;
-  itemsPerPage = 2;
+  itemsPerPage = 10;
   totalPages = 0;
   visible: boolean = false;
   selectedAppointment: Appointment = {
@@ -44,8 +44,6 @@ export class BookedSlotsComponent implements OnInit{
 
   constructor(private nutritionistservice:NutritionistService,
     private messageService:MessageService,
-    private router:Router,
-    private confirmationService: ConfirmationService,
     ){}
 
   getAppointment(){
@@ -54,8 +52,6 @@ export class BookedSlotsComponent implements OnInit{
           this.Appointments = response.appoinments;
           this.totalPages = Math.ceil(response.totalcount / this.itemsPerPage)
           console.log('Appointments fetched:', this.Appointments);
-         //  this.getCount()
- 
         },
         error: (error: any) => {
          console.error('Error fetching appointments:', error);
@@ -78,7 +74,7 @@ export class BookedSlotsComponent implements OnInit{
      }
    }
  
-   editAppointment(appointment:Appointment){
+   editAppointment(appointment:any){
     console.log('This is the appointemnt',appointment);
     const formattedDate = new Date(appointment.date).toISOString().split('T')[0];
     this.selectedAppointment = {...appointment,date: formattedDate}
@@ -104,7 +100,7 @@ export class BookedSlotsComponent implements OnInit{
     })
   }
   
-  deleteAppointment(appointmentId:string){
+  deleteAppointment(appointmentId:any){
       console.log('This is a show',appointmentId);
       
       this.nutritionistservice.deleteAppointment(appointmentId,this.nutriData).subscribe({
@@ -120,3 +116,6 @@ export class BookedSlotsComponent implements OnInit{
     }
 
 }
+
+
+

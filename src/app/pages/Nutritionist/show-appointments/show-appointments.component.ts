@@ -31,10 +31,13 @@ export class ShowAppointmentsComponent implements OnInit {
     // add other properties if needed
   };
   editVisible: boolean = false;
-  medication: string = '';
-  dosage: string = '';
-  frequency: string = '';
+
+  medications: { name: string, dosage: string, frequency: string }[] = [
+    { name: '', dosage: '', frequency: '' }
+  ];
+  
   prescriptionDetails: string = '';
+
   isModalOpen:boolean = false;
   Pvisible: boolean = false;
   appointmentId: string = ''
@@ -196,37 +199,49 @@ export class ShowAppointmentsComponent implements OnInit {
     this.Pvisible = false;
   }
 
-  resetForm() {
-    this.appointmentId = ''
-    this.userId = ''
-    this.nutriId = ''
-    this.medication = '';
-    this.dosage = '';
-    this.frequency = '';
-    this.prescriptionDetails = '';
+  // resetForm() {
+  //   this.appointmentId = ''
+  //   this.userId = ''
+  //   this.nutriId = ''
+  //   this.medication = '';
+  //   this.dosage = '';
+  //   this.frequency = '';
+  //   this.prescriptionDetails = '';
+  // }
+
+  addMedication() {
+    this.medications.push({ name: '', dosage: '', frequency: '' });
   }
 
+  removeMedication(index: number) {
+    if (this.medications.length > 1) {
+      this.medications.splice(index, 1);
+    }
+  }
 
   savePrescription() {
     const prescriptionData = {
       appointmentId: this.appointmentId,
       userId: this.userId,
       nutriIdS: this.nutriId,
-      medication: this.medication,
-      dosage: this.dosage,
-      frequency: this.frequency,
+      medications: this.medications,
       details: this.prescriptionDetails
     };
+  
     this.nutritionistservice.savePrescription(prescriptionData).subscribe({
-      next:(res) =>{
-        this.messageService.add({severity: 'success', summary: 'Success', detail: res.message})
+      next: (res) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
         this.resetForm();
-        this.closePrescriptionModal()
+        this.closePrescriptionModal();
       }
-    })
-    
-    
+    });
   }
+
+  resetForm() {
+    this.medications = [{ name: '', dosage: '', frequency: '' }];
+    this.prescriptionDetails = '';
+  }
+
 
 
 }

@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginResponse, User } from '../interfaces/auth';
 import { Nutritionist } from '../interfaces/auth'
-import { AdminLoginRes, ForgotPassChangeRes, ForgotVerifyOtp, GetUserRes, NutriLoginRes, NutriVerifyOtpRes, RefreshTokenRes, ResendOtpRes, VerifyOtpResponse } from '../interfaces/auth2';
+import { AdminLoginRes, ForgotPassChangeRes, ForgotVerifyOtp, GetNutriRes, GetUserRes, NutriLoginRes, NutriVerifyOtpRes, RefreshTokenRes, ResendOtpRes, VerifyOtpResponse } from '../interfaces/auth2';
+import { enviroment } from '../../enviroment/enviroment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:3000';
+  baseUrl = enviroment.baseUrl
 
   constructor(private http: HttpClient) { }
 
@@ -73,6 +74,10 @@ export class AuthService {
 
   getUser(userid: string):Observable<GetUserRes>{
     return this.http.get<GetUserRes>(`${this.baseUrl}/user/getuser/${userid}`)
+  }
+
+  getNutritionist(nutriid: string):Observable<GetNutriRes>{
+    return this.http.get<GetNutriRes>(`${this.baseUrl}/user/getnutritionist/${nutriid}`)
   }
 
 }

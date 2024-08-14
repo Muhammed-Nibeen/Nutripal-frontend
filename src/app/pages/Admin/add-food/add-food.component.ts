@@ -13,7 +13,7 @@ import { AdminService } from '../../../services/admin.service';
 })
 export class AddFoodComponent {
   previewImage: string | null = null
-  image!: File;
+  image: File | null = null;
   constructor(private router: Router,
     private fb: FormBuilder,
     private adminservice: AdminService,
@@ -92,6 +92,8 @@ export class AddFoodComponent {
         next: (response: any) => {
           if(response.message){
             this.addfoodForm.reset()
+            this.previewImage = null;  
+            this.image = null;  
             this.messageService.add({severity:'success',summary:'Success',detail: response.message})
           }
         },

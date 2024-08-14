@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { Bmi, User } from '../../../interfaces/auth';
 import { UserService } from '../../../services/user.service';
 
@@ -12,6 +13,9 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './bmi-calculator.component.css'
 })
 export class BmiCalculatorComponent  {
+
+  private bmiSubscription: Subscription | null = null
+
   constructor(private router:Router,
     private fb: FormBuilder,
     private userService: UserService,
@@ -64,7 +68,7 @@ export class BmiCalculatorComponent  {
       desweight: Number(desweight)
     };
   
-    this.userService.bmiCalculator(bmiData as Bmi,this.userData as User).subscribe({
+   this.bmiSubscription = this.userService.bmiCalculator(bmiData as Bmi,this.userData as User).subscribe({
       next:(response:any)=>{
         this.messageService.add({severity:'success',summary:'Success',detail: response.message})
         this.router.navigate(['showfood'])
@@ -74,6 +78,12 @@ export class BmiCalculatorComponent  {
     }
     
   })
+  }
+
+  ngOnDestroy(): void {
+    if(this.bmiSubscription){
+      this.bmiSubscription.unsubscribe()
+    }    
   }
 
 }

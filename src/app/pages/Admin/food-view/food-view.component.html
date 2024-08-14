@@ -52,8 +52,9 @@
     </div>
   </div>
 
-  <div class="flex flex-wrap justify-center mt-8 px-4">
-    <form *ngFor="let food of foodArray"  (submit)="submitForm(food)" class="mx-2">
+  <div class="flex flex-wrap justify-center mt-6 ">
+    <div class="form-container">
+    <form *ngFor="let food of foodArray"  (submit)="submitForm(food)" class="mx-4">
       <div class="mb-4">
         <label for="foodName" class="block text-sm font-medium text-gray-700">Food Name</label>
         <input type="text" id="foodName" [(ngModel)]="food.foodName" name="name" class="form-input mt-1 block w-full" required>
@@ -77,5 +78,6 @@
       <button type="submit" class="icon-button px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Change</button>
     </form>
   </div>
+</div>
 </div>
 </div>

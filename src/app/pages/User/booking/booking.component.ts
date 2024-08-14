@@ -4,6 +4,7 @@ import { Bookings, User } from '../../../interfaces/auth';
 import { MessageService } from 'primeng/api';
 import { jwtDecode } from 'jwt-decode';
 import { UserService } from '../../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-booking',
@@ -12,6 +13,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class BookingComponent implements OnInit{
 
+  private bookingSubscription: Subscription | null = null
   jwttoken!:string|null
   userData!:User
   Appointment:Bookings[]=[]
@@ -41,7 +43,7 @@ export class BookingComponent implements OnInit{
   }
 
   getBookings(){
-    this.userService.getBookings(this.userData,this.currentPage,this.itemsPerPage).subscribe({
+   this.bookingSubscription = this.userService.getBookings(this.userData,this.currentPage,this.itemsPerPage).subscribe({
       next: (response: any) => {
       this.Appointment = response.transformedAppointments
       this.totalPages = Math.ceil(response.totalcount / this.itemsPerPage)
@@ -86,6 +88,12 @@ export class BookingComponent implements OnInit{
         console.error('Subscription error:', error);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if(this.bookingSubscription){
+      this.bookingSubscription.unsubscribe();
+    }
   }
 
 }

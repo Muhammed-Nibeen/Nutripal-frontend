@@ -11,13 +11,17 @@
 }
 
 .main{
-  margin-left: 50px; /* Adjust to match the width of your sidebar */
+  margin-left: 250px; /* Adjust to match the width of your sidebar */
   padding: 16px;
+}
+
+.main-section h2 {
+  margin-left: 140px; /* Adjust the value as needed */
 }
 
 .pagination-controls {
   margin-top: -150px;
-  margin-left: 650px; /* Adjust to match the width of your sidebar */
+  margin-left: 750px; /* Adjust to match the width of your sidebar */
   padding: 16px;
 }
 
@@ -178,26 +182,4 @@ textarea {
 .prescription-button:focus {
   outline: none;
   box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.5); /* Tailwind focus:ring-4 */
-}
-
-.add-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.remove-button {
-  background-color: #f44336;
-  color: white;
-  padding: 4px 8px;
-  border: none;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-.add-button:hover, .remove-button:hover {
-  opacity: 0.8;
 }

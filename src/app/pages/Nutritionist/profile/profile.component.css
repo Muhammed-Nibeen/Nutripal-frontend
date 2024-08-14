@@ -1,0 +1,42 @@
+/* Profile Section Styles */
+.profile-section {
+  background-color: #ffffff;
+  border-radius: 0.5rem; /* Rounded corners */
+  padding: 1.5rem; /* Padding */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for a lifted effect */
+  max-width: 20rem; /* Max width to limit size */
+  margin: 0 auto; /* Center alignment */
+}
+
+/* Profile Photo Styles */
+.profile-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem; /* Space below the photo */
+}
+
+.profile-photo {
+  width: 6rem; /* Set photo size */
+  height: 6rem;
+  border-radius: 9999px; /* Fully round image */
+  border: 0.25rem solid #4299e1; /* Blue border */
+  
+}
+
+/* Profile Details */
+.profile-details p {
+  margin-bottom: 0.75rem; /* Space between details */
+}
+
+.profile-details .text-xl {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.profile-details .text-gray-600 {
+  color: #718096; /* Darker gray for labels */
+}
+
+.profile-details .text-gray-800 {
+  color: #2d3748; /* Darkest gray for text */
+}

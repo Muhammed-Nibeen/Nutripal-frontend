@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { DailyIntake, Food, User } from '../interfaces/auth';
 import { HttpClient } from '@angular/common/http';
 import { AddFood, AdminGetNutris, AdminGetUser, AdminManageNutris, AdminManageUsers, SearchEmail, ToogleBreakfast, ToogleDinner, ToogleLunch, UpdateFood } from '../interfaces/auth2';
+import { enviroment } from '../../enviroment/enviroment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  private baseUrl = 'http://localhost:3000'
+  baseUrl = enviroment.baseUrl
 
   constructor(private http: HttpClient) { }
 
@@ -21,8 +22,8 @@ export class AdminService {
     return this.http.put<AdminManageUsers>(`${this.baseUrl}/admin/manageUsers/${userid}`,{})
   }
 
-  getnutris():Observable<AdminGetNutris>{
-    return this.http.get<AdminGetNutris>(`${this.baseUrl}/admin/getNutris`)
+  getnutris(page:number,limit:number):Observable<AdminGetNutris>{
+    return this.http.get<AdminGetNutris>(`${this.baseUrl}/admin/getNutris?page=${page}&limit=${limit}`)
   }
 
   managenutri(userid: string):Observable<AdminManageNutris>{

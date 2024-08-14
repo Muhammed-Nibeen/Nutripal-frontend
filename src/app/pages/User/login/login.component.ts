@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { runInThisContext } from 'vm';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  private loginSubscription: Subscription | null = null
   loginForm = this.fb.group({
     email: ['',[Validators.required,Validators.email]],
     password:['',Validators.required]
@@ -33,7 +36,7 @@ export class LoginComponent {
 
     loginDetails() {
       const { email, password } = this.loginForm.value;
-      this.authService.userLogin(email as string, password as string).subscribe(
+      this.loginSubscription = this.authService.userLogin(email as string, password as string).subscribe(
         (response: any) => {
           console.log(response);
           if (response.message) {
@@ -60,6 +63,13 @@ export class LoginComponent {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error });
         }
       );
+    }
+
+    ngOnDestroy(): void {
+      if(this.loginSubscription){
+        this.loginSubscription.unsubscribe();
+      }
+            
     }
     
 }

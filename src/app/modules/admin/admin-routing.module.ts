@@ -22,3 +22,4 @@ const routes: Routes = [ {path:'adminlogin',component:AdminloginComponent,canAct
   exports: [RouterModule]
 })
 export class AdminRoutingModule { }
+

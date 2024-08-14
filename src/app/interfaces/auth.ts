@@ -17,6 +17,8 @@ export interface Nutritionist{
   email: string;
   password: string;
   isblocked:Boolean;
+  experience: string;
+  specialization: string;
 }
 
 export interface Bmi{
@@ -118,14 +120,18 @@ export interface NutriProfile{
   isblocked:Boolean
 }
 
-export interface Prescription{
-  appointmentId: string,
-  userId: string,
-  nutriIdS: string,
-  medication: string,
-  dosage: string,
-  frequency: string,
-  details: string
+export interface Medication {
+  name: string;
+  dosage: string;
+  frequency: string;
+}
+
+export interface Prescription {
+  appointmentId: string;
+  userId: string;
+  nutriIdS: string;
+  medications: Medication[];
+  details: string;
 }
 
 export interface Bookings{
@@ -156,4 +162,15 @@ export interface LoginResponse{
   token:string
   refreshToken:string
   message:string
+}
+
+export interface RevenueRecord{
+  username: string;
+  date: Date;
+  payment_id: string;
+  amount: number;
+  totalBookings: number;
+  user_id:{
+    fullName: 'string'
+  }
 }

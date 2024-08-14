@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { getEnvironmentData } from 'worker_threads';
+import { enviroment } from '../../enviroment/enviroment'
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { getEnvironmentData } from 'worker_threads';
 export class ChatService {
 
   private _socket: Socket;
-  private baseUrl = 'http://localhost:3000';
+  baseUrl = enviroment.baseUrl
   constructor(private http:HttpClient) { 
     this._socket = io(this.baseUrl,{})
 

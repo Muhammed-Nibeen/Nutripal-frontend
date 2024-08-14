@@ -142,3 +142,40 @@
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(90, 103, 216, 0.25);
 }
+
+
+
+
+
+.flex-1 {
+  flex: 1;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.space-x-4 > * + * {
+  margin-left: 1rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: flex-start;
+  transform: translateX(80px); /* Adjust this value to move the forms more or less to the left */
+  gap: 2rem; /* Adjust the gap between forms as needed */
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    transform: translateX(-10px); /* Smaller shift on smaller screens */
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,41 @@
+<app-nutridash></app-nutridash>
+
+<div class="main">
+  <div class="main-section w-full lg:w-3/4 xl:w-2/3 p-8 flex flex-col items-center justify-center mb-20">
+    <h2 class="text-2xl font-bold mb-4 text-indigo-500 ml-5">Revenue</h2>
+    <div class="main-content overflow-x-auto">
+      <table class="min-w-full mb-10 mt-10">
+        <thead>
+          <tr>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Amount</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">User name</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Transaction Id</th>
+            <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Total Bookings</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let row of revenueData; let i = index">
+            <td class="px-6 py-4 whitespace-no-wrap">{{ ((currentPage - 1) * itemsPerPage) + i + 1 }}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">{{ row.date | date: 'yyyy-MM-dd' }}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">{{ row.amount }}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">{{ row.user_id.fullName }}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">{{ row.payment_id }}</td>
+            <td class="px-6 py-4 whitespace-no-wrap">{{ row.totalBookings }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+  </div>
+</div>
+
+<div class="pagination-controls ">
+  <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="prevPage()">
+    Previous
+  </button>
+  <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
+  <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="nextPage()">
+    Next
+  </button>
+</div>

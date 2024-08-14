@@ -15,3 +15,4 @@ export class ReusableTableComponent {
     return path.split('.').reduce((o, p) => o && o[p], obj);
   }
 }
+

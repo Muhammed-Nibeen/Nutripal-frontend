@@ -41,14 +41,13 @@ export class ConsultComponent implements OnInit{
   currentPage = 1;
   itemsPerPage = 2;
   totalPages = 0;
+  nutriId!: string
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
     private messageService:MessageService,
     private router:Router,
-    private cdr:ChangeDetectorRef,
     private paymentService:PaymentService,
-    private changeDetectorRef: ChangeDetectorRef
    ){}
 
   consultOptForm = this.fb.group({
@@ -166,6 +165,7 @@ export class ConsultComponent implements OnInit{
   }
 
   bookSlot(nutritionistId:string){
+    this.nutriId = nutritionistId
     console.log("This is the appointment id",nutritionistId)
     this.visible = true;
     const userId = this.userData
@@ -225,7 +225,7 @@ export class ConsultComponent implements OnInit{
     
     this.loading = true;
 
-    this.paymentService.paymentSuccess(paymentId, userId,this.price,appointmentid).subscribe({
+    this.paymentService.paymentSuccess(paymentId, userId,this.price,appointmentid,this.nutriId).subscribe({
       next: (response: any) => {
         this.messageService.add({severity:'success',summary:'Success',detail: response.message})
         console.log('Response from backend', response); // Debug log for response

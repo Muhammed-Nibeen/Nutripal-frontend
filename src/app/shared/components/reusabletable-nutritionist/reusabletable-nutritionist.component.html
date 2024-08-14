@@ -1,0 +1,31 @@
+<div class="main-content overflow-x-auto">
+  <table class="min-w-full mb-10 mt-10">
+    <thead>
+      <tr>
+        <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">No</th>
+        <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+        <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+        <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Start Time</th>
+        <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">End Time</th>
+        <th class="px-6 py-1 bg-gray-25 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr *ngFor="let row of rows; let i = index">
+        <td class="px-6 py-4 whitespace-no-wrap">{{ ((currentPage - 1) * itemsPerPage) + i + 1 }}</td>
+        <td class="px-6 py-4 whitespace-no-wrap">{{ row.date | date: 'yyyy-MM-dd' }}</td>
+        <td class="px-6 py-4 whitespace-no-wrap">{{ row.status }}</td>
+        <td class="px-6 py-4 whitespace-no-wrap">{{ row.time }}</td>
+        <td class="px-6 py-4 whitespace-no-wrap">{{ row.end_time }}</td>
+        <td class="px-6 py-4 whitespace-no-wrap">
+          <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-blue-500 rounded-lg border-none hover:bg-blue-600 focus:ring-4 focus:outline-none" (click)="onEdit(row)">Edit</button>
+          <button type="button"
+        class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-red-500 rounded-lg border-none hover:bg-red-600 focus:ring-4 focus:outline-none"
+        (click)="onDelete(row)">
+  Delete
+</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

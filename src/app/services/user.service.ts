@@ -5,14 +5,14 @@ import { Appointment, TrackProgress, User } from '../interfaces/auth';
 import {Bmi} from '../interfaces/auth'
 import { Router } from '@angular/router';
 import { ShowBmiRes } from '../interfaces/auth2';
-
+import { enviroment } from '../../enviroment/enviroment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:3000';
+  baseUrl = enviroment.baseUrl
 
   constructor(private http: HttpClient,
     private router: Router) { }

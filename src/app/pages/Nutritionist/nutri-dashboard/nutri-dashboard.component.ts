@@ -24,6 +24,7 @@ export class NutriDashboardComponent implements OnInit{
     this.router.navigate(['nutriLogin'])
   }
   
+
   ngOnInit(): void {
     this.getToken()
     

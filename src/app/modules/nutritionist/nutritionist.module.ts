@@ -20,6 +20,10 @@ import { VideoCallComponent } from '../../pages/Nutritionist/video-call/video-ca
 import { BookedSlotsComponent } from '../../pages/Nutritionist/booked-slots/booked-slots.component';
 import { VideocallEndComponent } from '../../pages/User/videocall-end/videocall-end.component';
 
+import { ReusabletableNutritionistComponent } from '../../shared/components/reusabletable-nutritionist/reusabletable-nutritionist.component';
+import { ProfileComponent } from '../../pages/Nutritionist/profile/profile.component';
+import { RevenueComponent } from '../../pages/Nutritionist/revenue/revenue.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +37,9 @@ import { VideocallEndComponent } from '../../pages/User/videocall-end/videocall-
     ChatComponent,
     VideoCallComponent,
     BookedSlotsComponent,
+    ReusabletableNutritionistComponent,
+    ProfileComponent,
+    RevenueComponent
   ],
   imports: [
     CommonModule,

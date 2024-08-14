@@ -11,7 +11,7 @@
 }
 
 .main{
-  margin-left: 30px; /* Adjust to match the width of your sidebar */
+  margin-left: -50px; /* Adjust to match the width of your sidebar */
   padding: 16px;
 }
 
@@ -21,7 +21,7 @@
 
 .pagination-controls {
   margin-top: -150px;
-  margin-left: 750px; /* Adjust to match the width of your sidebar */
+  margin-left: 650px; /* Adjust to match the width of your sidebar */
   padding: 16px;
 }
 

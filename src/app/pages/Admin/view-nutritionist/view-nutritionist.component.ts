@@ -11,6 +11,10 @@ import { AdminService } from '../../../services/admin.service';
 })
 export class ViewNutritionistComponent {
 
+    currentPage = 1;
+    itemsPerPage = 2;
+    totalPages = 0;
+
     constructor(private adminservice:AdminService,
     private messageService:MessageService,
     private router:Router
@@ -19,20 +23,39 @@ export class ViewNutritionistComponent {
     Nutritionist:Nutritionist[]=[]
 
     ngOnInit(): void{
-      this.adminservice.getnutris().subscribe(
+      this.getnutris()
+    }
+
+    getnutris(){
+      this.adminservice.getnutris(this.currentPage, this.itemsPerPage).subscribe(
         (response:any)=>{
           this.Nutritionist = response.users
+          this.totalPages = Math.ceil(response.totalcount / this.itemsPerPage);
         },
         (error:any) =>{
           this.messageService.add({severity: 'error', summary: 'Error', detail:  error.error.error})
         }
       )
-      }
-
+    }
+  
     logout(){
       localStorage.removeItem('admin_token');
       this.router.navigate(['adminlogin'])
     } 
+
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.getnutris();
+      }
+    }
+  
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.getnutris();
+      }
+    }
 
     toggleBlockStatus(user:any){
       this.adminservice.managenutri(user._id).subscribe(

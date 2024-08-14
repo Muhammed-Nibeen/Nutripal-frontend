@@ -84,5 +84,16 @@
       </tbody>
     </table>
   </div>
+
+  <div class="pagination-controls ">
+    <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="prevPage()">
+      Previous
+    </button>
+    <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button type="button" class="px-4 py-2 border border-gray-300 hover:bg-gray-400 hover:text-white transition duration-150 ease-in-out" (click)="nextPage()">
+      Next
+    </button>
+  </div>
+
 </div>
 </div>

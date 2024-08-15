@@ -25,8 +25,20 @@
             <td class="px-3 py-4 whitespace-no-wrap">{{ appointment.time }}</td>
             <td class="px-3 py-4 whitespace-no-wrap">{{ appointment.end_time }}</td>
             <td class="px-3 py-4 whitespace-no-wrap">
-              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-blue-500 rounded-lg border-none hover:bg-blue-600 focus:ring-4 focus:outline-none" (click)="editAppointment(appointment)">Edit</button>
-              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-red-500 rounded-lg border-none hover:bg-red-600 focus:ring-4 focus:outline-none" (click)="deleteAppointment(appointment._id)">Delete</button>
+              <!-- <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-blue-500 rounded-lg border-none hover:bg-blue-600 focus:ring-4 focus:outline-none" >Edit</button> -->
+              <button class="Btn" (click)="editAppointment(appointment)">
+                Edit
+                <svg viewBox="0 0 512 512" class="svg">
+                  <path
+                    d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
+                  ></path>
+                </svg>
+              </button>
+              <!-- <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-red-500 rounded-lg border-none hover:bg-red-600 focus:ring-4 focus:outline-none" >Delete</button> -->
+              <button type="button" class="button" (click)="deleteAppointment(appointment._id)" >
+                <span class="button__text">Delete</span>
+                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="512" viewBox="0 0 512 512" height="512" class="svg"><title></title><path style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320"></path><line y2="112" y1="112" x2="432" x1="80" style="stroke:#323232;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"></line><path style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40"></path><line y2="400" y1="176" x2="256" x1="256" style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line><line y2="400" y1="176" x2="192" x1="184" style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line><line y2="400" y1="176" x2="320" x1="328" style="fill:none;stroke:#323232;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></line></svg></span>
+              </button>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap" *ngIf="appointment.status === 'booked'">
               <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none" (click)="showInfo(appointment._id)">Show Info</button>
@@ -41,7 +53,10 @@
               </button>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap" *ngIf="appointment.status === 'booked'">
-              <button type="button" class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none" (click)="videoCall(appointment.user_id)">Video Call</button>
+              <button class="chatBtn" (click)="videoCall(appointment.user_id)">                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512" stroke-width="0" fill="currentColor" stroke="currentColor" class="video-icon">
+                <path d="M464 384.39a32 32 0 01-13-2.77 15.77 15.77 0 01-2.71-1.54l-82.71-58.22A32 32 0 01352 295.7v-79.4a32 32 0 0113.58-26.16l82.71-58.22a15.77 15.77 0 012.71-1.54 32 32 0 0145 29.24v192.76a32 32 0 01-32 32zM268 400H84a68.07 68.07 0 01-68-68V180a68.07 68.07 0 0168-68h184.48A67.6 67.6 0 01336 179.52V332a68.07 68.07 0 01-68 68z"></path>
+              </svg>
+              <span class="tooltip">VideoCall</span></button>
             </td>
             <td>
               <button id="prescriptionButton" *ngIf="appointment.status === 'booked'" 

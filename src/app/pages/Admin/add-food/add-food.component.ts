@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 import { Food } from '../../../interfaces/auth';
 import { AdminService } from '../../../services/admin.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-food',
@@ -12,6 +13,8 @@ import { AdminService } from '../../../services/admin.service';
   styleUrl: './add-food.component.css'
 })
 export class AddFoodComponent {
+
+  private addFoodSubscription: Subscription | null = null
   previewImage: string | null = null
   image: File | null = null;
   constructor(private router: Router,
@@ -87,8 +90,7 @@ export class AddFoodComponent {
         formData.append('image', this.image);
       }
 
-      console.log('this is the image', formData)
-      this.adminservice.addFood(formData as any).subscribe({
+      this.addFoodSubscription = this.adminservice.addFood(formData as any).subscribe({
         next: (response: any) => {
           if(response.message){
             this.addfoodForm.reset()
@@ -102,6 +104,12 @@ export class AddFoodComponent {
         }
       })
     }
+  }
+
+  ngOnDestroy(): void {
+    if(this.addFoodSubscription){
+      this.addFoodSubscription.unsubscribe()
+    }    
   }
 
 }

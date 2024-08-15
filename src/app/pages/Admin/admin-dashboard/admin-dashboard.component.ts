@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { User } from '../../../interfaces/auth';
 import { AdminService } from '../../../services/admin.service';
 @Component({
@@ -9,6 +10,9 @@ import { AdminService } from '../../../services/admin.service';
   styleUrl: './admin-dashboard.component.css'
 })
 export class AdminDashboardComponent {
+
+  private getUsersSubscription: Subscription | null = null
+
   filterObj = { Email: '' };
   currentPage = 1;
   itemsPerPage = 2;
@@ -39,7 +43,7 @@ export class AdminDashboardComponent {
   }
 
   getusers(){
-    this.adminservice.getUsers(this.currentPage, this.itemsPerPage).subscribe(
+    this.getUsersSubscription = this.adminservice.getUsers(this.currentPage, this.itemsPerPage).subscribe(
       (response:any)=>{
         this.Users = response.users
         this.totalPages = Math.ceil(response.totalcount / this.itemsPerPage);
@@ -86,4 +90,11 @@ export class AdminDashboardComponent {
     localStorage.removeItem('admin_token');
     this.router.navigate(['adminlogin'])
   }
+
+  ngOnDestroy(): void {
+    if(this.getUsersSubscription){
+      this.getUsersSubscription.unsubscribe()
+    } 
+  }
+
 }

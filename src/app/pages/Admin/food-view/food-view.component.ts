@@ -54,9 +54,12 @@ export class FoodViewComponent {
         this.foodArray = response.food
         this.showForm = true;
         console.log('THis is  ',this.foodArray);
-        
+      },
+      error:(error: any)=>{
+        this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
       }
     })
+    
   }
 
   submitForm(food:any){
@@ -65,6 +68,9 @@ export class FoodViewComponent {
         console.log('Food updated', response);
         this.messageService.add({severity: 'success', summary: 'Success', detail: response.message})
       },
+      error:(error: any)=>{
+        this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
+      }
     })
   }
 

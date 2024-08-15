@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { MessageService } from 'primeng/api';
 import { Food, User } from '../../../interfaces/auth';
 import { UserService } from '../../../services/user.service';
 
@@ -14,7 +15,8 @@ export class ShowfoodComponent implements OnInit{
   constructor(private router:Router,
     private userservice:UserService,
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private messageService: MessageService,
     ){}
 
   userData!:User
@@ -70,10 +72,9 @@ export class ShowfoodComponent implements OnInit{
             food.description = "Very nice and tasty food";
           }
         });
-        console.log(response.food)
         },
-        error: (error: any) => {
-          console.error('Error fetching breakfast food');
+        error:(error: any)=>{
+          this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
         }
       });
     }
@@ -91,8 +92,8 @@ export class ShowfoodComponent implements OnInit{
         });
         console.log(response.food)
         },
-        error: (error: any) => {
-          console.error('Error fetching breakfast food');
+        error:(error: any)=>{
+          this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
         }
       });
     }
@@ -110,8 +111,8 @@ export class ShowfoodComponent implements OnInit{
         });
         console.log(response.food)
         },
-        error: (error: any) => {
-          console.error('Error fetching breakfast food');
+        error:(error: any)=>{
+          this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
         }
       });
     }

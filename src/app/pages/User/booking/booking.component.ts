@@ -84,8 +84,8 @@ export class BookingComponent implements OnInit{
       window.URL.revokeObjectURL(url);
       console.log('bookings',this.Appointment);
       },
-      error: (error: any) => {
-        console.error('Subscription error:', error);
+      error:(error: any)=>{
+        this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
       }
     });
   }

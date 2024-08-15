@@ -41,7 +41,6 @@ export class NutriProfileComponent implements OnInit{
       next:(response: any)=>{
         this.nutriProfile = response.nutri
         console.log('Thsi is profile',this.nutriProfile);
-        
       },
       error:(error: any) => {
         this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})

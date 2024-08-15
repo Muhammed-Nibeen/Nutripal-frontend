@@ -32,7 +32,6 @@ export class ForgotpassComponent {
         this.messageService.add({severity:'success',summary:'Success',detail: response.message})
       },
       (error:any)=>{
-        console.log(error)
         this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
       }
     )

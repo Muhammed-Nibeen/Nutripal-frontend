@@ -233,6 +233,9 @@ export class ShowAppointmentsComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
         this.resetForm();
         this.closePrescriptionModal();
+      },
+      error:(error: any)=>{
+        this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
       }
     });
   }

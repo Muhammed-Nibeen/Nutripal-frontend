@@ -43,7 +43,6 @@ export class SetPasswordComponent {
         localStorage.removeItem('email_id')
       },
       (error: any)=>{
-        console.log(error)
         this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
       }
     )

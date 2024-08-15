@@ -76,11 +76,10 @@ export class OtpVerifyComponent {
         (response: any) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: response.message });
         },
-        (error: any) => {
           (error: any)=>{
             this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error });
           }
-        }
+        
       )
     }
   }

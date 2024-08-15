@@ -107,8 +107,8 @@ export class UserProgressComponent implements OnInit{
           this.showProgressSection = true;
 
         },
-        error:(error: any) =>{
-  
+        error:(error: any)=>{
+          this.messageService.add({severity:'error',summary:'Error',detail: error.error.error})
         }
       })
     }else{

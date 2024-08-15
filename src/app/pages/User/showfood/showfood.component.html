@@ -32,7 +32,7 @@
   <div class="foodDisplay" *ngFor="let food of foodArray">
     <p-card header="{{food.foodName}}" header="Calories {{food.kcal}} Protein {{food.protein}} Fats {{food.fats}}" [style]="{ width: '360px' }">
       <ng-template pTemplate="header">
-          <img alt="Card" src="http://localhost:3000/foodImages/{{food?.imageUrl}}" />
+          <img alt="Card" src="https://speculo.shop/foodImages/{{food?.imageUrl}}" />
       </ng-template>
       <p>
           {{food.description}}

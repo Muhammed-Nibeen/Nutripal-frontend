@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Appointment, NutritionistResponse, Prescription, RevenueRecord, User, UserResponse } from '../interfaces/auth';
 import { Nutritionist } from '../interfaces/auth'
-import {Bmi} from '../interfaces/auth'
 import { Router } from '@angular/router';
 import { enviroment } from '../../enviroment/enviroment'
 
@@ -13,7 +12,7 @@ import { enviroment } from '../../enviroment/enviroment'
 export class NutritionistService {
   baseUrl = enviroment.baseUrl
   constructor(private http: HttpClient,
-    private router: Router) { }
+  ) { }
 
   scheduleAppointment(data:Appointment,nutri_id:Nutritionist,slots:string[]):Observable<any>{
     const requestBody = {data:data,nutri_id:nutri_id,slots:slots}

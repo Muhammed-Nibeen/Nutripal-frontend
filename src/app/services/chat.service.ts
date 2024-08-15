@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
-import { getEnvironmentData } from 'worker_threads';
 import { enviroment } from '../../enviroment/enviroment'
 
 @Injectable({

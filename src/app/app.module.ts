@@ -25,7 +25,7 @@ import { ButtonModule } from 'primeng/button';
 import { ShareButton } from 'ngx-sharebuttons/button';
 import { ShareButtonDirective } from 'ngx-sharebuttons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { ErrorInterceptor } from './core/interceptor/errorhandling.ts';
+// import { ErrorInterceptor } from './core/interceptor/errorhandling.ts';
 
 
 
@@ -68,7 +68,7 @@ import { ErrorInterceptor } from './core/interceptor/errorhandling.ts';
     ConfirmationService,
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

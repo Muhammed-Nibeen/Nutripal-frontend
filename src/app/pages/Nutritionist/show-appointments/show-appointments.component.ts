@@ -199,16 +199,6 @@ export class ShowAppointmentsComponent implements OnInit {
     this.Pvisible = false;
   }
 
-  // resetForm() {
-  //   this.appointmentId = ''
-  //   this.userId = ''
-  //   this.nutriId = ''
-  //   this.medication = '';
-  //   this.dosage = '';
-  //   this.frequency = '';
-  //   this.prescriptionDetails = '';
-  // }
-
   addMedication() {
     this.medications.push({ name: '', dosage: '', frequency: '' });
   }

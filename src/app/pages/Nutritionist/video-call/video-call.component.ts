@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../../../services/chat.service';
 
@@ -30,7 +30,8 @@ export class VideoCallComponent implements OnInit {
   private candidateSubscription!: Subscription;
 
   constructor(private chatService: ChatService,
-    private route: ActivatedRoute) {  }
+    private route: ActivatedRoute,
+    private router: Router) {  }
 
     ngOnInit() {
       this.route.params.subscribe((params: Params) => { 
@@ -162,6 +163,7 @@ endCall() {
     }
 
     }
+    this.router.navigate(['/showappointment'])
   };
 
 toggleCamera() {

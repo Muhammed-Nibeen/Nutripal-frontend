@@ -1,4 +1,13 @@
+.text-white {
+  color: white;;
+}
+
+.font-bold {
+  font-weight: bold;;
+}
+
 .custom-input {
   height: 80px!important;
   width: 200px!important; /* Adjusted width */
 }
+

@@ -22,7 +22,7 @@
     <!-- Navigation Links -->
     <ul class="text-lg mb-8">
       <li class="mb-4">
-        <a routerLink="/admindash" class="block py-2 px-4 text-gray-300 hover:text-white">Users</a>
+        <a routerLink="/admindash" routerLinkActive="text-white font-bold" class="block py-2 px-4 text-gray-300 hover:text-white">Users</a>
       </li>
       <li class="mb-4">
         <a routerLink="/viewnutritionist" class="block py-2 px-4 text-gray-300 hover:text-white">View Nutritionist</a>
@@ -31,10 +31,10 @@
         <a routerLink="/addfood" class="block py-2 px-4 text-gray-300 hover:text-white">Add food items</a>
       </li>
       <li class="mb-4">
-        <a href="/viewfood" class="block py-2 px-4 text-gray-300 hover:text-white">View Food</a>
+        <a routerLink="/viewfood" class="block py-2 px-4 text-gray-300 hover:text-white">View Food</a>
       </li>
       <li class="mb-4">
-        <a href="/dailyintake" class="block py-2 px-4 text-gray-300 hover:text-white">Daily Intake</a>
+        <a routerLink="/dailyintake" class="block py-2 px-4 text-gray-300 hover:text-white">Daily Intake</a>
       </li>
       <li class="mb-4">
         <a (click)="logout()" class="block py-2 px-4 text-gray-300 hover:text-white">Logout</a>
@@ -87,12 +87,39 @@
                 class="bg-red-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded">BLOCKED</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap">
+
+              <!-- <p-confirmDialog></p-confirmDialog> -->
+
+              <div class="card flex justify-center">
+                <p-toast></p-toast>
+                <p-confirmPopup #confirmPopup>
+                    <ng-template #content let-message>
+                        <div class="flex flex-col items-center w-full gap-4 border-b border-surface-200 dark:border-surface-700 p-4 mb-4 pb-0">
+                            <i [class]="message.icon" class="!text-6xl text-primary-500"></i>
+                            <p>{{ message.message }}</p>
+                        </div>
+                    </ng-template>
+                </p-confirmPopup>
+            
+                <!-- Block button -->
+                <p-button 
+                    (click)="confirmBlock(user, $event)" 
+                    *ngIf="!user.isblocked"
+                    type="button"
+                    class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-red-500 rounded-lg border-none hover:bg-red-600 focus:ring-4 focus:outline-none"
+                    label="Block">
+                </p-button>
+            </div>
+
+         
+
+ 
               <button *ngIf="user.isblocked" type="button"
                 class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-green-500 rounded-lg border-none hover:bg-green-600 focus:ring-4 focus:outline-none"
                 (click)="toggleBlockStatus(user)">Unblock</button>
-              <button (click)="toggleBlockStatus(user)" *ngIf="!user.isblocked" type="button"
+              <!-- <button (click)="toggleBlockStatus(user)" *ngIf="!user.isblocked" type="button"
                 class="px-3 py-2 text-sm font-medium text-center cursor-pointer text-white bg-red-500 rounded-lg border-none hover:bg-red-600 focus:ring-4 focus:outline-none"
-                >Block</button>
+                >Block</button> -->
             </td>
           </tr>
           <!-- Add more user rows here -->

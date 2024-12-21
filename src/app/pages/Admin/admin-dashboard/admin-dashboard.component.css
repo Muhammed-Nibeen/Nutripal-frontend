@@ -2,3 +2,20 @@
   width: 0px;
   height: 0px;
 } */
+
+/* Add more specificity to override PrimeNG styles */
+.p-confirm-dialog .p-button {
+  margin-right: 20px !important;
+}
+
+.p-confirm-dialog .p-button:last-child {
+  margin-right: 0 !important;
+}
+
+.text-white {
+  color: white;
+}
+
+.font-bold {
+  font-weight: bold;
+}

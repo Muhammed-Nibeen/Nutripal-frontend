@@ -14,9 +14,7 @@ export const userAuthGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  const token = localStorage.getItem(
-    'user_token'
-  )
+  const token = localStorage.getItem('user_refreshToken')
   if (!token) {
     router.navigate(['userLogin']);
     return false;
@@ -44,13 +42,14 @@ export const authGuardForLoggedUser: CanActivateFn = (route, state) => {
   if(typeof window === 'undefined'){
     return true;
   }
-  const token = localStorage.getItem('user_token');
+  const token = localStorage.getItem('user_token') 
   if (!token) {
     return true
   }
 
   try {
     const decodedToken: any = jwtDecode(token)
+    console.log('Decoded Token:', decodedToken);
     const currentTime = Math.floor(Date.now() / 1000)
     if (decodedToken.exp > currentTime) {
       router.navigate(['userHome'])

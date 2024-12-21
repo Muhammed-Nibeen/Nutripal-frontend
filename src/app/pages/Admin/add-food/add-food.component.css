@@ -23,3 +23,10 @@ form {
   width: 70%; /* Ensure form takes up full width */
 }
 
+.text-white {
+  color: white;
+}
+
+.font-bold {
+  font-weight: bold;
+}

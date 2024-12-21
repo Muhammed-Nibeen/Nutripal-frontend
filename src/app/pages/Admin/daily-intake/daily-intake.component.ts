@@ -23,10 +23,10 @@ export class DailyIntakeComponent {
 
     dailyintakeForm = this.fb.group({
       program:['',[Validators.required]],
-      calories: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      protein: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      carbs: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      fats: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      calories: ['', [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
+      protein: ['', [Validators.required,Validators.min(1), Validators.pattern(/^\d+$/)]],
+      carbs: ['', [Validators.required,Validators.min(1), Validators.pattern(/^\d+$/)]],
+      fats: ['', [Validators.required,Validators.min(1), Validators.pattern(/^\d+$/)]],
     })
 
     get program() {

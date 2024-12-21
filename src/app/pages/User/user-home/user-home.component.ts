@@ -19,5 +19,8 @@ export class UserHomeComponent {
   }
 
 
+  navigateToStart(): void {
+    this.router.navigate(['/bmicalculator']); 
+  }
 
 }

@@ -100,7 +100,11 @@ export class NutriDashboardComponent implements OnInit{
   constructor(private fb: FormBuilder,
     private messageService:MessageService,
     private router:Router,
-    private nutritionistservice:NutritionistService){}
+    private nutritionistservice:NutritionistService,
+    ){
+      const today = new Date();
+      this.minDate = today.toISOString().split('T')[0];
+    }
 
     appointmentForm = this.fb.group({
       date: ['', Validators.required],
@@ -108,7 +112,7 @@ export class NutriDashboardComponent implements OnInit{
       endTime:['',Validators.required]
     });
   
-
+    minDate: string;
     
     get date(){
       return this.appointmentForm.controls['date']

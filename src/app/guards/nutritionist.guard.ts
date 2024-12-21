@@ -47,6 +47,7 @@ export const authGuardForLoggedNutritionist: CanActivateFn = (route, state) => {
   
   try{
     const decodedToken: any = jwtDecode(token)
+    
     const currentTime = Math.floor(Date.now() / 1000)
     if (decodedToken.exp > currentTime){
       router.navigate(['nutrihome'])

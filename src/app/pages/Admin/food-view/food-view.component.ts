@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { response } from 'express';
 import { MessageService } from 'primeng/api';
@@ -9,7 +9,7 @@ import { AdminService } from '../../../services/admin.service';
   templateUrl: './food-view.component.html',
   styleUrl: './food-view.component.css'
 })
-export class FoodViewComponent {
+export class FoodViewComponent implements OnInit{
 
   showForm = false;
   foodArray: any = [];
@@ -17,6 +17,11 @@ export class FoodViewComponent {
   constructor(private adminservice:AdminService,
     private router:Router,
     private messageService: MessageService){}
+  
+    ngOnInit(): void {
+      // Load breakfast data by default
+      this.toggleBreakfast();
+    }
 
   logout(){
     localStorage.removeItem('admin_token');

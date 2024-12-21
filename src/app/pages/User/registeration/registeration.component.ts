@@ -14,11 +14,12 @@ import { passwordMatchValidator } from '../../../shared/password-match-directive
   styleUrl: './registeration.component.css'
 })
 export class RegisterationComponent {
-  
+  isSubmitting = false;
+
   registerForm = this.fb.group({
     fullName: ['',[Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['',[Validators.required,Validators.email]],
-    age: ['', [Validators.required, Validators.min(0)]],
+    age: ['', [Validators.required, Validators.min(1),Validators.max(99)]],
     sex: ['', Validators.required],
     phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
     password: ['',Validators.required],
@@ -61,6 +62,9 @@ export class RegisterationComponent {
   }
 
   submitDetails(){
+    if (this.isSubmitting) return;
+    this.isSubmitting = true;
+
     const postData = {...this.registerForm.value}
     delete postData.confirmPassword;
     localStorage.setItem('userData', JSON.stringify(postData));
@@ -73,7 +77,9 @@ export class RegisterationComponent {
       (error:any) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error });
       }
-    )
+    ).add(() => {
+      this.isSubmitting = false; // Reset the flag after the request completes
+    });
     }
   }
 

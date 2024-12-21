@@ -34,6 +34,10 @@ export class AdminService {
     return this.http.post(`${this.baseUrl}/admin/searchUser`,{Email})
   }  
 
+  searchbyNutritionist(Email: string): Observable<any>{
+    return this.http.post(`${this.baseUrl}/admin/searchnutritionist`,{Email})
+  }
+
   addFood(formdata:FormData):Observable<AddFood>{
     return this.http.post<AddFood>(`${this.baseUrl}/admin/addfood`, formdata)
   }

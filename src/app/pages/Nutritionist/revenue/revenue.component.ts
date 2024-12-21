@@ -12,11 +12,15 @@ import { NutritionistService } from '../../../services/nutritionist.service';
 export class RevenueComponent implements OnInit{
 
   revenueData: RevenueRecord[] = []
+  filteredRevenueData: RevenueRecord[] = [];
   jwttoken!: string|null
   nutriData!: Nutritionist
   currentPage = 1;
   itemsPerPage = 10;
   totalPages = 0;
+  startDate!: string | null;
+  endDate!: string | null;
+  isFiltered = false;
 
   ngOnInit():void{
     if(typeof window!== 'undefined'){
@@ -46,6 +50,24 @@ export class RevenueComponent implements OnInit{
       }
     })
   }
+
+  filterRevenue() {
+    if (this.startDate && this.endDate) {
+      const start = new Date(this.startDate).getTime();
+      const end = new Date(this.endDate).getTime();
+      console.log('Start and end',start,end)
+      this.filteredRevenueData = this.revenueData.filter((record) => {
+        const recordDate = new Date(record.date).getTime();
+        return recordDate >= start && recordDate <= end;
+      });
+      this.isFiltered = true; 
+      console.log('Filtered record',this.filteredRevenueData)
+    } else {
+      this.isFiltered = false;
+      this.filteredRevenueData = [...this.revenueData]; // Reset to all data if no date range selected
+    }
+  }
+  
 
   nextPage() {
     if (this.currentPage < this.totalPages) {

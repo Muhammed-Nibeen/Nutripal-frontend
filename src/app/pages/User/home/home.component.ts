@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,6 +7,10 @@ import { Route } from '@angular/router';
 })
 export class HomeComponent {
 
-  
+  constructor(private router: Router) {}
+
+  navigateToLogin(): void {
+    this.router.navigate(['/userLogin']); // Adjust the route path as needed
+  }
 
 }

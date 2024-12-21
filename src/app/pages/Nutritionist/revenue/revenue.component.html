@@ -3,6 +3,18 @@
 <div class="main">
   <div class="main-section w-full lg:w-3/4 xl:w-2/3 p-8 flex flex-col items-center justify-center mb-20">
     <h2 class="text-2xl font-bold mb-4 text-indigo-500 ml-5">Revenue</h2>
+   
+    <div class="filter-section flex items-center mb-5">
+      <label for="startDate" class="mr-2">Start Date:</label>
+      <input type="date" id="startDate" [(ngModel)]="startDate" class="border rounded px-2 py-1 mr-4">
+    
+      <label for="endDate" class="mr-2">End Date:</label>
+      <input type="date" id="endDate" [(ngModel)]="endDate" class="border rounded px-2 py-1 mr-4">
+    
+      <button type="button" class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600" (click)="filterRevenue()">Filter</button>
+    </div>
+    
+
     <div class="main-content overflow-x-auto">
       <table class="min-w-full mb-10 mt-10">
         <thead>
@@ -16,7 +28,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let row of revenueData; let i = index">
+          <tr *ngFor="let row of (isFiltered ? filteredRevenueData : revenueData); let i = index">
             <td class="px-6 py-4 whitespace-no-wrap">{{ ((currentPage - 1) * itemsPerPage) + i + 1 }}</td>
             <td class="px-6 py-4 whitespace-no-wrap">{{ row.date | date: 'yyyy-MM-dd' }}</td>
             <td class="px-6 py-4 whitespace-no-wrap">{{ row.amount }}</td>

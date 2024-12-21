@@ -8,7 +8,7 @@
       <div class="fields flex flex-col w-full items-center p-2">
         <div class="w-full max-w-md mb-4">
           <label for="date" class="block mb-2 text-base text-black font-semibold text-center">Date</label>
-          <input type="date" id="date" formControlName="date"
+          <input type="date" id="date" [min]="minDate"  formControlName="date"
                  class="custom-input form-control text-indigo-600 placeholder-indigo-600 text-sm rounded-lg w-full p-3 border-2 border-solid border-indigo-200 focus:border-indigo-600"
                  required />
           <small *ngIf="date.invalid && (date.dirty || date.touched)" class="block p-error text-center">

@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService,MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { User } from '../../../interfaces/auth';
 import { AdminService } from '../../../services/admin.service';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ButtonModule } from 'primeng/button'
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -20,7 +23,8 @@ export class AdminDashboardComponent {
 
   constructor(private adminservice:AdminService,
     private messageService:MessageService,
-    private router:Router
+    private confirmationService: ConfirmationService,
+    private router:Router,
     ){}
 
   Users:User[]=[]
@@ -67,10 +71,31 @@ export class AdminDashboardComponent {
       this.getusers();
     }
   }
+  
+  confirmBlock(user: any, event: Event) {
+    // Show confirmation dialog before blocking the user
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Are you sure you want to block this user?',
+      icon: 'pi pi-exclamation-circle',
+      accept: () => {
+        this.toggleBlockStatus(user);
+      },
+      reject: () => {
+        // Show rejection message
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Action Canceled',
+          detail: 'You have canceled the block action.',
+          life: 3000,
+        });
+      }
+    });
+  }
 
 
   toggleBlockStatus(user:any){
-    alert(user)
+    user.isblocked = !user.isblocked;
     this.adminservice.manageUsers(user._id).subscribe(
       (response:any)=>{
         if(response){
@@ -79,6 +104,7 @@ export class AdminDashboardComponent {
           if(index !== -1){
             this.Users[index].isblocked = response.updatedUser.isblocked
           }
+          
         }
       },
       (error:any)=>{
@@ -86,6 +112,7 @@ export class AdminDashboardComponent {
       }
     )
   }
+
   logout(){
     localStorage.removeItem('admin_token');
     this.router.navigate(['adminlogin'])

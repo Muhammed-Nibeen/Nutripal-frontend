@@ -24,7 +24,6 @@ import { ProfileComponent } from '../../pages/User/profile/profile.component';
 import { UserProgressComponent } from '../../pages/User/user-progress/user-progress.component';
 import { ShareButton } from 'ngx-sharebuttons/button';
 import { ShareButtonDirective } from 'ngx-sharebuttons';
-import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { VideochatComponent } from '../../pages/User/videochat/videochat.component';
 import { BookingComponent } from '../../pages/User/booking/booking.component';

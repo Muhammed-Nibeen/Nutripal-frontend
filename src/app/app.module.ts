@@ -21,12 +21,12 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
  //websocket
 // import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ShareButton } from 'ngx-sharebuttons/button';
 import { ShareButtonDirective } from 'ngx-sharebuttons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { ErrorComponent } from './pages/User/error/error.component';
 // import { ErrorInterceptor } from './core/interceptor/errorhandling.ts';
-
 
 
 
@@ -37,6 +37,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
   declarations: [
     AppComponent,
     HomeComponent,
+    ErrorComponent,
 
 
   ],
@@ -59,7 +60,8 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
     ShareButton,
     ShareButtonDirective,
     FaIconComponent,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ConfirmPopupModule
   ],
   providers: [
     provideClientHydration(),

@@ -11,6 +11,7 @@ import { AdminService } from '../../../services/admin.service';
 })
 export class ViewNutritionistComponent {
 
+    filterObj = { Email: '' };
     currentPage = 1;
     itemsPerPage = 2;
     totalPages = 0;
@@ -24,6 +25,18 @@ export class ViewNutritionistComponent {
 
     ngOnInit(): void{
       this.getnutris()
+    }
+
+    searchNutritionist(){
+      console.log(this.filterObj.Email)
+      this.adminservice.searchbyNutritionist(this.filterObj.Email).subscribe(
+        (response) => {
+          this.Nutritionist = response.nutritionist
+        },
+        (error:any)=>{
+          this.messageService.add({severity: 'error', summary: 'Error', detail:  error.error.error})
+        }
+      )
     }
 
     getnutris(){

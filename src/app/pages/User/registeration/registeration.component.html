@@ -3,8 +3,8 @@
     <img src='./assets/images/Boost your immune system-bro.png' alt="image" class="object-cover w-full h-full">
   </div> 
 
-  <div class="w-full lg:w-1/2 p-8 flex justify-center mt-48">
-  <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
+  <div class="w-full lg:w-1/2 p-8 flex justify-center ">
+  <form [formGroup]="registerForm" (ngSubmit)="submitDetails()" class="mt-0 lg:mt-48">
     <p-card header="Register" [style]="{width: '360px' }" >
       <div class="field">
         <label for="fullName">FullName</label>
@@ -71,9 +71,9 @@
         <small class="block p-error"
         *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword.valid && password.valid">Password not matching</small>
       </div>
-      <p-button label="Register" styleClass="w-full" [disabled]="registerForm.invalid" type="submit"></p-button>
+      <p-button label="Register" styleClass="w-full" [disabled]="registerForm.invalid || isSubmitting" type="submit"></p-button>
       <div class="mt-2">
-        Already a member?  <a routerLink="/userLogin">Login</a>
+        Already a member?<a routerLink="/userLogin">Login</a>
       </div>
   </p-card>
   </form>
